@@ -384,10 +384,6 @@
                 --content-narrow: clamp(320px, 92vw, 860px);
             }
 
-            main {
-                margin: 0;
-            }
-
             .container {
                 width: 100%;
                 padding-inline: clamp(16px, 4vw, 24px);
@@ -401,11 +397,6 @@
 
             main section > .container > * {
                 width: 100%;
-            }
-
-            .hero {
-                padding-top: calc(var(--section-padding-block) * 1.05 + var(--header-offset));
-                padding-bottom: calc(var(--section-padding-block) * 1.05);
             }
 
             header.is-compact-mode .header-container {
@@ -483,7 +474,7 @@
         }
 
         main {
-            margin-top: var(--header-offset);
+            margin-top: 0;
         }
 
         main section {
@@ -539,7 +530,8 @@
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;
-            padding-block: calc(var(--section-padding-block) * 1.05);
+            padding-top: calc(var(--section-padding-block) * 1.05 + var(--header-offset));
+            padding-bottom: calc(var(--section-padding-block) * 1.05);
         }
 
         .hero::before {
