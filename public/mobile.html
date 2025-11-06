@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Электроконструктив — мобильная версия</title>
+    <meta name="description" content="Электромонтажные работы с гарантией качества. Электроконструктив на мобильной версии сайта.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kTcXnX2d3R1bYhVJ0b1Ik5+pUvV1sP5F5Ne1s8z1Ry6j8TDIrS9KuX3sI5Gucs5rtxDgWcZyjfRSA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #ffd400;
+            --accent: #ffe566;
+            --light: #f8f8f8;
+            --text: #1f1f1f;
+            --muted: #6c6c6c;
+            --surface: #ffffff;
+            --radius: 18px;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.12);
+            --shadow-card: 0 12px 24px rgba(0, 0, 0, 0.08);
+            --transition: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(180deg, #111111 0%, #1f1f1f 30%, #ffffff 30%, #ffffff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            --call-fab-offset: clamp(18px, 5vw, 32px);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: clamp(16px, 5vw, 24px);
+            padding-bottom: clamp(120px, 22vw, 160px);
+        }
+
+        header.site-header {
+            display: flex;
+            justify-content: center;
+            padding-block: clamp(12px, 4vw, 24px);
+        }
+
+        .brand {
+            display: grid;
+            grid-template-columns: clamp(44px, 16vw, 56px) auto;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            padding: 8px 14px;
+            color: #ffffff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .brand img {
+            width: clamp(40px, 15vw, 52px);
+            height: clamp(40px, 15vw, 52px);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px;
+        }
+
+        .brand__text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .brand__title {
+            font-size: clamp(16px, 5vw, 22px);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .brand__subtitle {
+            font-size: clamp(11px, 3.4vw, 13px);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.8;
+        }
+
+        .page-content {
+            display: grid;
+            gap: clamp(24px, 8vw, 36px);
+        }
+
+        .content-block {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+            padding: clamp(22px, 7vw, 32px);
+            display: grid;
+            gap: clamp(16px, 5vw, 24px);
+        }
+
+        .hero {
+            position: relative;
+            margin: 0;
+            text-align: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(4, 8, 15, 0.78), rgba(4, 8, 15, 0.55));
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .hero.hero--has-image {
+            color: #ffffff;
+        }
+
+        .hero.hero--has-image::before {
+            opacity: 1;
+        }
+
+        .hero.hero--has-image p {
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .hero.hero--has-image .btn--outline {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .hero h1 {
+            font-size: clamp(24px, 7.6vw, 32px);
+            line-height: 1.15;
+            margin: 0 0 12px;
+        }
+
+        .hero p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: clamp(14px, 4.2vw, 16px);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .hero-actions .btn {
+            flex: 1 1 140px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: clamp(14px, 4.2vw, 16px);
+            transition: transform var(--transition), box-shadow var(--transition);
+            border: none;
+        }
+
+        .btn--primary {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn--primary:hover,
+        .btn--primary:focus-visible {
+            box-shadow: var(--shadow-card);
+            transform: translateY(-1px);
+        }
+
+        .btn--outline {
+            background: rgba(17, 17, 17, 0.06);
+            color: var(--primary);
+        }
+
+        .btn--outline i {
+            margin-right: 8px;
+        }
+
+        section h2 {
+            font-size: clamp(20px, 6vw, 26px);
+            margin: 0;
+        }
+
+        .highlights,
+        .services,
+        .contact-info {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: clamp(16px, 5vw, 20px);
+            box-shadow: var(--shadow-card);
+            display: grid;
+            gap: 8px;
+            align-items: start;
+        }
+
+        .card__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(44px, 12vw, 52px);
+            height: clamp(44px, 12vw, 52px);
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 212, 0, 0.35);
+            color: var(--secondary);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card__icon i {
+            display: inline-block;
+            font-size: clamp(20px, 6vw, 26px);
+            line-height: 1;
+        }
+
+        .card__icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .card__title {
+            font-weight: 700;
+            font-size: clamp(15px, 4.6vw, 17px);
+        }
+
+        .card__text {
+            color: var(--muted);
+            font-size: clamp(13px, 4vw, 15px);
+        }
+
+        .card__extra {
+            display: grid;
+            gap: 4px;
+            margin-top: 6px;
+            font-size: clamp(12px, 3.6vw, 14px);
+            color: var(--muted);
+        }
+
+        .services .card {
+            grid-template-columns: auto 1fr;
+            column-gap: 14px;
+            row-gap: 4px;
+        }
+
+        .services .card__icon {
+            grid-row: span 2;
+        }
+
+        .contact-info .card {
+            grid-template-columns: auto 1fr;
+            column-gap: 12px;
+        }
+
+        .contact-info .card__icon {
+            width: clamp(44px, 12vw, 52px);
+            height: clamp(44px, 12vw, 52px);
+        }
+
+        .contact-actions {
+            display: grid;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .contact-actions .btn {
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            font-weight: 700;
+            font-size: clamp(14px, 4.2vw, 16px);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-actions .btn--ghost {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--primary);
+            border: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 50%;
+            right: max(4px, env(safe-area-inset-right) + 4px);
+            transform: translateY(-50%);
+            display: grid;
+            justify-items: center;
+            align-items: start;
+            width: clamp(32px, 10vw, 44px);
+            pointer-events: none;
+            z-index: 85;
+        }
+
+        .scroll-progress__track {
+            position: relative;
+            grid-area: 1 / 1;
+            width: 6px;
+            height: clamp(140px, 45vh, 260px);
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .scroll-progress__fill {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 212, 0, 0.22) 0%, var(--secondary) 100%);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .scroll-progress__icon {
+            grid-area: 1 / 1;
+            align-self: start;
+            transform: translateY(-55%);
+            width: clamp(38px, 12vw, 48px);
+            height: clamp(38px, 12vw, 48px);
+            border-radius: 50%;
+            background: rgba(17, 17, 17, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: grid;
+            place-items: center;
+            color: rgba(255, 255, 255, 0.78);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            pointer-events: none;
+        }
+
+        .scroll-progress__icon svg {
+            width: clamp(18px, 6vw, 22px);
+            height: clamp(18px, 6vw, 22px);
+            display: block;
+            fill: currentColor;
+        }
+
+        .scroll-progress__icon.is-complete {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .call-fab {
+            position: fixed;
+            bottom: var(--call-fab-offset);
+            right: clamp(18px, 5.5vw, 32px);
+            width: clamp(56px, 16vw, 68px);
+            height: clamp(56px, 16vw, 68px);
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid rgba(255, 212, 0, 0.38);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            z-index: 90;
+        }
+
+        .call-fab__icon {
+            width: clamp(22px, 6.6vw, 28px);
+            height: clamp(22px, 6.6vw, 28px);
+            display: block;
+            fill: currentColor;
+        }
+
+        .call-fab:hover,
+        .call-fab:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.32);
+            border-color: rgba(255, 212, 0, 0.6);
+            outline: none;
+        }
+
+        .request-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 8, 0.82);
+            display: grid;
+            place-items: center;
+            padding: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition);
+            z-index: 100;
+        }
+
+        .request-overlay.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .request-modal {
+            width: min(100%, 420px);
+            background: var(--surface);
+            border-radius: 20px;
+            padding: clamp(16px, 5.2vw, 22px);
+            display: grid;
+            gap: clamp(12px, 4vw, 16px);
+            position: relative;
+        }
+
+        .request-close {
+            position: absolute;
+            top: clamp(6px, 2vw, 12px);
+            right: clamp(6px, 2vw, 14px);
+            border: none;
+            background: transparent;
+            width: 10px;
+            height: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        .request-close i {
+            display: none;
+        }
+
+        .request-close::before,
+        .request-close::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 1.2px;
+            border-radius: 999px;
+            background: currentColor;
+            transform-origin: center;
+            transition: transform var(--transition);
+        }
+
+        .request-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .request-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .request-modal h2 {
+            margin: 0;
+            font-size: clamp(18px, 5.6vw, 22px);
+            text-align: center;
+        }
+
+        .request-form {
+            display: grid;
+            gap: clamp(4px, 2.4vw, 10px);
+        }
+
+        .request-field {
+            display: grid;
+            gap: clamp(3px, 1.8vw, 6px);
+        }
+
+        .request-field label {
+            font-weight: 600;
+            font-size: clamp(13px, 4vw, 15px);
+            line-height: 1.25;
+        }
+
+        .request-field input,
+        .request-field textarea {
+            width: 100%;
+            padding: clamp(10px, 3.6vw, 12px);
+            border-radius: 12px;
+            border: 1px solid rgba(17, 17, 17, 0.1);
+            font-size: clamp(14px, 4.2vw, 16px);
+            background: rgba(17, 17, 17, 0.02);
+            transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+        }
+
+        .request-field textarea {
+            min-height: clamp(80px, 28vw, 104px);
+            resize: vertical;
+        }
+
+        .request-field input:focus-visible,
+        .request-field textarea:focus-visible {
+            outline: 2px solid rgba(255, 212, 0, 0.6);
+        }
+
+        .request-field.has-error label {
+            color: #d64545;
+        }
+
+        .request-field.has-error input,
+        .request-field.has-error textarea {
+            border-color: rgba(214, 69, 69, 0.9);
+            box-shadow: 0 0 0 1px rgba(214, 69, 69, 0.18);
+            background: rgba(214, 69, 69, 0.04);
+        }
+
+        .request-file {
+            display: grid;
+            gap: 6px;
+        }
+
+        .request-file input {
+            padding: 0;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+            transition: outline-color var(--transition), background-color var(--transition);
+        }
+
+        .request-file.has-error label,
+        .request-file.has-error .request-file__info {
+            color: #d64545;
+        }
+
+        .request-file.has-error input {
+            outline: 2px solid rgba(214, 69, 69, 0.7);
+            background: rgba(214, 69, 69, 0.06);
+        }
+
+        .request-actions {
+            display: grid;
+            gap: clamp(8px, 3vw, 12px);
+            margin-top: 6px;
+        }
+
+        .request-submit {
+            background: var(--primary);
+            color: #ffffff;
+            padding: clamp(12px, 4vw, 14px);
+            border-radius: 14px;
+            border: none;
+            font-weight: 700;
+            font-size: clamp(14px, 4.4vw, 16px);
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .request-submit:disabled {
+            opacity: 0.6;
+            cursor: progress;
+        }
+
+        .request-note {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .request-footer {
+            display: grid;
+            gap: 6px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .request-footer a {
+            color: inherit;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .request-footer a:hover,
+        .request-footer a:focus-visible {
+            color: var(--primary);
+            outline: none;
+        }
+
+        .request-status {
+            min-height: 18px;
+            text-align: center;
+            font-size: 13px;
+            white-space: pre-line;
+        }
+
+        .request-file__info {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .toast {
+            position: fixed;
+            inset: auto 50% clamp(16px, 6vw, 24px) auto;
+            transform: translateX(-50%) translateY(16px);
+            background: rgba(17, 17, 17, 0.92);
+            color: #ffffff;
+            padding: 12px 18px;
+            border-radius: 999px;
+            box-shadow: 0 18px 28px rgba(0, 0, 0, 0.28);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition);
+            z-index: 120;
+            font-size: 14px;
+        }
+
+        .toast.is-visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .request-modal {
+                width: 100vw;
+                height: 100vh;
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+                padding: clamp(18px, 5.8vw, 24px) clamp(14px, 4.8vw, 20px);
+                overflow-y: auto;
+            }
+
+            .request-close {
+                top: clamp(10px, 4.6vw, 18px);
+                right: clamp(10px, 4.6vw, 18px);
+            }
+
+            .request-actions {
+                margin-top: 10px;
+            }
+
+            .request-footer {
+                margin-top: 8px;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .request-overlay {
+                padding: clamp(16px, 5vw, 24px);
+            }
+        }
+
+        @media (min-width: 700px) {
+            body {
+                background: linear-gradient(180deg, #111111 0%, #1f1f1f 24%, #ffffff 24%, #ffffff 100%);
+            }
+
+            .page {
+                padding-top: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <a class="brand" href="#top" id="brandLink">
+                <img src="assets/logo-inline.svg" alt="Электроконструктив" id="brandLogo" loading="lazy">
+                <span class="brand__text">
+                    <span class="brand__title">ЭЛЕКТРОКОНСТРУКТИВ</span>
+                    <span class="brand__subtitle">энергия надежных решений</span>
+                </span>
+            </a>
+        </header>
+
+        <main class="page-content">
+            <section class="content-block hero" id="top">
+                <h1 id="heroTitle">Профессиональные электромонтажные работы</h1>
+                <p id="heroSubtitle">Работаем по Москве и области с 2010 года. Надёжно, оперативно, с гарантией.</p>
+                <div class="hero-actions">
+                    <button class="btn btn--primary" type="button" data-open-request="true" id="heroPrimaryAction">Получить консультацию</button>
+                    <a class="btn btn--outline" id="heroPhoneButton" href="tel:+74951234567">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        Позвонить
+                    </a>
+                </div>
+            </section>
+
+            <section class="content-block" id="highlights">
+                <h2>Главные преимущества</h2>
+                <div class="highlights" id="highlightsList">
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="card__title">15 лет опыта</div>
+                        <div class="card__text">Сертифицированные специалисты и отлаженные процессы.</div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="content-block" id="services">
+                <h2>Услуги</h2>
+                <div class="services" id="mobileServicesList">
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <div class="card__title">Электромонтаж</div>
+                        <div class="card__text">Комплекс работ под ключ</div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="content-block" id="contact">
+                <h2 id="contactTitle">Связаться с нами</h2>
+                <div class="contact-info" id="contactInfo">
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-phone" id="contactPhoneIcon"></i></div>
+                        <div>
+                            <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
+                            <div class="card__text">Звоните в рабочее время</div>
+                            <div class="card__extra" id="contactPhoneExtra" hidden></div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-envelope" id="contactEmailIcon"></i></div>
+                        <div>
+                            <div class="card__title" id="contactEmail">etl@elektrokonstruktiv.ru</div>
+                            <div class="card__text">Ответим в течение дня</div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-location-dot" id="contactAddressIcon"></i></div>
+                        <div>
+                            <div class="card__title" id="contactAddress">Москва, ул. Электромонтажная, 15</div>
+                            <div class="card__text" id="contactSchedule">Пн-Пт: 9:00 - 19:00</div>
+                        </div>
+                    </article>
+                </div>
+                <div class="contact-actions">
+                    <a class="btn btn--ghost" id="contactCallButton" href="tel:+74951234567">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        Позвонить
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress__track">
+            <div class="scroll-progress__fill" id="scrollProgressFill"></div>
+        </div>
+        <div class="scroll-progress__icon" id="scrollProgressIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path d="M13.7 2.5a1 1 0 0 1 .94 1.35l-1.43 4.02h4.57a1 1 0 0 1 .83 1.56l-7.1 10.4a1 1 0 0 1-1.82-.74l1.47-4.87H6.39a1 1 0 0 1-.9-1.45l6-10.4a1 1 0 0 1 .87-.47h1.34z"/>
+            </svg>
+        </div>
+    </div>
+
+    <a class="call-fab" href="tel:+74951234567" id="floatingCallButton" aria-label="Позвонить">
+        <svg class="call-fab__icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M6.62 2.99a1 1 0 0 1 1.12-.54l3.2.8a1 1 0 0 1 .73.97v3.12a1 1 0 0 1-.41.8l-1.63 1.22a11.05 11.05 0 0 0 4.92 4.92l1.22-1.63a1 1 0 0 1 .8-.41h3.12a1 1 0 0 1 .97.73l.8 3.2a1 1 0 0 1-.54 1.12l-2.74 1.37c-.3.15-.64.2-.97.13-2.86-.62-5.44-2.05-7.55-4.16-2.11-2.11-3.54-4.69-4.16-7.55a1.5 1.5 0 0 1 .13-.97L6.62 2.99z"/>
+        </svg>
+    </a>
+
+    <div class="request-overlay" id="requestOverlay" aria-hidden="true">
+        <div class="request-modal" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
+            <button type="button" class="request-close" id="requestClose" aria-label="Закрыть форму">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 id="requestModalTitle">Получить коммерческое предложение</h2>
+            <form class="request-form" id="requestForm" novalidate>
+                <div class="request-field">
+                    <label for="requestName">Ваше имя</label>
+                    <input type="text" id="requestName" name="name" autocomplete="name" required>
+                </div>
+                <div class="request-field">
+                    <label for="requestPhone">Телефон</label>
+                    <input type="tel" id="requestPhone" name="phone" autocomplete="tel">
+                </div>
+                <div class="request-field">
+                    <label for="requestEmail">E-mail</label>
+                    <input type="email" id="requestEmail" name="email" autocomplete="email">
+                </div>
+                <div class="request-field">
+                    <label for="requestComment">Комментарий</label>
+                    <textarea id="requestComment" name="comment" placeholder="Опишите задачу"></textarea>
+                </div>
+                <div class="request-file">
+                    <label for="requestFile">Прикрепить файл</label>
+                    <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.zip,.rar">
+                    <div class="request-file__info" id="requestFileInfo">Допустимые форматы: PDF, DOC, XLS, PPT, JPG, PNG, ZIP, RAR. До 10 МБ.</div>
+                </div>
+                <div class="request-status" id="requestStatus"></div>
+                <div class="request-actions">
+                    <button type="submit" class="request-submit" id="requestSubmit">Отправить заявку</button>
+                    <p class="request-note" id="requestNote">Мы перезвоним в течение рабочего дня.</p>
+                </div>
+            </form>
+            <div class="request-footer">
+                <a href="mailto:etl@elektrokonstruktiv.ru" id="requestFooterEmail">etl@elektrokonstruktiv.ru</a>
+                <a href="tel:+74951234567" id="requestFooterPhone">+7 (495) 123-45-67</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="requestToast" role="status" aria-live="polite">
+        <span id="requestToastMessage">Заявка отправлена. Мы свяжемся с вами.</span>
+    </div>
+
+    <script>
+        const contentUrl = new URL('/api/content', window.location.origin).toString();
+        const requestUrl = new URL('/api/request', window.location.origin).toString();
+        const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
+        const defaultHeroBackground = 'assets/hero-background-blue.svg';
+        const heroSection = document.querySelector('.hero');
+
+        const heroTitleEl = document.getElementById('heroTitle');
+        const heroSubtitleEl = document.getElementById('heroSubtitle');
+        const heroPrimaryAction = document.getElementById('heroPrimaryAction');
+        const heroPhoneButton = document.getElementById('heroPhoneButton');
+        const highlightsList = document.getElementById('highlightsList');
+        const servicesList = document.getElementById('mobileServicesList');
+        const contactTitleEl = document.getElementById('contactTitle');
+        const contactPhoneEl = document.getElementById('contactPhone');
+        const contactEmailEl = document.getElementById('contactEmail');
+        const contactAddressEl = document.getElementById('contactAddress');
+        const contactScheduleEl = document.getElementById('contactSchedule');
+        const contactCallButton = document.getElementById('contactCallButton');
+        const contactRequestButton = document.getElementById('contactRequestButton');
+        const floatingCallButton = document.getElementById('floatingCallButton');
+        const contactPhoneIconNode = document.getElementById('contactPhoneIcon');
+        const contactEmailIconNode = document.getElementById('contactEmailIcon');
+        const contactAddressIconNode = document.getElementById('contactAddressIcon');
+        const contactPhoneIconContainer = contactPhoneIconNode ? contactPhoneIconNode.closest('.card__icon') : null;
+        const contactEmailIconContainer = contactEmailIconNode ? contactEmailIconNode.closest('.card__icon') : null;
+        const contactAddressIconContainer = contactAddressIconNode ? contactAddressIconNode.closest('.card__icon') : null;
+        const scrollProgressFill = document.getElementById('scrollProgressFill');
+        const scrollProgressIcon = document.getElementById('scrollProgressIcon');
+        const requestOverlay = document.getElementById('requestOverlay');
+        const requestClose = document.getElementById('requestClose');
+        const requestForm = document.getElementById('requestForm');
+        const requestNameInput = document.getElementById('requestName');
+        const requestPhoneInput = document.getElementById('requestPhone');
+        const requestEmailInput = document.getElementById('requestEmail');
+        const requestCommentInput = document.getElementById('requestComment');
+        const requestFileInput = document.getElementById('requestFile');
+        const requestSubmitButton = document.getElementById('requestSubmit');
+        const requestStatus = document.getElementById('requestStatus');
+        const requestFileInfo = document.getElementById('requestFileInfo');
+        const requestToast = document.getElementById('requestToast');
+        const requestToastMessage = document.getElementById('requestToastMessage');
+        const brandLogo = document.getElementById('brandLogo');
+        const brandLink = document.getElementById('brandLink');
+        const requestFooterEmail = document.getElementById('requestFooterEmail');
+        const requestFooterPhone = document.getElementById('requestFooterPhone');
+
+        let requestToastTimer = null;
+        let scrollUpdateScheduled = false;
+        const SCROLL_COMPLETE_THRESHOLD = 0.995;
+
+        function resolveAssetUrl(value, fallback) {
+            const candidate = (value || '').trim();
+            const fallbackValue = (fallback || '').trim();
+            const target = candidate || fallbackValue;
+            if (!target) {
+                return '';
+            }
+            if (/^(data:|blob:|https?:|ftp:|\/\/)/i.test(target)) {
+                return target;
+            }
+            try {
+                return new URL(target, window.location.origin).toString();
+            } catch (error) {
+                console.warn('Не удалось преобразовать путь к фоновому изображению героя', target, error);
+                return target;
+            }
+        }
+
+        function applyHeroBackground(imageValue) {
+            if (!heroSection) {
+                return;
+            }
+            const backgroundUrl = resolveAssetUrl(imageValue, defaultHeroBackground);
+            if (backgroundUrl) {
+                heroSection.style.backgroundImage = `url("${backgroundUrl}")`;
+                heroSection.classList.add('hero--has-image');
+            } else {
+                heroSection.style.backgroundImage = '';
+                heroSection.classList.remove('hero--has-image');
+            }
+        }
+
+        function getScrollElement() {
+            return document.scrollingElement || document.documentElement;
+        }
+
+        function updateScrollProgress() {
+            const scrollElement = getScrollElement();
+            if (!scrollElement) {
+                return;
+            }
+            const scrollTop = scrollElement.scrollTop;
+            const scrollableHeight = scrollElement.scrollHeight - window.innerHeight;
+            const progress = scrollableHeight > 0 ? Math.min(Math.max(scrollTop / scrollableHeight, 0), 1) : 1;
+            const isComplete = progress >= SCROLL_COMPLETE_THRESHOLD;
+
+            if (scrollProgressFill) {
+                scrollProgressFill.style.transform = `scaleY(${progress})`;
+            }
+            if (scrollProgressIcon) {
+                scrollProgressIcon.classList.toggle('is-complete', isComplete);
+            }
+        }
+
+        function scheduleScrollProgressUpdate() {
+            if (scrollUpdateScheduled) {
+                return;
+            }
+            scrollUpdateScheduled = true;
+            window.requestAnimationFrame(() => {
+                scrollUpdateScheduled = false;
+                updateScrollProgress();
+            });
+        }
+
+        function normalizePhoneToTel(value) {
+            if (!value) {
+                return '';
+            }
+            const cleaned = value.replace(/[^+\d]/g, '');
+            if (!cleaned) {
+                return '';
+            }
+            return cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
+        }
+
+        function clearElementChildren(element) {
+            while (element && element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+        }
+
+        const ICON_STYLE_ALIASES = {
+            fas: 'fa-solid',
+            far: 'fa-regular',
+            fal: 'fa-light',
+            fat: 'fa-thin',
+            fad: 'fa-duotone',
+            fab: 'fa-brands'
+        };
+
+        const ICON_FALLBACK_DEFAULT = 'fa-solid fa-bolt';
+        const ICON_FALLBACK_SERVICE = 'fa-solid fa-screwdriver-wrench';
+        const ICON_FALLBACK_PHONE = 'fa-solid fa-phone';
+        const ICON_FALLBACK_EMAIL = 'fa-solid fa-envelope';
+        const ICON_FALLBACK_ADDRESS = 'fa-solid fa-map-marker-alt';
+
+        function normalizeIconClass(value, fallback = ICON_FALLBACK_DEFAULT) {
+            const candidate = typeof value === 'string' ? value.trim() : '';
+            const base = candidate || (typeof fallback === 'string' ? fallback.trim() : '');
+            if (!base) {
+                return ICON_FALLBACK_DEFAULT;
+            }
+            const tokens = base
+                .split(/\s+/)
+                .filter(Boolean)
+                .map(token => ICON_STYLE_ALIASES[token] || token);
+            const hasStyle = tokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
+            if (!hasStyle) {
+                tokens.unshift('fa-solid');
+            }
+            return Array.from(new Set(tokens)).join(' ');
+        }
+
+        function applyIconClass(element, iconClass, fallback) {
+            if (!element) {
+                return;
+            }
+            element.className = normalizeIconClass(iconClass, fallback);
+        }
+
+        function looksLikeImageUrl(value) {
+            if (!value) {
+                return false;
+            }
+            const candidate = String(value).trim();
+            if (!candidate) {
+                return false;
+            }
+            if (candidate.startsWith('data:') || candidate.startsWith('blob:')) {
+                return true;
+            }
+            if (candidate.includes(' ')) {
+                return false;
+            }
+            const lower = candidate.toLowerCase();
+            const extensions = ['.svg', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.avif'];
+            return extensions.some(ext => lower.endsWith(ext));
+        }
+
+        function normalizeIconDescriptor(source, fallbackIcon) {
+            const candidates = Array.isArray(source) ? source : [source];
+            for (const candidate of candidates) {
+                if (!candidate) {
+                    continue;
+                }
+                if (typeof candidate === 'string') {
+                    const trimmed = candidate.trim();
+                    if (!trimmed) {
+                        continue;
+                    }
+                    if (looksLikeImageUrl(trimmed)) {
+                        return { image: resolveAssetUrl(trimmed, '') };
+                    }
+                    return { icon: trimmed };
+                }
+                if (typeof candidate === 'object') {
+                    const rawImage = typeof candidate.image === 'string' && candidate.image.trim()
+                        ? candidate.image.trim()
+                        : (typeof candidate.src === 'string' && candidate.src.trim() ? candidate.src.trim() : '');
+                    if (rawImage) {
+                        return { image: resolveAssetUrl(rawImage, '') };
+                    }
+                    const rawClass = typeof candidate.icon === 'string' && candidate.icon.trim()
+                        ? candidate.icon.trim()
+                        : (typeof candidate.class === 'string' && candidate.class.trim()
+                            ? candidate.class.trim()
+                            : (typeof candidate.className === 'string' ? candidate.className.trim() : ''));
+                    if (rawClass) {
+                        if (looksLikeImageUrl(rawClass)) {
+                            return { image: resolveAssetUrl(rawClass, '') };
+                        }
+                        return { icon: rawClass };
+                    }
+                }
+            }
+            return { icon: fallbackIcon };
+        }
+
+        function setIconContent(container, source, fallbackIcon) {
+            if (!container) {
+                return;
+            }
+            const descriptor = normalizeIconDescriptor(source, fallbackIcon);
+            container.innerHTML = '';
+            if (descriptor.image) {
+                const img = document.createElement('img');
+                img.src = descriptor.image;
+                img.alt = '';
+                container.appendChild(img);
+            } else {
+                const iconElement = document.createElement('i');
+                applyIconClass(iconElement, descriptor.icon, fallbackIcon);
+                container.appendChild(iconElement);
+            }
+        }
+
+        function createIconWrapper(source, fallbackIcon) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'card__icon';
+            wrapper.setAttribute('aria-hidden', 'true');
+            setIconContent(wrapper, source, fallbackIcon);
+            return wrapper;
+        }
+
+        function createHighlightCard(item) {
+            const article = document.createElement('article');
+            article.className = 'card';
+
+            const iconSource = { icon: item.icon, image: item.iconImage || item.image };
+            article.appendChild(createIconWrapper(iconSource, ICON_FALLBACK_DEFAULT));
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'card__title';
+            titleEl.textContent = item.title || '';
+            article.appendChild(titleEl);
+
+            const textValue = item.description || item.text || '';
+            if (textValue) {
+                const textEl = document.createElement('div');
+                textEl.className = 'card__text';
+                textEl.textContent = textValue;
+                article.appendChild(textEl);
+            }
+
+            return article;
+        }
+
+        function createServiceCard(item) {
+            const article = document.createElement('article');
+            article.className = 'card';
+            article.style.gridTemplateColumns = 'auto 1fr';
+            article.style.columnGap = '14px';
+
+            const iconSource = { icon: item.icon, image: item.iconImage || item.image };
+            article.appendChild(createIconWrapper(iconSource, ICON_FALLBACK_SERVICE));
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'card__title';
+            titleEl.textContent = item.title || '';
+            article.appendChild(titleEl);
+
+            const textValue = item.description || '';
+            if (textValue) {
+                const textEl = document.createElement('div');
+                textEl.className = 'card__text';
+                textEl.textContent = textValue;
+                article.appendChild(textEl);
+            }
+
+            return article;
+        }
+
+        
+
+        function showRequestOverlay() {
+            if (requestOverlay) {
+                requestOverlay.classList.add('is-visible');
+                requestOverlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function hideRequestOverlay({ reset = false } = {}) {
+            if (requestOverlay) {
+                requestOverlay.classList.remove('is-visible');
+                requestOverlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            if (reset && requestForm) {
+                requestForm.reset();
+                clearRequestErrors();
+                updateRequestFileInfo(null);
+                updateRequestStatus('');
+            }
+        }
+
+        function updateRequestFileInfo(file) {
+            if (!requestFileInfo) {
+                return;
+            }
+            if (file) {
+                const sizeKb = Math.round(file.size / 1024);
+                requestFileInfo.textContent = `${file.name} — ${sizeKb} КБ`;
+            } else {
+                requestFileInfo.textContent = 'Допустимые форматы: PDF, DOC, XLS, PPT, JPG, PNG, ZIP, RAR. До 10 МБ.';
+            }
+        }
+
+        function setFieldError(field, message) {
+            const hasError = Boolean(message);
+            if (!field) {
+                return hasError;
+            }
+            field.classList.toggle('is-error', hasError);
+            field.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+            const group = field.closest('.request-field, .request-file');
+            if (group) {
+                group.classList.toggle('has-error', hasError);
+            }
+            return hasError;
+        }
+
+        function clearRequestErrors() {
+            [
+                requestNameInput,
+                requestPhoneInput,
+                requestEmailInput,
+                requestCommentInput,
+                requestFileInput,
+            ].forEach(field => {
+                if (field) {
+                    setFieldError(field, '');
+                }
+            });
+            updateRequestStatus('');
+        }
+
+        function setRequestLoadingState(isLoading) {
+            if (requestSubmitButton) {
+                requestSubmitButton.disabled = isLoading;
+            }
+        }
+
+        function updateRequestStatus(message, tone = 'info') {
+            if (!requestStatus) {
+                return;
+            }
+            requestStatus.textContent = message || '';
+            requestStatus.style.color = tone === 'error' ? '#d64545' : tone === 'success' ? '#2e7d32' : var_get('--muted');
+        }
+
+        function var_get(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#6c6c6c';
+        }
+
+        function showToast(message) {
+            if (!requestToast) {
+                return;
+            }
+            if (requestToastMessage) {
+                requestToastMessage.textContent = message || 'Заявка отправлена';
+            }
+            requestToast.classList.add('is-visible');
+            if (requestToastTimer) {
+                clearTimeout(requestToastTimer);
+            }
+            requestToastTimer = window.setTimeout(() => {
+                requestToast.classList.remove('is-visible');
+            }, 2800);
+        }
+
+        function applyMobileContent(content) {
+            const mobile = content.mobile && typeof content.mobile === 'object' ? content.mobile : {};
+            const hero = mobile.hero && typeof mobile.hero === 'object' ? mobile.hero : content.hero || {};
+
+            const desktopServices = Array.isArray(content.services) ? content.services : [];
+            const serviceIconMap = new Map();
+            const desktopServiceByTitle = new Map();
+            desktopServices.forEach((service, index) => {
+                if (!service || typeof service !== 'object') {
+                    return;
+                }
+                const titleValue = typeof service.title === 'string' ? service.title.trim() : '';
+                const iconValue = typeof service.icon === 'string' ? service.icon.trim() : '';
+                const titleKey = titleValue.toLowerCase();
+                if (titleKey) {
+                    desktopServiceByTitle.set(titleKey, { service, index });
+                    if (iconValue) {
+                        serviceIconMap.set(titleKey, iconValue);
+                    }
+                }
+                if (iconValue) {
+                    serviceIconMap.set(`index:${index}`, iconValue);
+                }
+            });
+
+            const highlights = Array.isArray(mobile.highlights) && mobile.highlights.length > 0
+                ? mobile.highlights.map(item => (item && typeof item === 'object' ? { ...item } : item))
+                : (Array.isArray(content.features) ? content.features.slice(0, 3).map(item => ({
+                    icon: item?.icon,
+                    iconImage: item?.iconImage || item?.image,
+                    image: item?.image,
+                    title: item?.title,
+                    description: item?.description,
+                    text: item?.text,
+                })) : []);
+
+            const mobileServicesSource = Array.isArray(mobile.services) ? mobile.services : [];
+            const fallbackLength = mobileServicesSource.length > 0 ? mobileServicesSource.length : 4;
+            const fallbackServicesSource = desktopServices.slice(0, fallbackLength);
+            const servicesSource = mobileServicesSource.length > 0 ? mobileServicesSource : fallbackServicesSource;
+            const services = servicesSource.map((item, index) => {
+                const candidate = item && typeof item === 'object' ? { ...item } : {};
+                const rawTitle = typeof candidate.title === 'string' ? candidate.title.trim() : '';
+                const titleKey = rawTitle.toLowerCase();
+                const desktopMatch = titleKey ? desktopServiceByTitle.get(titleKey) : undefined;
+                const fallbackIndex = desktopMatch ? desktopMatch.index : index;
+                const fallbackService = desktopMatch ? desktopMatch.service : (desktopServices[fallbackIndex] || null);
+
+                if (!rawTitle && fallbackService && typeof fallbackService.title === 'string') {
+                    candidate.title = fallbackService.title;
+                }
+
+                if (!candidate.description && fallbackService && typeof fallbackService.description === 'string') {
+                    candidate.description = fallbackService.description;
+                }
+
+                if (!candidate.iconImage && fallbackService && typeof fallbackService.iconImage === 'string') {
+                    candidate.iconImage = fallbackService.iconImage;
+                }
+                if (!candidate.iconImage && fallbackService && typeof fallbackService.image === 'string') {
+                    candidate.iconImage = fallbackService.image;
+                }
+
+                let iconClass = '';
+                if (desktopMatch && desktopMatch.service && typeof desktopMatch.service.icon === 'string') {
+                    iconClass = desktopMatch.service.icon;
+                }
+                if (!iconClass && fallbackService && typeof fallbackService.icon === 'string') {
+                    iconClass = fallbackService.icon;
+                }
+                if (!iconClass && titleKey) {
+                    iconClass = serviceIconMap.get(titleKey) || '';
+                }
+                if (!iconClass) {
+                    iconClass = serviceIconMap.get(`index:${fallbackIndex}`) || '';
+                }
+                candidate.icon = iconClass || candidate.icon || ICON_FALLBACK_SERVICE;
+
+                return candidate;
+            });
+
+            const contact = mobile.contact && typeof mobile.contact === 'object' ? mobile.contact : content.contacts || {};
+            const desktopContactIcons = content.contacts && typeof content.contacts === 'object' && content.contacts.icons && typeof content.contacts.icons === 'object'
+                ? content.contacts.icons
+                : {};
+
+            if (heroTitleEl) {
+                heroTitleEl.textContent = hero.title || content.hero?.title || heroTitleEl.textContent;
+            }
+            if (heroSubtitleEl) {
+                heroSubtitleEl.textContent = hero.subtitle || content.hero?.subtitle || heroSubtitleEl.textContent;
+            }
+            if (heroPrimaryAction) {
+                heroPrimaryAction.textContent = hero.primaryAction || content.cta?.button || 'Оставить заявку';
+            }
+            if (heroPhoneButton) {
+                heroPhoneButton.textContent = hero.secondaryAction || 'Позвонить';
+            }
+
+            applyHeroBackground(hero.image || content.hero?.image);
+
+            if (highlightsList) {
+                clearElementChildren(highlightsList);
+                highlights.forEach(item => {
+                    const candidate = item && typeof item === 'object'
+                        ? item
+                        : { title: String(item || '') };
+                    highlightsList.appendChild(createHighlightCard(candidate));
+                });
+            }
+
+            if (servicesList) {
+                clearElementChildren(servicesList);
+                services.forEach(item => servicesList.appendChild(createServiceCard(item)));
+            }
+
+            if (contactTitleEl) {
+                contactTitleEl.textContent = contact.title || 'Связаться с нами';
+            }
+            const defaultPhone = content.contacts?.phone || '+7 (495) 123-45-67';
+            const phone = contact.phone || content.contacts?.phone || defaultPhone;
+            const phoneRequests = contact.phoneRequests || content.contacts?.phoneRequests;
+            const phoneEtl = contact.phoneEtl || content.contacts?.phoneEtl;
+            const email = contact.email || content.contacts?.email;
+            const address = contact.address || content.contacts?.address;
+            const schedule = contact.schedule || content.contacts?.schedule;
+
+            if (contactPhoneEl) {
+                contactPhoneEl.textContent = phone || contactPhoneEl.textContent;
+            }
+            const contactPhoneExtraEl = document.getElementById('contactPhoneExtra');
+            if (contactPhoneExtraEl) {
+                const extraItems = [];
+                if (phoneRequests) {
+                    extraItems.push(`${phoneRequests} Прием заявок`);
+                }
+                if (phoneEtl) {
+                    extraItems.push(`${phoneEtl} ЭТЛ`);
+                }
+                contactPhoneExtraEl.innerHTML = '';
+                extraItems.forEach(text => {
+                    const span = document.createElement('span');
+                    span.textContent = text;
+                    contactPhoneExtraEl.appendChild(span);
+                });
+                contactPhoneExtraEl.hidden = extraItems.length === 0;
+            }
+            const contactIcons = contact.icons && typeof contact.icons === 'object' ? contact.icons : {};
+            setIconContent(contactPhoneIconContainer, [contactIcons.phone, desktopContactIcons.phone], ICON_FALLBACK_PHONE);
+            setIconContent(contactEmailIconContainer, [contactIcons.email, desktopContactIcons.email], ICON_FALLBACK_EMAIL);
+            setIconContent(contactAddressIconContainer, [contactIcons.address, desktopContactIcons.address], ICON_FALLBACK_ADDRESS);
+
+            if (contactEmailEl) {
+                contactEmailEl.textContent = email || contactEmailEl.textContent;
+            }
+            if (contactAddressEl) {
+                contactAddressEl.textContent = address || contactAddressEl.textContent;
+            }
+            if (contactScheduleEl) {
+                contactScheduleEl.textContent = schedule || contactScheduleEl.textContent;
+            }
+
+            const phoneHref = normalizePhoneToTel(phone);
+            const callHref = phoneHref || normalizePhoneToTel(defaultPhone);
+            [heroPhoneButton, contactCallButton, floatingCallButton].forEach(element => {
+                if (element && callHref) {
+                    element.href = `tel:${callHref}`;
+                }
+            });
+
+            const ctaText = contact.cta || mobile.hero?.primaryAction || content.cta?.button;
+            [heroPrimaryAction, contactRequestButton].forEach(element => {
+                if (element && ctaText) {
+                    element.textContent = ctaText;
+                }
+            });
+
+            const logo = content.branding?.headerLogo || 'assets/logo-inline.svg';
+            if (brandLogo) {
+                brandLogo.src = logo;
+            }
+            if (brandLink) {
+                brandLink.href = '#top';
+            }
+
+            scheduleScrollProgressUpdate();
+        }
+
+        async function loadContent() {
+            try {
+                const response = await fetch(contentUrl, { credentials: 'include' });
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить контент');
+                }
+                const data = await response.json();
+                applyMobileContent(data);
+                updateRequestContacts(data);
+                scheduleScrollProgressUpdate();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function updateRequestContacts(content) {
+            const contacts = content.contacts || {};
+            const requestConfig = content.request || {};
+            const configuredEmail = typeof requestConfig.targetEmail === 'string' && requestConfig.targetEmail.trim()
+                ? requestConfig.targetEmail.trim()
+                : null;
+            const email = configuredEmail || contacts.email || 'etl@elektrokonstruktiv.ru';
+            const phone = contacts.phone || '+7 (495) 123-45-67';
+            const tel = normalizePhoneToTel(phone);
+
+            if (contactCallButton && tel) {
+                contactCallButton.href = `tel:${tel}`;
+            }
+            if (floatingCallButton && tel) {
+                floatingCallButton.href = `tel:${tel}`;
+            }
+            if (heroPhoneButton && tel) {
+                heroPhoneButton.href = `tel:${tel}`;
+            }
+            if (contactPhoneEl) {
+                contactPhoneEl.textContent = phone;
+            }
+            if (contactEmailEl) {
+                contactEmailEl.textContent = email;
+            }
+            if (requestFooterEmail) {
+                requestFooterEmail.textContent = email;
+                requestFooterEmail.href = `mailto:${email}`;
+            }
+            if (requestFooterPhone) {
+                requestFooterPhone.textContent = phone;
+                requestFooterPhone.href = tel ? `tel:${tel}` : '#';
+            }
+        }
+
+        function handleOpenRequest(event) {
+            event.preventDefault();
+            showRequestOverlay();
+            if (requestNameInput) {
+                requestNameInput.focus();
+            }
+        }
+
+        function initOpeners() {
+            document.querySelectorAll('[data-open-request="true"]').forEach(element => {
+                element.addEventListener('click', handleOpenRequest);
+            });
+        }
+
+        function initCloseHandlers() {
+            if (requestOverlay) {
+                requestOverlay.addEventListener('click', event => {
+                    if (event.target === requestOverlay) {
+                        hideRequestOverlay();
+                    }
+                });
+            }
+            if (requestClose) {
+                requestClose.addEventListener('click', () => hideRequestOverlay());
+            }
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    hideRequestOverlay();
+                }
+            });
+        }
+
+        function initRequestForm() {
+            if (!requestForm) {
+                return;
+            }
+            requestForm.addEventListener('submit', async event => {
+                event.preventDefault();
+                clearRequestErrors();
+
+                const nameValue = requestNameInput?.value.trim() || '';
+                const phoneValue = requestPhoneInput?.value.trim() || '';
+                const emailValue = requestEmailInput?.value.trim() || '';
+                const commentValue = requestCommentInput?.value.trim() || '';
+                const file = requestFileInput?.files && requestFileInput.files[0] ? requestFileInput.files[0] : null;
+
+                updateRequestFileInfo(file);
+
+                const errorMessages = [];
+
+                if (!nameValue) {
+                    setFieldError(requestNameInput, 'Заполните поле «Ваше имя»');
+                    errorMessages.push('Заполните поле «Ваше имя».');
+                }
+
+                const hasContact = Boolean(phoneValue) || Boolean(emailValue);
+                if (!hasContact) {
+                    setFieldError(requestPhoneInput, 'Укажите телефон или e-mail');
+                    setFieldError(requestEmailInput, 'Укажите телефон или e-mail');
+                    errorMessages.push('Добавьте телефон или e-mail.');
+                } else if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+                    setFieldError(requestEmailInput, 'Введите корректный e-mail');
+                    errorMessages.push('Проверьте корректность e-mail.');
+                }
+
+                if (file && file.size > MAX_ATTACHMENT_SIZE) {
+                    setFieldError(requestFileInput, 'Файл слишком большой');
+                    errorMessages.push('Размер файла не должен превышать 10 МБ.');
+                }
+
+                if (!commentValue && !file) {
+                    setFieldError(requestCommentInput, 'Добавьте комментарий или вложение');
+                    setFieldError(requestFileInput, 'Добавьте комментарий или вложение');
+                    errorMessages.push('Добавьте комментарий или приложите файл.');
+                }
+
+                if (errorMessages.length) {
+                    updateRequestStatus(errorMessages.join('\n'), 'error');
+                    return;
+                }
+
+                const formData = new FormData(requestForm);
+                setRequestLoadingState(true);
+                updateRequestStatus('Отправляем заявку...', 'info');
+
+                try {
+                    const response = await fetch(requestUrl, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const payload = await response.json();
+                    if (!response.ok) {
+                        const serverMessages = [];
+                        if (payload && payload.errors) {
+                            if (payload.errors.name) {
+                                setFieldError(requestNameInput, payload.errors.name);
+                                if (!serverMessages.includes(payload.errors.name)) {
+                                    serverMessages.push(payload.errors.name);
+                                }
+                            }
+                            if (payload.errors.phone) {
+                                setFieldError(requestPhoneInput, payload.errors.phone);
+                                if (!serverMessages.includes(payload.errors.phone)) {
+                                    serverMessages.push(payload.errors.phone);
+                                }
+                            }
+                            if (payload.errors.email) {
+                                setFieldError(requestEmailInput, payload.errors.email);
+                                if (!serverMessages.includes(payload.errors.email)) {
+                                    serverMessages.push(payload.errors.email);
+                                }
+                            }
+                            if (payload.errors.comment) {
+                                setFieldError(requestCommentInput, payload.errors.comment);
+                                if (!serverMessages.includes(payload.errors.comment)) {
+                                    serverMessages.push(payload.errors.comment);
+                                }
+                            }
+                            if (payload.errors.attachment) {
+                                setFieldError(requestFileInput, payload.errors.attachment);
+                                if (!serverMessages.includes(payload.errors.attachment)) {
+                                    serverMessages.push(payload.errors.attachment);
+                                }
+                            }
+                        }
+                        const fallbackMessage = payload && payload.error ? payload.error : 'Не удалось отправить заявку.';
+                        updateRequestStatus(serverMessages.length ? serverMessages.join('\n') : fallbackMessage, 'error');
+                        return;
+                    }
+                    updateRequestStatus('', 'success');
+                    hideRequestOverlay({ reset: true });
+                    showToast(payload.message || 'Заявка отправлена. Мы свяжемся с вами.');
+                } catch (error) {
+                    console.error('Request failed', error);
+                    updateRequestStatus('Не удалось отправить заявку. Попробуйте позже.', 'error');
+                } finally {
+                    setRequestLoadingState(false);
+                }
+            });
+
+            if (requestFileInput) {
+                requestFileInput.addEventListener('change', () => {
+                    const file = requestFileInput.files && requestFileInput.files[0] ? requestFileInput.files[0] : null;
+                    updateRequestFileInfo(file);
+                    setFieldError(requestFileInput, '');
+                    updateRequestStatus('');
+                });
+            }
+
+            [requestNameInput, requestPhoneInput, requestEmailInput, requestCommentInput].forEach(input => {
+                if (input) {
+                    input.addEventListener('input', () => {
+                        setFieldError(input, '');
+                        updateRequestStatus('');
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', scheduleScrollProgressUpdate, { passive: true });
+        window.addEventListener('resize', scheduleScrollProgressUpdate);
+        scheduleScrollProgressUpdate();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent();
+            initOpeners();
+            initCloseHandlers();
+            initRequestForm();
+        });
+    </script>
+</body>
+</html>

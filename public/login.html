@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в панель управления</title>
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #ffd400;
+            --accent: #ffe566;
+            --muted: #6c6c6c;
+            --border: #d7d7d7;
+            --danger: #d64545;
+            --danger-dark: #bb3636;
+            --success: #2e7d32;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #111111, #2f2f2f);
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            color: var(--primary);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 28px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            margin-top: 28px;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--accent);
+        }
+
+        .status {
+            margin-top: 18px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h1>Вход</h1>
+        <form id="loginForm">
+            <label for="loginInput">Логин</label>
+            <input type="text" id="loginInput" autocomplete="username" required>
+
+            <label for="passwordInput">Пароль</label>
+            <input type="password" id="passwordInput" autocomplete="current-password" required>
+
+            <button type="submit">Продолжить</button>
+            <p class="status" id="loginStatus"></p>
+        </form>
+        <a class="link" href="/" data-site-link="landing">Вернуться на сайт</a>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const loginInput = document.getElementById('loginInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const statusElement = document.getElementById('loginStatus');
+
+        const rootStyles = getComputedStyle(document.documentElement);
+        const palette = {
+            muted: rootStyles.getPropertyValue('--muted').trim() || '#6c6c6c',
+            success: rootStyles.getPropertyValue('--success').trim() || '#2e7d32',
+            error: rootStyles.getPropertyValue('--danger').trim() || '#d64545'
+        };
+
+        const siteOrigin = window.location.origin; 
+        const loginEndpoint = new URL('/api/auth/login', siteOrigin).toString(); 
+        const defaultRedirect = new URL('/admin', siteOrigin).toString(); 
+        const landingUrl = new URL('/', siteOrigin).toString(); 
+
+        const backLink = document.querySelector('[data-site-link="landing"]'); 
+        if (backLink) { 
+            backLink.href = landingUrl; 
+        }
+
+        function getRedirectTarget() {
+            const params = new URLSearchParams(window.location.search); 
+            const redirect = params.get('redirect'); 
+            if (redirect && redirect.startsWith('/')) { 
+                return new URL(redirect, siteOrigin).toString(); 
+            }
+            return defaultRedirect; 
+        }
+
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+            statusElement.textContent = 'Проверка...';
+            statusElement.style.color = palette.muted;
+
+            const login = loginInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!login || !password) {
+                statusElement.textContent = 'Введите логин и пароль.';
+                statusElement.style.color = palette.error;
+                return;
+            }
+
+            try {
+                const response = await fetch(loginEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ login, password })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Неверные учётные данные');
+                }
+                statusElement.textContent = 'Успешный вход. Перенаправление...';
+                statusElement.style.color = palette.success;
+
+                setTimeout(() => {
+                    window.location.href = getRedirectTarget();
+                }, 400);
+            } catch (error) {
+                statusElement.textContent = error.message || 'Не удалось выполнить вход';
+                statusElement.style.color = palette.error;
+            }
+        });
+    </script>
+</body>
+</html>

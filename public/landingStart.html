@@ -1,0 +1,4154 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Электроконструктив — Профессиональные электромонтажные работы</title>
+    <meta name="description" content="Профессиональные электромонтажные работы любой сложности. Качественно, надежно, с гарантией. Работаем в Москве и области."> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <style> 
+        :root {
+            --primary: #111111;
+            --secondary: #ffd400;
+            --accent: #ffe566;
+            --light: #f5f5f5;
+            --dark: #000000;
+            --text: #1c1c1c;
+            --muted: #6c6c6c;
+            --surface: #ffffff;
+            --scale-base: 1;
+            --container-max: clamp(320px, 88vw, 1320px);
+            --content-narrow: clamp(320px, 70vw, 860px);
+            --section-inline: calc(clamp(24px, 5vw, 56px) * var(--scale-base));
+            --section-padding-block: calc(clamp(60px, 8vw, 96px) * var(--scale-base));
+            --section-gap: calc(clamp(32px, 6vw, 56px) * var(--scale-base));
+            --card-gap: calc(clamp(22px, 4vw, 36px) * var(--scale-base));
+            --card-padding: calc(clamp(20px, 4vw, 32px) * var(--scale-base));
+            --card-padding-tight: calc(clamp(16px, 3.2vw, 26px) * var(--scale-base));
+            --partner-card-width: clamp(160px, 13vw, 210px);
+            --partner-gap: clamp(18px, 2.6vw, 26px);
+            --transition-base: 0.3s ease;
+            --header-offset: clamp(72px, 10vw, 96px);
+        }
+
+        @media (min-width: 1600px) {
+            :root {
+                --container-max: 1440px;
+                --content-narrow: 960px;
+            }
+        }
+
+        @media (min-width: 1760px) {
+            :root {
+                --scale-base: 1.06;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            :root {
+                --scale-base: 1.1;
+            }
+        }
+
+        @media (max-width: 1366px) {
+            :root {
+                --scale-base: 0.96;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            :root {
+                --scale-base: 0.92;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                --scale-base: 0.88;
+            }
+        }
+
+        @media (max-width: 820px) {
+            :root {
+                --scale-base: 1;
+            }
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+            cursor: default;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            font-size: calc(16px * var(--scale-base));
+        }
+
+        a { 
+            color: inherit; 
+        } 
+
+        .container {
+            width: min(100%, var(--container-max));
+            margin: 0 auto;
+            padding-inline: var(--section-inline);
+        }
+
+        main section > .container,
+        footer > .container {
+            display: grid;
+            gap: var(--section-gap);
+            align-content: start;
+            justify-items: center;
+            padding-inline: var(--section-inline);
+        }
+
+        main section > .container > * {
+            width: min(100%, var(--container-max));
+            justify-self: stretch;
+        }
+
+        main section > .container > .section-title {
+            width: min(100%, var(--content-narrow));
+            justify-self: center;
+        }
+
+        header {
+            background: #050505;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            padding-block: 0;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(255, 212, 0, 0.14), transparent 36%);
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .header-container {
+            position: relative;
+            display: grid;
+            width: min(100%, clamp(320px, 98vw, 1500px));
+            grid-template-columns: clamp(36px, 3.2vw, 56px) minmax(220px, 1.2fr) minmax(480px, 2.6fr) minmax(156px, 0.9fr) minmax(156px, 1fr) auto;
+            grid-template-areas: "brand tagline nav phone cta toggle";
+            align-items: center;
+            column-gap: clamp(4px, 0.8vw, 10px);
+            row-gap: clamp(2px, 0.6vw, 8px);
+            grid-auto-rows: auto;
+            padding-inline: clamp(12px, 1.8vw, 28px);
+            padding-block: 15px;
+        }
+
+        .header-brand {
+            grid-area: brand;
+            display: flex;
+            align-items: center;
+            justify-self: start;
+            min-width: 0;
+            align-self: center;
+        }
+
+        .header-tagline {
+            grid-area: tagline;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            text-align: center;
+            width: clamp(220px, 18vw, 264.8px);
+            min-width: clamp(220px, 18vw, 264.8px);
+            max-width: 264.8px;
+            color: rgba(255, 255, 255, 0.88);
+            align-self: center;
+        }
+
+        .header-tagline__link {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            color: inherit;
+            text-decoration: none;
+            text-align: inherit;
+            gap: 0;
+        }
+
+        .header-nav {
+            grid-area: nav;
+            min-width: 0;
+            justify-self: center;
+            align-self: center;
+            width: 100%;
+        }
+
+        .header-nav.is-collapsible {
+            width: 100%;
+            max-height: clamp(320px, 60vh, 440px);
+            overflow: hidden;
+            transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease, margin-top 0.3s ease;
+        }
+
+        .header-nav.is-collapsible:not(.is-collapsed) {
+            margin-top: clamp(10px, 2vw, 18px);
+            border-radius: clamp(12px, 2vw, 18px);
+            background: rgba(0, 0, 0, 0.92);
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .header-nav.is-collapsible.is-collapsed {
+            max-height: 0;
+            margin-top: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-8px);
+        }
+
+        .header-nav.is-collapsible .header-nav__list {
+            flex-direction: column;
+            align-items: stretch;
+            white-space: normal;
+            gap: clamp(12px, 1.8vw, 20px);
+            padding: clamp(12px, 2vw, 20px);
+        }
+
+        .header-nav.is-collapsible .header-nav__list li,
+        .header-nav.is-collapsible .header-nav__list a {
+            width: 100%;
+        }
+
+        .header-nav.is-collapsible .header-nav__list a {
+            font-size: clamp(12px, 0.4vw + 11px, 14px);
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+
+        .header-nav__list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            list-style: none;
+            gap: clamp(6px, 1vw, 12px);
+        }
+
+        .header-nav__list li.is-hidden {
+            display: none;
+        }
+
+        .header-nav__list li {
+            display: flex;
+            flex: 0 auto;
+        }
+
+        .header-nav__list a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: clamp(6px, 0.7vw, 12px);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            font-size: clamp(11px, 0.18vw + 10px, 13px);
+            color: rgba(255, 255, 255, 0.82);
+            position: relative;
+            transition: color var(--transition-base);
+            padding: 0;
+        }
+
+        .header-nav__list a:hover,
+        .header-nav__list a:focus-visible {
+            color: var(--secondary);
+            outline: none;
+        }
+
+        .header-nav__list a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), transparent);
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity var(--transition-base), transform var(--transition-base);
+        }
+
+        .header-nav__list a:hover::after,
+        .header-nav__list a:focus-visible::after,
+        .header-nav__list a:active::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-toggle {
+            grid-area: toggle;
+            display: none;
+            width: clamp(40px, 3.2vw, 48px);
+            height: clamp(40px, 3.2vw, 48px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            background: transparent;
+            color: inherit;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-toggle:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .nav-toggle__line {
+            display: block;
+            width: 20px;
+            height: 2px;
+            border-radius: 999px;
+            background-color: currentColor;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+            color: white;
+            min-width: 0;
+            flex-wrap: nowrap;
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+
+        .logo-name,
+        .logo-tagline {
+            display: block;
+            width: 100%;
+            color: #ffffff;
+        }
+
+        .logo-name {
+            font-weight: 700;
+            font-size: clamp(15px, 0.7vw + 13px, 21px);
+            line-height: clamp(24px, 0.6vw + 24px, 33.1px);
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+        }
+
+        .logo-tagline {
+            display: block;
+            width: 100%;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: clamp(9px, 0.39vw + 8.4px, 12.6px);
+            line-height: clamp(17px, 0.42vw + 17px, 23.2px);
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        main section h1,
+        main section h2,
+        main section h3,
+        main section p,
+        main section li,
+        main section span {
+            cursor: default;
+            user-select: text;
+        }
+
+        .header-phone {
+            grid-area: phone;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            justify-self: end;
+            align-self: center;
+            min-width: clamp(0px, 24vw, 180px);
+            max-width: clamp(140px, 34vw, 200px);
+            white-space: nowrap;
+        }
+
+        .header-cta {
+            grid-area: cta;
+            justify-self: end;
+            align-self: center;
+            white-space: nowrap;
+            margin-top: 0;
+            min-width: clamp(0px, 28vw, 190px);
+            max-width: clamp(150px, 40vw, 220px);
+        }
+
+        header.is-compact-mode .header-container {
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-areas:
+                "cta brand toggle"
+                "tagline tagline tagline"
+                "nav nav nav";
+            align-items: center;
+            column-gap: clamp(6px, 1.4vw, 16px);
+            row-gap: clamp(2px, 0.8vw, 8px);
+            padding-block: clamp(4px, 1vw, 8px);
+            width: min(100%, clamp(320px, 90vw, 720px));
+        }
+
+        header.is-compact-mode .header-brand,
+        header.is-compact-mode .header-tagline {
+            align-self: center;
+        }
+
+        header.is-compact-mode .header-tagline {
+            justify-content: center;
+            justify-self: center;
+            align-items: center;
+            text-align: center;
+            margin-top: clamp(2px, 0.6vw, 6px);
+        }
+
+        header.is-compact-mode .header-phone {
+            display: none;
+        }
+
+        header.is-compact-mode .nav-toggle {
+            display: inline-flex;
+        }
+
+        header.is-compact-mode .header-cta {
+            justify-self: center;
+            align-self: center;
+            width: auto;
+            min-width: auto;
+            max-width: 100%;
+        }
+
+        @media (max-width: 1280px) {
+            .header-container {
+            }
+
+            .header-tagline {
+                min-width: clamp(200px, 24vw, 264.8px);
+                max-width: 264.8px;
+            }
+
+            .header-nav__list a {
+                font-size: clamp(11px, 0.22vw + 9.6px, 12.6px);
+            }
+        }
+
+        @media (max-width: 1019px) {
+            header.is-compact-mode .header-tagline {
+                min-width: clamp(200px, 42vw, 264.8px);
+                max-width: 264.8px;
+            }
+
+            header.is-compact-mode .header-cta {
+                font-size: clamp(11px, 0.4vw + 10px, 13px);
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 680px) {
+            header.is-compact-mode .header-container {
+                grid-template-columns: auto minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "brand cta toggle"
+                    "tagline tagline tagline"
+                    "nav nav nav";
+                row-gap: clamp(4px, 2vw, 14px);
+            }
+
+            header.is-compact-mode .header-tagline {
+                width: 100%;
+                justify-self: stretch;
+            }
+
+            .logo-tagline {
+                display: none;
+            }
+
+            header.is-compact-mode .header-cta {
+                justify-self: stretch;
+                width: 100%;
+                font-size: clamp(11px, 2vw + 9px, 13px);
+            }
+
+            .header-nav.is-collapsible .header-nav__list {
+                gap: clamp(10px, 2.4vw, 18px);
+            }
+        }
+
+        .phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(4px, 0.5vw, 8px);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            padding: clamp(8px, 0.8vw + 6px, 14px) clamp(12px, 1.6vw, 18px);
+        }
+
+        .phone i {
+            color: var(--secondary);
+            font-size: 16px;
+        }
+
+        .phone a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(10px, 0.2vw + 9.2px, 11.6px);
+        }
+
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(4px, 0.5vw, 8px);
+            border-radius: 999px;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: clamp(10px, 0.2vw + 9.2px, 11.6px);
+            text-decoration: none;
+            box-shadow: 0 16px 32px rgba(255, 212, 0, 0.35);
+            transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
+            padding: clamp(8px, 0.8vw + 6px, 14px) clamp(12px, 1.6vw, 18px);
+        }
+
+        .header-cta:hover,
+        .header-cta:focus-visible {
+            transform: translateY(-2px);
+            background-color: #ffe256;
+            box-shadow: 0 20px 36px rgba(255, 212, 0, 0.45);
+            outline: none;
+        }
+
+        .hero-logo {
+            width: clamp(160px, 18vw, 220px);
+            height: auto;
+            margin: 0 auto clamp(16px, 3vw, 24px);
+            display: block;
+        }
+
+        main {
+            margin-top: var(--header-offset);
+        }
+
+        main section {
+            padding-block: var(--section-padding-block);
+        }
+
+        main section[data-empty="true"] {
+            display: none;
+        }
+
+        .section-title {
+            display: grid;
+            gap: 12px;
+            text-align: center;
+            margin: 0 auto;
+            justify-items: center;
+            width: min(100%, var(--content-narrow));
+        }
+
+        .section-title h2 {
+            font-size: clamp(28px, 3vw, 40px);
+            letter-spacing: 0.04em;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -14px;
+            transform: translateX(-50%);
+            width: clamp(48px, 6vw, 72px);
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: min(96vh, 780px);
+            color: #ffffff;
+            background-color: #050505;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            padding-block: calc(var(--section-padding-block) * 1.05);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0.86));
+            opacity: 0.9;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: -180px;
+            right: -160px;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 212, 0, 0.28), transparent 68%);
+            filter: blur(12px);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .hero > .container {
+            position: relative;
+            width: min(100%, var(--container-max));
+            margin: 0 auto;
+            z-index: 1;
+            padding-inline: var(--section-inline);
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: clamp(32px, 6vw, 60px);
+            align-items: center;
+            justify-items: center;
+            text-align: center;
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hero-text {
+            position: relative;
+            display: grid;
+            gap: clamp(20px, 4vw, 32px);
+            justify-items: center;
+            text-align: center;
+            max-width: clamp(520px, 90vw, 640px);
+            margin: 0 auto;
+        }
+
+        .hero-heading {
+            display: grid;
+            gap: clamp(12px, 2vw, 18px);
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 62px);
+            margin: 0;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2.4vw, 22px);
+            margin: 0;
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            padding-top: clamp(6px, 1.4vw, 18px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 999px;
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+            padding: clamp(10px, 1vw + 6px, 16px) clamp(18px, 2.4vw, 28px);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus-visible {
+            background-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        @media (min-width: 1100px) {
+            .hero-grid {
+                justify-items: center;
+                text-align: center;
+                gap: clamp(40px, 6vw, 72px);
+            }
+
+            .hero-text {
+                justify-items: center;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 0.03em;
+            transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
+            padding: clamp(12px, 1.2vw + 8px, 18px) clamp(22px, 2.6vw, 32px);
+        }
+
+        .btn:hover { 
+            transform: translateY(-3px); 
+            background-color: #ffde33; 
+            box-shadow: 0 10px 20px rgba(255,212,0,0.35); 
+        } 
+
+        body.modal-open { 
+            overflow: hidden; 
+        } 
+
+        .request-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0, 0, 0, 0.75); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            opacity: 0; 
+            pointer-events: none; 
+            transition: opacity 0.3s ease; 
+            z-index: 1400; 
+        } 
+
+        .request-overlay.is-visible { 
+            opacity: 1; 
+            pointer-events: auto; 
+        } 
+
+        .request-modal {
+            position: relative;
+            width: min(640px, 100%);
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            color: var(--text);
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: clamp(28px, 4vw, 40px);
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .request-modal::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        .request-logo {
+            width: 160px;
+            height: auto;
+            display: block;
+        }
+
+        .request-close { 
+            position: absolute; 
+            top: 16px; 
+            right: 16px; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: rgba(0, 0, 0, 0.08); 
+            color: var(--dark); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: background-color 0.2s ease, color 0.2s ease; 
+        } 
+
+        .request-close:hover, .request-close:focus-visible { 
+            background: var(--dark); 
+            color: var(--secondary); 
+            outline: none; 
+        } 
+
+        .request-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            padding: 0 clamp(8px, 2vw, 20px);
+        }
+
+        .request-tab {
+            border-radius: 999px;
+            background: transparent;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: clamp(22px, 4vw + 8px, 44px);
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            padding: clamp(8px, 1.4vw, 14px) clamp(16px, 2.6vw, 28px);
+            border: none;
+        }
+
+        .request-tab.is-active {
+            background: transparent;
+            color: var(--dark);
+            transform: scale(1.02);
+        }
+
+        .request-form {
+            display: grid;
+            gap: clamp(16px, 3vw, 24px);
+            width: 100%;
+            padding: 0 clamp(12px, 3vw, 28px) clamp(12px, 3vw, 28px);
+        }
+
+        .request-field label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+        } 
+
+        .request-field input,
+        .request-field textarea {
+            width: 100%;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            padding: clamp(12px, 1.6vw, 18px) clamp(14px, 2vw, 22px);
+        }
+
+        .request-field.has-error input,
+        .request-field.has-error textarea { 
+            box-shadow: 0 0 0 2px rgba(217, 48, 37, 0.15); 
+        } 
+
+        .request-field textarea { 
+            min-height: 120px; 
+            resize: vertical; 
+        } 
+
+        .request-field input:focus,
+        .request-field textarea:focus { 
+            outline: none; 
+            box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.25); 
+        } 
+
+        .field-error { 
+            margin-top: 6px; 
+            font-size: 14px; 
+            color: #d93025; 
+            min-height: 18px; 
+        } 
+
+        .request-file-control {
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 2vw, 18px);
+            flex-wrap: wrap;
+            padding: clamp(12px, 2.4vw, 20px);
+        }
+
+        .request-file-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: var(--dark);
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+            padding: clamp(10px, 1.2vw + 6px, 16px) clamp(18px, 2.6vw, 26px);
+        }
+
+        .request-file-button:hover,
+        .request-file-button:focus-visible { 
+            background: var(--secondary); 
+            color: var(--dark); 
+            box-shadow: 0 8px 20px rgba(255, 212, 0, 0.35); 
+        } 
+
+        .request-field.has-error .request-file-button { 
+            background: #d93025; 
+            color: #ffffff; 
+            box-shadow: 0 8px 20px rgba(217, 48, 37, 0.35); 
+        } 
+
+        .request-field.has-error .request-file-button:hover,
+        .request-field.has-error .request-file-button:focus-visible { 
+            background: #c5221f; 
+            color: #ffffff; 
+            box-shadow: 0 8px 20px rgba(197, 34, 31, 0.45); 
+        } 
+
+        .request-file-control input[type="file"] { 
+            position: absolute; 
+            width: 1px; 
+            height: 1px; 
+            margin: -1px; 
+            overflow: hidden; 
+            clip: rect(0, 0, 0, 0); 
+        } 
+
+        .request-file-status { 
+            font-size: 14px; 
+            color: var(--muted); 
+            min-height: 20px; 
+        } 
+
+        .request-progress { 
+            position: relative; 
+            width: 100%; 
+            height: 6px; 
+            border-radius: 999px; 
+            background: rgba(0, 0, 0, 0.08); 
+            overflow: hidden; 
+        } 
+
+        .request-progress-bar { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            height: 100%; 
+            width: 0; 
+            background: var(--secondary); 
+            transition: width 0.3s ease; 
+        } 
+
+        .request-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+            padding-top: clamp(6px, 1.6vw, 14px);
+        }
+
+        .request-submit {
+            border-radius: 999px;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            padding: clamp(12px, 1.4vw + 8px, 18px) clamp(24px, 3vw, 34px);
+        }
+
+        .request-submit:hover:not([disabled]),
+        .request-submit:focus-visible:not([disabled]) { 
+            transform: translateY(-2px); 
+            background-color: #ffde33; 
+            box-shadow: 0 12px 24px rgba(255, 212, 0, 0.35); 
+            outline: none; 
+        } 
+
+        .request-submit[disabled] { 
+            opacity: 0.6; 
+            cursor: not-allowed; 
+        } 
+
+        .request-status { 
+            font-size: 14px; 
+            color: var(--muted); 
+            min-height: 18px; 
+        } 
+
+        .request-status.is-error { 
+            color: #d93025; 
+        } 
+
+        .request-status.is-success { 
+            color: #1a7f37; 
+        } 
+
+        .request-footer {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+            padding: 0 clamp(12px, 3vw, 24px);
+        }
+
+        .request-footer a { 
+            color: var(--dark); 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: color 0.2s ease; 
+        } 
+
+        .request-footer a:hover, .request-footer a:focus-visible { 
+            color: var(--secondary); 
+            outline: none; 
+        } 
+
+        .request-toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1500;
+            padding: clamp(16px, 2.4vw, 24px) clamp(18px, 2.8vw, 28px);
+        }
+
+        .request-toast.is-visible { 
+            opacity: 1; 
+            pointer-events: auto; 
+            transform: translateY(0); 
+        } 
+
+        .request-toast-message { 
+            font-weight: 600; 
+            color: var(--text); 
+        } 
+
+        .request-toast-close { 
+            border-radius: 999px; 
+            background: var(--secondary); 
+            color: var(--dark); 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: background-color 0.2s ease, transform 0.2s ease; 
+        } 
+
+        .request-toast-close:hover,
+        .request-toast-close:focus-visible { 
+            background: #ffde33; 
+            transform: translateY(-1px); 
+            outline: none; 
+        } 
+
+        .call-button {
+            position: fixed;
+            bottom: clamp(18px, 3vw, 32px);
+            right: clamp(18px, 3vw, 32px);
+            width: clamp(52px, 7vw, 72px);
+            height: clamp(52px, 7vw, 72px);
+            border-radius: 50%;
+            background-color: var(--dark);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            text-decoration: none; 
+            box-shadow: 0 0 0 rgba(255,212,0,0); 
+            animation: callPulse 3s infinite; 
+            transition: box-shadow 0.3s, color 0.3s; 
+            z-index: 1200; 
+        } 
+
+        .call-button i {
+            font-size: clamp(20px, 2.4vw, 28px);
+            transition: color 0.3s;
+        }
+
+        .call-button:hover { 
+            animation: none; 
+            box-shadow: 0 0 18px rgba(255,212,0,0.6); 
+        } 
+
+        .call-button:hover i { 
+            color: var(--secondary); 
+        } 
+
+        .call-button::after { 
+            content: ""; 
+            position: absolute; 
+            inset: 0; 
+            border-radius: 50%; 
+            box-shadow: 0 0 0 rgba(255,212,0,0); 
+            pointer-events: none; 
+            transition: box-shadow 0.3s; 
+        } 
+
+        .call-button:hover::after { 
+            box-shadow: 0 0 18px rgba(255,212,0,0.6); 
+        } 
+
+        .call-button.hidden { 
+            opacity: 0; 
+            pointer-events: none; 
+        } 
+
+        @keyframes callPulse { 
+            0%, 70% { 
+                box-shadow: 0 0 0 rgba(255,212,0,0); 
+            } 
+            80% { 
+                box-shadow: 0 0 18px rgba(255,212,0,0.55); 
+            } 
+            90%, 100% { 
+                box-shadow: 0 0 0 rgba(255,212,0,0); 
+            } 
+        } 
+
+        .sr-only { 
+            position: absolute; 
+            width: 1px; 
+            height: 1px; 
+            margin: -1px; 
+            overflow: hidden; 
+            clip: rect(0, 0, 0, 0); 
+            white-space: nowrap; 
+        } 
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--card-gap);
+            width: 100%;
+            align-items: stretch;
+            justify-items: stretch;
+            grid-auto-rows: 1fr;
+        }
+
+        .feature-card {
+            background-color: var(--surface);
+            border-radius: 18px;
+            box-shadow: 0 16px 32px rgba(10, 10, 10, 0.08);
+            text-align: left;
+            display: grid;
+            gap: 14px;
+            align-content: start;
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            height: 100%;
+            padding: var(--card-padding);
+        }
+
+        .feature-card i {
+            font-size: clamp(30px, 4vw, 40px);
+            color: var(--secondary);
+            align-self: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 26px 48px rgba(17,17,17,0.14);
+        }
+
+        .services {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.3s ease;
+        }
+
+        .services.services--has-background > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--card-gap);
+            width: 100%;
+            align-items: stretch;
+            justify-items: stretch;
+            grid-auto-rows: 1fr;
+        }
+
+        .service-card {
+            background-color: var(--surface);
+            border-radius: 18px;
+            box-shadow: 0 16px 32px rgba(10,10,10,0.08);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: clamp(14px, 3vw, 20px);
+            row-gap: clamp(8px, 1.6vw, 16px);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            height: 100%;
+            padding: var(--card-padding);
+            align-items: start;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 46px rgba(17,17,17,0.14);
+        }
+
+        .service-card__icon {
+            width: clamp(48px, 5vw, 64px);
+            height: clamp(48px, 5vw, 64px);
+            border-radius: 16px;
+            background: rgba(255, 212, 0, 0.14);
+            color: var(--secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(22px, 3vw, 30px);
+            box-shadow: inset 0 0 0 1px rgba(255, 212, 0, 0.18);
+        }
+
+        .service-card__icon i {
+            line-height: 1;
+        }
+
+        .service-card__content {
+            display: grid;
+            row-gap: clamp(10px, 2vw, 16px);
+        }
+
+        .service-card__content h3 {
+            margin: 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--card-gap);
+            width: 100%;
+            align-items: stretch;
+            justify-items: stretch;
+            grid-auto-rows: 1fr;
+        }
+
+        .step-card {
+            background-color: var(--surface);
+            border-radius: 18px;
+            box-shadow: 0 16px 32px rgba(10,10,10,0.08);
+            position: relative;
+            display: grid;
+            gap: 10px;
+            height: 100%;
+            padding: var(--card-padding);
+        }
+
+        .step-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px; 
+            left: 20px; 
+            background-color: var(--secondary); 
+            color: var(--dark); 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+        } 
+
+        .about {
+            background: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
+            padding-bottom: calc(var(--section-padding-block) * 0.6);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(28px, 6vw, 60px);
+            align-items: center;
+            justify-items: stretch;
+            width: 100%;
+            margin: 0 auto;
+            padding: clamp(16px, 3vw, 32px);
+        }
+
+        .about-text p {
+            margin-bottom: 18px;
+            color: #3b3b3d;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: clamp(16px, 3vw, 28px);
+        }
+
+        .stat-card {
+            background-color: var(--surface);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 18px 34px rgba(10, 10, 10, 0.08);
+            display: grid;
+            gap: 6px;
+            padding: var(--card-padding-tight);
+        }
+
+        .stat-card h3 {
+            font-size: clamp(26px, 3vw, 34px);
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .stat-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 26px 52px rgba(15, 15, 15, 0.18);
+        }
+
+        .about-image.is-hidden {
+            display: none;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .partners {
+            background-color: #ffffff;
+            padding-top: calc(var(--section-padding-block) * 0.6);
+        }
+
+        .partners.is-hidden { 
+            display: none; 
+        } 
+
+        .partners-viewport {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 4vw, 28px);
+            border-radius: 16px;
+            background-color: var(--light);
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+            padding: clamp(18px, 3.6vw, 28px);
+        }
+
+        .partners-window {
+            flex: 0 0 auto;
+            width: min(100%, calc(4 * var(--partner-card-width) + 3 * var(--partner-gap)));
+            max-width: calc(4 * var(--partner-card-width) + 3 * var(--partner-gap));
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .partners-track {
+            display: flex;
+            align-items: center;
+            gap: var(--partner-gap);
+            will-change: transform;
+            transition: transform 0.6s ease;
+        }
+
+        .partners-nav {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(17, 17, 17, 0.92);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .partners-nav:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 12px 24px rgba(17, 17, 17, 0.25);
+        }
+
+        .partners-nav:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: 3px;
+        } 
+
+        .partners-nav i { 
+            pointer-events: none; 
+        } 
+
+        .partner-card {
+            flex: 0 0 var(--partner-card-width);
+            width: var(--partner-card-width);
+            background-color: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 96px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            padding: clamp(12px, 2vw, 20px);
+        }
+
+        .partner-card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: 0 16px 32px rgba(17, 17, 17, 0.18); 
+        } 
+
+        .partner-card img { 
+            max-width: 100%; 
+            max-height: 72px; 
+            object-fit: contain; 
+            filter: grayscale(100%); 
+            transition: filter 0.3s ease, transform 0.3s ease; 
+        } 
+
+        .partner-card:hover img { 
+            filter: grayscale(0%); 
+            transform: scale(1.04); 
+        } 
+
+        .partners-status { 
+            text-align: center; 
+            margin-top: 20px; 
+            color: var(--muted); 
+            font-size: 14px; 
+        } 
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--card-gap);
+            width: 100%;
+            align-items: stretch;
+            justify-items: stretch;
+            grid-auto-rows: 1fr;
+        }
+
+        .portfolio-card {
+            background-color: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100%;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: clamp(200px, 32vw, 240px);
+            object-fit: cover;
+        }
+
+        .portfolio-placeholder { 
+            width: 100%; 
+            height: 200px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: repeating-linear-gradient(
+                135deg,
+                rgba(17, 17, 17, 0.15),
+                rgba(17, 17, 17, 0.15) 10px,
+                rgba(255, 212, 0, 0.15) 10px,
+                rgba(255, 212, 0, 0.15) 20px
+            ); 
+        } 
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(0,0,0,0.14);
+        }
+
+        .portfolio-card .portfolio-info {
+            display: grid;
+            gap: 10px;
+            padding: var(--card-padding-tight);
+        }
+
+        .reviews { 
+            background-color: var(--light); 
+        } 
+
+        .reviews-slider {
+            position: relative;
+            max-width: min(820px, var(--content-narrow));
+            margin: 0 auto;
+            overflow: hidden;
+            display: grid;
+            gap: clamp(20px, 4vw, 28px);
+            justify-items: center;
+        }
+
+        #reviewsContainer { 
+            display: flex; 
+            transition: transform 0.6s ease; 
+            will-change: transform; 
+        } 
+
+        .review-card {
+            flex: 0 0 100%;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            opacity: 0.4;
+            transform: scale(0.94);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: clamp(24px, 5vw, 38px);
+        }
+
+        .review-card.active { 
+            opacity: 1; 
+            transform: scale(1); 
+        } 
+
+        .review-card img { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-bottom: 15px; 
+        } 
+
+        .review-placeholder { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            margin: 0 auto 15px; 
+            background: linear-gradient(135deg, #f7f7f7, #d9d9d9); 
+        } 
+
+        .review-author { 
+            margin-top: 15px; 
+            font-weight: 600; 
+        } 
+
+        .review-meta { 
+            margin-top: 10px; 
+            font-size: 14px; 
+            color: var(--muted); 
+        } 
+
+        .review-rating { 
+            margin-top: 10px; 
+            font-weight: 600; 
+            color: var(--accent); 
+            letter-spacing: 2px; 
+        } 
+
+        .reviews-status { 
+            margin-top: 15px; 
+            text-align: center; 
+            font-size: 14px; 
+            color: var(--muted); 
+        } 
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding-top: clamp(10px, 2vw, 18px);
+        }
+
+        .slider-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .slider-button:hover {
+            background-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .cta {
+            background: linear-gradient(135deg, var(--dark), #2d2d2d);
+            color: white;
+            text-align: center;
+            padding: calc(var(--section-padding-block) * 0.85) var(--section-inline);
+        }
+
+        .cta .container {
+            justify-items: center;
+            gap: clamp(18px, 4vw, 32px);
+            width: min(100%, var(--content-narrow));
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 4vw, 40px);
+            margin: 0;
+        }
+
+        .cta p {
+            max-width: 640px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: calc(var(--section-padding-block) * 0.75) var(--section-inline);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(24px, 4vw, 36px);
+            width: 100%;
+            margin: 0 auto;
+            align-items: start;
+            justify-items: stretch;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: clamp(6px, 1vw, 14px);
+            text-align: left;
+        }
+
+        .footer-col.is-hidden {
+            display: none;
+        }
+
+        .footer-col h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .footer-col__body {
+            display: grid;
+            gap: clamp(6px, 1vw, 12px);
+            width: 100%;
+        }
+
+        .footer-col__body > * {
+            margin: 0;
+        }
+
+        .footer-contact {
+            display: grid;
+            gap: clamp(6px, 1vw, 12px);
+            width: 100%;
+        }
+
+        .footer-contact p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: clamp(6px, 1vw, 12px);
+        }
+
+        .footer-contact i {
+            flex-shrink: 0;
+        }
+
+        .footer-phones {
+            display: grid;
+            gap: clamp(4px, 0.8vw, 8px);
+        }
+
+        .footer-phone {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            column-gap: clamp(6px, 1vw, 12px);
+        }
+
+        .footer-phone a {
+            color: inherit;
+        }
+
+        .footer-phone__text {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: clamp(4px, 0.8vw, 8px);
+        }
+
+        .footer-phone__note {
+            margin-left: clamp(4px, 0.8vw, 8px);
+            color: rgba(255, 255, 255, 0.64);
+            font-size: 0.95em;
+        }
+
+        .footer-phone__icon-spacer {
+            width: 1.1em;
+            height: 1em;
+            display: block;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: clamp(6px, 1vw, 12px);
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-col {
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+                padding-block: clamp(12px, 5vw, 18px);
+            }
+
+            .footer-col:last-child {
+                border-bottom: none;
+            }
+
+            .footer-col h3 {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: clamp(8px, 3vw, 16px);
+                cursor: pointer;
+                position: relative;
+                padding-right: clamp(12px, 5vw, 24px);
+            }
+
+            .footer-col h3::after {
+                content: '';
+                width: 10px;
+                height: 10px;
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
+                transform: rotate(45deg);
+                transition: transform 0.2s ease;
+            }
+
+            .footer-col.is-expanded h3::after {
+                transform: rotate(-135deg);
+            }
+
+            .footer-col.is-collapsed h3::after {
+                transform: rotate(45deg);
+            }
+
+            .footer-col[data-expanded="false"] .footer-col__body {
+                display: none;
+            }
+
+            .footer-col__body {
+                padding-top: clamp(8px, 3vw, 14px);
+            }
+        }
+
+        .footer-col a { 
+            color: white; 
+            text-decoration: none; 
+            transition: color 0.3s; 
+        } 
+
+        .footer-col a:hover { 
+            color: var(--accent); 
+        } 
+
+        .footer-bottom { 
+            text-align: center; 
+            font-size: 14px; 
+        } 
+
+        @media (min-width: 1200px) {
+            .features-grid,
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .about-content {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .features-grid,
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .about-content {
+                gap: clamp(40px, 5vw, 80px);
+                grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            main section > .container,
+            footer > .container {
+                gap: clamp(28px, 8vw, 44px);
+            }
+
+            .header-container {
+                grid-template-columns: auto minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "brand phone toggle"
+                    "tagline tagline tagline"
+                    "cta cta cta"
+                    "nav nav nav";
+                row-gap: clamp(14px, 4vw, 22px);
+            }
+
+            .header-brand {
+                justify-self: flex-start;
+                width: auto;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+                grid-area: toggle;
+                margin-left: 0;
+                justify-self: flex-end;
+            }
+
+            .header-tagline {
+                grid-area: tagline;
+                justify-self: center;
+                justify-items: center;
+                text-align: center;
+                align-items: center;
+            }
+
+            .header-phone {
+                grid-area: phone;
+                justify-content: flex-end;
+                min-width: 0;
+            }
+
+            .header-nav {
+                grid-area: nav;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .header-nav__list {
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .header-cta {
+                grid-area: cta;
+                justify-self: stretch;
+                text-align: center;
+            }
+
+            .phone {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main section > .container,
+            footer > .container {
+                gap: clamp(24px, 10vw, 40px);
+            }
+
+            header {
+                position: sticky;
+            }
+
+            .header-nav.is-collapsible .header-nav__list {
+                align-items: center;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header-tagline {
+                justify-items: center;
+                text-align: center;
+                align-items: center;
+            }
+
+            .header-tagline__link {
+                justify-items: center;
+            }
+
+            .header-phone {
+                justify-content: center;
+            }
+
+            .header-cta {
+                justify-self: center;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-text {
+                justify-items: center;
+                text-align: center;
+            }
+
+            .partners-viewport {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+                justify-content: center;
+            }
+
+            .partners-window {
+                width: 100%;
+                max-width: 100%;
+                flex: 0 1 auto;
+                min-height: auto;
+            }
+
+            .partners-nav {
+                width: 40px;
+                height: 40px;
+                align-self: center;
+            }
+
+            .partner-card {
+                flex: 0 0 clamp(180px, 48vw, 260px);
+                width: clamp(180px, 48vw, 260px);
+                min-height: 88px;
+            }
+
+            .request-modal {
+                width: min(540px, 100%);
+                gap: 20px;
+            }
+
+            .request-tabs {
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .request-file-control {
+                gap: 12px;
+            }
+
+            .request-toast {
+                right: 16px;
+                left: 16px;
+                bottom: 24px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            :root {
+                --section-inline: calc(clamp(16px, 6vw, 24px) * var(--scale-base));
+            }
+
+            .header-phone {
+                justify-content: center;
+            }
+
+            .header-cta {
+                width: 100%;
+            }
+
+            .phone {
+                width: 100%;
+            }
+
+            .partners-nav {
+                width: 34px;
+                height: 34px;
+            }
+
+            .partner-card {
+                flex: 0 0 clamp(220px, 70vw, 100%);
+            }
+
+            .request-modal {
+                border-radius: 18px;
+                gap: 18px;
+            }
+
+            .request-tabs {
+                flex-direction: column;
+                gap: 6px;
+            } 
+
+            .request-file-control { 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 10px; 
+            } 
+
+            .request-file-status { 
+                font-size: 13px; 
+            } 
+
+            .request-toast { 
+                left: 12px; 
+                right: 12px; 
+                bottom: 16px; 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 12px; 
+            } 
+
+            .request-toast-close { 
+                width: 100%; 
+                text-align: center; 
+            } 
+        } 
+    </style> 
+</head> 
+<body> 
+    <header>
+        <div class="container header-container">
+            <div class="header-brand">
+                <a href="#top" class="logo">
+                    <img src="assets/logo-inline.svg" alt="Логотип Электроконструктив" loading="lazy" id="headerLogoImage">
+                </a>
+            </div>
+            <div class="header-tagline">
+                <a href="#top" class="header-tagline__link">
+                    <span class="logo-name">ЭЛЕКТРОКОНСТРУКТИВ</span>
+                    <span class="logo-tagline">энергия надежных решений</span>
+                </a>
+            </div>
+            <nav class="header-nav" id="siteNav" aria-hidden="false">
+                <ul class="header-nav__list">
+                    <li class="is-hidden"><a href="#services">Услуги</a></li>
+                    <li class="is-hidden"><a href="#process">Этапы</a></li>
+                    <li class="is-hidden"><a href="#about">О компании</a></li>
+                    <li class="is-hidden"><a href="#partners">Партнёры</a></li>
+                    <li class="is-hidden"><a href="#portfolio">Проекты</a></li>
+                    <li class="is-hidden"><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header-phone">
+                <div class="phone">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+74951234567" id="phoneLink">+7 (495) 123-45-67</a>
+                </div>
+            </div>
+            <a href="#request" class="header-cta" data-open-request="true">Заказать звонок</a>
+            <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="siteNav" aria-hidden="true">
+                <span class="nav-toggle__line"></span>
+                <span class="nav-toggle__line"></span>
+                <span class="nav-toggle__line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="top"> 
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <img src="assets/logo-hero.svg" alt="Эмблема Электроконструктив" class="hero-logo" loading="lazy" id="heroLogoImage">
+                        <div class="hero-heading">
+                            <h1 id="heroTitle">Заголовок загружается...</h1>
+                            <p id="heroSubtitle">Описание загружается...</p>
+                        </div>
+                        <div class="hero-actions">
+                            <a href="#request" class="btn" id="heroCta" data-open-request="true">Получить консультацию</a>
+                            <a href="#portfolio" class="btn-secondary">Наши проекты</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Почему выбирают нас</h2> 
+                </div> 
+                <div class="features-grid" id="featuresGrid"> 
+                     
+                </div> 
+            </div> 
+        </section> 
+
+        <section class="services" id="services" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Наши услуги</h2> 
+                </div> 
+                <div class="services-grid" id="servicesGrid"> 
+                     
+                </div> 
+            </div> 
+        </section> 
+
+        <section class="process" id="process" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Как мы работаем</h2> 
+                </div> 
+                <div class="steps-grid" id="stepsGrid"> 
+                     
+                </div> 
+            </div> 
+        </section> 
+
+        <section class="about" id="about" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>О компании</h2> 
+                </div> 
+                <div class="about-content"> 
+                    <div class="about-text"> 
+                        <h3 id="aboutTitle">Заголовок о компании</h3> 
+                        <p id="aboutDescription">Описание о компании загружается...</p> 
+                        <div class="about-stats" id="aboutStats"> 
+                             
+                        </div> 
+                    </div> 
+                    <div class="about-image">
+                        <img id="aboutImage" src="" alt="Команда Электроконструктив" loading="lazy" hidden>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="partners is-hidden" id="partners" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Наши партнёры</h2> 
+                </div> 
+                <div class="partners-viewport" id="partnersViewport"> 
+                    <button type="button" class="partners-nav partners-nav--prev" id="partnersPrev" aria-label="Показать предыдущих партнёров"> 
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i> 
+                    </button> 
+                    <div class="partners-window"> 
+                        <div class="partners-track" id="partnersTrack"> 
+                             
+                        </div> 
+                    </div> 
+                    <button type="button" class="partners-nav partners-nav--next" id="partnersNext" aria-label="Показать следующих партнёров"> 
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i> 
+                    </button> 
+                </div> 
+                <p class="partners-status" id="partnersStatus">Логотипы загружаются...</p> 
+            </div> 
+        </section> 
+
+        <section class="portfolio" id="portfolio" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Недавние проекты</h2> 
+                </div> 
+                <div class="portfolio-grid" id="portfolioGrid"> 
+                     
+                </div> 
+            </div> 
+        </section> 
+
+        <section class="reviews" id="reviews" data-empty="true">
+            <div class="container"> 
+                <div class="section-title"> 
+                    <h2>Отзывы клиентов</h2> 
+                </div> 
+                <div class="reviews-slider"> 
+                    <div id="reviewsContainer"> 
+                         
+                    </div> 
+                    <p class="reviews-status" id="reviewsStatus">Отзывы загружаются...</p> 
+                    <div class="slider-controls"> 
+                        <button class="slider-button" id="prevReview" aria-label="Предыдущий отзыв">&#8592;</button> 
+                        <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">&#8594;</button> 
+                    </div> 
+                </div> 
+            </div> 
+        </section> 
+
+        <section class="cta" id="cta"> 
+            <div class="container"> 
+                <h2 id="ctaTitle">Готовы начать сотрудничество?</h2> 
+                <p id="ctaDescription">Оставьте заявку и наш специалист свяжется с вами.</p> 
+                <a href="#request" class="btn" id="ctaButton" data-open-request="true">Оставить заявку</a> 
+            </div> 
+        </section> 
+    </main> 
+
+    <a href="tel:+74951234567" class="call-button" id="callButton" aria-label="Позвонить компании"> 
+        <i class="fas fa-phone" aria-hidden="true"></i> 
+        <span class="sr-only">Позвонить компании</span> 
+    </a> 
+
+    <div class="request-overlay" id="requestOverlay" aria-hidden="true"> 
+        <div class="request-modal" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle"> 
+            <button type="button" class="request-close" id="requestClose" aria-label="Закрыть окно"> 
+                <i class="fas fa-times" aria-hidden="true"></i> 
+            </button> 
+            <h2 class="sr-only" id="requestModalTitle">Получить коммерческое предложение</h2> 
+            <img src="assets/logo-inline.svg" alt="Электроконструктив" class="request-logo" id="requestModalLogo">
+            <div class="request-tabs" role="tablist" aria-label="Варианты заявки"> 
+                <button type="button" class="request-tab is-active" id="requestPrimaryTab" aria-selected="true">Получить коммерческое предложение</button> 
+            </div> 
+            <form class="request-form" id="requestForm" novalidate>
+                <div class="request-field">
+                    <label for="requestName">Ваше имя</label>
+                    <input type="text" id="requestName" name="name" placeholder="Введите ваше имя" autocomplete="name" required>
+                    <p class="field-error" id="requestNameError"></p>
+                </div>
+                <div class="request-field">
+                    <label for="requestEmail">E-mail</label>
+                    <input type="email" id="requestEmail" name="email" placeholder="Введите ваш e-mail" autocomplete="email">
+                    <p class="field-error" id="requestEmailError"></p>
+                </div>
+                <div class="request-field">
+                    <label for="requestPhone">Телефон</label>
+                    <input type="tel" id="requestPhone" name="phone" placeholder="Введите номер телефона" autocomplete="tel">
+                    <p class="field-error" id="requestPhoneError"></p>
+                </div>
+                <div class="request-field">
+                    <label for="requestComment">Комментарий</label>
+                    <textarea id="requestComment" name="comment" placeholder="Опишите ваш проект или вопрос"></textarea>
+                    <p class="field-error" id="requestCommentError"></p>
+                </div>
+                <div class="request-field"> 
+                    <label for="requestFile">Прикрепить проект (PDF, DOC, JPG, PNG)</label> 
+                    <div class="request-file-control"> 
+                        <label class="request-file-button" for="requestFile">Выберите файл</label> 
+                        <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.rar"> 
+                        <div class="request-file-status" id="requestFileStatus">Файл не выбран</div> 
+                    </div> 
+                    <div class="request-progress" id="requestFileProgress" hidden> 
+                        <div class="request-progress-bar" id="requestFileProgressBar"></div> 
+                    </div> 
+                    <p class="field-error" id="requestFileError"></p> 
+                </div> 
+                <div class="request-actions">
+                    <button type="submit" class="request-submit" id="requestSubmit">Заказать консультацию</button>
+                    <p class="request-status" id="requestStatus"></p>
+                </div>
+            </form>
+            <div class="request-footer">
+                <a href="mailto:etl@elektrokonstruktiv.ru" id="requestContactEmail">etl@elektrokonstruktiv.ru</a>
+                <a href="tel:+79135025246" id="requestContactPhone">+7 (913) 502-52-46</a> 
+            </div> 
+        </div> 
+    </div> 
+
+    <div class="request-toast" id="requestToast" role="status" aria-live="polite" aria-hidden="true"> 
+        <p class="request-toast-message" id="requestToastMessage">Ваша заявка отправлена, скоро с вами свяжутся наши специалисты.</p> 
+        <button type="button" class="request-toast-close" id="requestToastClose">Понятно</button> 
+    </div> 
+
+    <footer id="contacts"> 
+        <div class="container"> 
+            <div class="footer-container"> 
+                <div class="footer-col"> 
+                    <h3>О компании</h3> 
+                    <p>Профессиональные электромонтажные работы в Москве и Московской области. Качество, надежность, гарантия.</p> 
+                </div> 
+                <div class="footer-col"> 
+                    <h3>Услуги</h3> 
+                    <ul id="footerServices"> 
+                         
+                    </ul> 
+                </div> 
+                <div class="footer-col"> 
+                    <h3>Контакты</h3> 
+                    <div class="footer-contact"> 
+                        <p><i class="fas fa-map-marker-alt" id="contactAddressIconDesktop"></i> <span id="contactAddress">Адрес загружается...</span></p>
+                        <div class="footer-phones" id="footerPhones">
+                            <div class="footer-phone footer-phone--primary">
+                                <i class="fas fa-phone" aria-hidden="true" id="contactPhoneIconDesktop"></i>
+                                <a href="tel:+74951234567" id="contactPhone">Телефон</a>
+                            </div>
+                        </div>
+                        <p><i class="fas fa-envelope" id="contactEmailIconDesktop"></i> <a href="mailto:etl@elektrokonstruktiv.ru" id="contactEmail">Email</a></p>
+                        <p><i class="fas fa-clock" id="contactScheduleIconDesktop"></i> <span id="contactSchedule">График загружается...</span></p>
+                    </div> 
+                </div> 
+            </div> 
+            <div class="footer-bottom"> 
+                <p>&copy; <span id="footerYear"></span> Электроконструктив. Все права защищены.</p>
+            </div> 
+        </div> 
+    </footer> 
+
+    <script> 
+        const contentEndpoint = new URL('/api/content', window.location.origin).toString(); 
+        const reviewsEndpoint = new URL('/api/reviews/external', window.location.origin).toString(); 
+        const defaultHeaderLogo = 'assets/logo-inline.svg'; 
+        const defaultHeroLogo = 'assets/logo-hero.svg';
+        const defaultHeroBackground = 'assets/hero-background-blue.svg';
+        const heroSection = document.querySelector('.hero');
+        const servicesSection = document.getElementById('services');
+        const PARTNERS_VISIBLE_COUNT = 4;
+        const DEFAULT_PARTNERS_INTERVAL_MS = 5000;
+        const MIN_PARTNERS_INTERVAL_MS = 1000;
+        const partnersPrevButton = document.getElementById('partnersPrev');
+        const partnersNextButton = document.getElementById('partnersNext');
+        let partnersAutoTimer = null;
+        let partnersAutoInterval = DEFAULT_PARTNERS_INTERVAL_MS;
+        let partnersRenderedItems = [];
+        let partnersMaxIndex = 0;
+        let currentPartnerIndex = 0;
+        const reviewsStatusElement = document.getElementById('reviewsStatus'); 
+        let reviewsData = []; 
+        let reviewsSource = 'content'; 
+        let currentReviewIndex = 0; 
+        let autoSlideTimer = null; 
+        const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024; 
+        const navToggle = document.querySelector('.nav-toggle');
+        const headerNav = document.getElementById('siteNav');
+        const header = document.querySelector('header');
+        const headerContainer = document.querySelector('.header-container');
+        const headerBrand = document.querySelector('.header-brand');
+        const headerTaglineBlock = document.querySelector('.header-tagline');
+        const headerPhone = document.querySelector('.header-phone');
+        const headerCTAButton = document.querySelector('.header-cta');
+        const requestOverlay = document.getElementById('requestOverlay');
+        const requestModal = document.getElementById('requestModal');
+        const requestCloseButton = document.getElementById('requestClose'); 
+        const requestForm = document.getElementById('requestForm'); 
+        const requestNameInput = document.getElementById('requestName'); 
+        const requestEmailInput = document.getElementById('requestEmail'); 
+        const requestPhoneInput = document.getElementById('requestPhone'); 
+        const requestCommentInput = document.getElementById('requestComment'); 
+        const requestFileInput = document.getElementById('requestFile'); 
+        const requestFileStatus = document.getElementById('requestFileStatus'); 
+        const requestFileError = document.getElementById('requestFileError');
+        const requestFileProgress = document.getElementById('requestFileProgress');
+        const requestFileProgressBar = document.getElementById('requestFileProgressBar');
+        const requestSubmitButton = document.getElementById('requestSubmit');
+        const requestStatus = document.getElementById('requestStatus');
+        const requestNameError = document.getElementById('requestNameError');
+        const requestEmailError = document.getElementById('requestEmailError');
+        const requestPhoneError = document.getElementById('requestPhoneError');
+        const requestCommentError = document.getElementById('requestCommentError');
+        const requestContactEmail = document.getElementById('requestContactEmail');
+        const requestContactPhone = document.getElementById('requestContactPhone');
+        const requestModalLogo = document.getElementById('requestModalLogo');
+        const requestToast = document.getElementById('requestToast');
+        const requestToastMessage = document.getElementById('requestToastMessage');
+        const requestToastClose = document.getElementById('requestToastClose');
+        const requestTriggers = document.querySelectorAll('[data-open-request="true"]');
+        const defaultRequestLogo = defaultHeaderLogo;
+        const requestSubmitDefaultText = requestSubmitButton ? requestSubmitButton.textContent : 'Заказать консультацию';
+        const requestToastDefaultMessage = requestToastMessage
+            ? requestToastMessage.textContent
+            : 'Ваша заявка отправлена, скоро с вами свяжутся наши специалисты.';
+        let requestToastTimer = null;
+        let lastFocusedRequestTrigger = null;
+        const NAV_COLLAPSE_BREAKPOINT = 1020;
+        const HEADER_TOUCH_TOLERANCE = 0.5;
+        const rootElement = document.documentElement;
+        let isNavInCollapsedMode = null;
+        const footerColumns = Array.from(document.querySelectorAll('.footer-col'));
+        const FOOTER_ACCORDION_BREAKPOINT = 768;
+        let footerAccordionActive = false;
+
+        footerColumns.forEach((column, index) => {
+            const heading = column.querySelector('h3');
+            if (!heading) {
+                return;
+            }
+            let body = column.querySelector('.footer-col__body');
+            if (!body) {
+                body = document.createElement('div');
+                body.className = 'footer-col__body';
+                const fragment = document.createDocumentFragment();
+                Array.from(column.children).forEach(child => {
+                    if (child !== heading && child !== body) {
+                        fragment.appendChild(child);
+                    }
+                });
+                body.appendChild(fragment);
+                column.appendChild(body);
+            }
+            if (!body.id) {
+                body.id = `footer-col-body-${index + 1}`;
+            }
+            heading.setAttribute('data-footer-body', body.id);
+        });
+
+        footerColumns.forEach(column => {
+            const heading = column.querySelector('h3');
+            if (!heading) {
+                return;
+            }
+            heading.addEventListener('click', handleFooterHeadingClick);
+            heading.addEventListener('keydown', handleFooterHeadingKeydown);
+            heading.addEventListener('pointerenter', handleFooterHeadingPointerEnter);
+            heading.addEventListener('mouseenter', handleFooterHeadingMouseEnter);
+        });
+
+        function updateHeaderOffset() {
+            if (!header || !rootElement) {
+                return;
+            }
+            const offset = header.offsetHeight;
+            rootElement.style.setProperty('--header-offset', `${Math.max(offset, 0)}px`);
+        }
+
+        function updateSectionEmptyState(sectionId, hasContent) {
+            const section = document.getElementById(sectionId);
+            if (!section) {
+                return;
+            }
+            section.dataset.empty = hasContent ? 'false' : 'true';
+            toggleNavLinkVisibility(sectionId, hasContent);
+        }
+
+        function toggleNavLinkVisibility(sectionId, shouldShow) {
+            if (!sectionId) {
+                return;
+            }
+            const navLink = document.querySelector(`.header-nav__list a[href="#${sectionId}"]`);
+            if (!navLink) {
+                return;
+            }
+            const navItem = navLink.closest('li');
+            if (!navItem) {
+                return;
+            }
+            navItem.classList.toggle('is-hidden', !shouldShow);
+            window.requestAnimationFrame(() => {
+                applyNavMode(false);
+                applyFooterAccordion(false);
+            });
+        }
+
+        function setFooterColumnState(column, expanded) {
+            if (!column) {
+                return;
+            }
+            const heading = column.querySelector('h3');
+            const body = column.querySelector('.footer-col__body');
+            const isExpanded = Boolean(expanded);
+            column.dataset.expanded = isExpanded ? 'true' : 'false';
+            column.classList.toggle('is-expanded', isExpanded);
+            column.classList.toggle('is-collapsed', !isExpanded);
+            if (heading) {
+                heading.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            }
+            if (body) {
+                body.hidden = footerAccordionActive ? !isExpanded : false;
+                body.setAttribute('aria-hidden', !footerAccordionActive || isExpanded ? 'false' : 'true');
+            }
+        }
+
+        function openFooterColumn(column) {
+            if (!footerAccordionActive || !column) {
+                return;
+            }
+            footerColumns.forEach(item => {
+                if (item !== column) {
+                    setFooterColumnState(item, false);
+                }
+            });
+            setFooterColumnState(column, true);
+        }
+
+        function toggleFooterColumn(column) {
+            if (!footerAccordionActive || !column) {
+                return;
+            }
+            const isExpanded = column.dataset.expanded === 'true';
+            if (isExpanded) {
+                setFooterColumnState(column, false);
+            } else {
+                openFooterColumn(column);
+            }
+        }
+
+        function handleFooterHeadingClick(event) {
+            if (!footerAccordionActive) {
+                return;
+            }
+            event.preventDefault();
+            const heading = event.currentTarget;
+            const column = heading ? heading.closest('.footer-col') : null;
+            if (!column) {
+                return;
+            }
+            toggleFooterColumn(column);
+        }
+
+        function handleFooterHeadingKeydown(event) {
+            if (!footerAccordionActive) {
+                return;
+            }
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+            event.preventDefault();
+            const heading = event.currentTarget;
+            const column = heading ? heading.closest('.footer-col') : null;
+            if (!column) {
+                return;
+            }
+            toggleFooterColumn(column);
+        }
+
+        function handleFooterHeadingPointerEnter(event) {
+            if (!footerAccordionActive) {
+                return;
+            }
+            if (event.pointerType && event.pointerType === 'touch') {
+                return;
+            }
+            const heading = event.currentTarget;
+            const column = heading ? heading.closest('.footer-col') : null;
+            if (!column) {
+                return;
+            }
+            openFooterColumn(column);
+        }
+
+        function handleFooterHeadingMouseEnter(event) {
+            if (!footerAccordionActive) {
+                return;
+            }
+            const heading = event.currentTarget;
+            const column = heading ? heading.closest('.footer-col') : null;
+            if (!column) {
+                return;
+            }
+            openFooterColumn(column);
+        }
+
+        function applyFooterAccordion(force = false) {
+            const shouldEnable = window.innerWidth <= FOOTER_ACCORDION_BREAKPOINT;
+            if (!force && shouldEnable === footerAccordionActive) {
+                return;
+            }
+            footerAccordionActive = shouldEnable;
+            footerColumns.forEach(column => {
+                const heading = column.querySelector('h3');
+                const body = column.querySelector('.footer-col__body');
+                if (!heading || !body) {
+                    return;
+                }
+                if (shouldEnable) {
+                    heading.setAttribute('role', 'button');
+                    heading.setAttribute('aria-controls', body.id);
+                    heading.setAttribute('tabindex', '0');
+                    const isExpanded = column.dataset.expanded === 'true';
+                    setFooterColumnState(column, isExpanded);
+                } else {
+                    heading.removeAttribute('role');
+                    heading.removeAttribute('aria-controls');
+                    heading.removeAttribute('aria-expanded');
+                    heading.removeAttribute('tabindex');
+                    column.removeAttribute('data-expanded');
+                    column.classList.remove('is-expanded', 'is-collapsed');
+                    body.hidden = false;
+                    body.setAttribute('aria-hidden', 'false');
+                }
+            });
+            if (!shouldEnable) {
+                footerColumns.forEach(column => {
+                    column.classList.remove('is-expanded', 'is-collapsed');
+                });
+            }
+        }
+
+        function setNavCollapsed(collapsed) {
+            if (!headerNav || !navToggle) {
+                return;
+            }
+            headerNav.classList.toggle('is-collapsed', collapsed);
+            headerNav.setAttribute('aria-hidden', collapsed ? 'true' : 'false');
+            navToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            window.requestAnimationFrame(updateHeaderOffset);
+        }
+
+        function closeHeaderNav() {
+            if (!headerNav) {
+                return;
+            }
+            if (headerNav.classList.contains('is-collapsible')) {
+                setNavCollapsed(true);
+            }
+        }
+
+        function getVisibleRect(element) {
+            if (!element) {
+                return null;
+            }
+            const style = window.getComputedStyle(element);
+            if (style.display === 'none' || style.visibility === 'hidden') {
+                return null;
+            }
+            const rect = element.getBoundingClientRect();
+            if (rect.width === 0 && rect.height === 0) {
+                return null;
+            }
+            return rect;
+        }
+
+        function detectNavOverlap() {
+            if (!headerContainer || !headerNav) {
+                return false;
+            }
+            const navRect = getVisibleRect(headerNav);
+            if (!navRect) {
+                return false;
+            }
+            const neighborRects = [
+                getVisibleRect(headerCTAButton),
+                getVisibleRect(headerBrand),
+                getVisibleRect(headerTaglineBlock),
+                getVisibleRect(headerPhone)
+            ].filter(Boolean);
+
+            for (const rect of neighborRects) {
+                const horizontallyTouching = rect.left <= navRect.right + HEADER_TOUCH_TOLERANCE
+                    && rect.right >= navRect.left - HEADER_TOUCH_TOLERANCE;
+                const verticallyAligned = rect.bottom >= navRect.top && rect.top <= navRect.bottom;
+                if (horizontallyTouching && verticallyAligned) {
+                    return true;
+                }
+            }
+
+            const containerRect = headerContainer.getBoundingClientRect();
+            if (navRect.left - containerRect.left <= HEADER_TOUCH_TOLERANCE) {
+                return true;
+            }
+            if (containerRect.right - navRect.right <= HEADER_TOUCH_TOLERANCE) {
+                return true;
+            }
+            return false;
+        }
+
+        function applyNavMode(forceCollapse = false) {
+            if (!headerNav || !navToggle) {
+                return;
+            }
+            const wasCompact = header && header.classList.contains('is-compact-mode');
+            const wasCollapsible = headerNav.classList.contains('is-collapsible');
+            const wasCollapsed = wasCollapsible && headerNav.classList.contains('is-collapsed');
+            if (wasCompact && header) {
+                header.classList.remove('is-compact-mode');
+            }
+            let temporarilyExpanded = false;
+            if (wasCollapsed) {
+                headerNav.classList.remove('is-collapsed');
+                headerNav.style.visibility = 'hidden';
+                headerNav.style.pointerEvents = 'none';
+                temporarilyExpanded = true;
+            }
+
+            const overlapDetected = window.innerWidth >= NAV_COLLAPSE_BREAKPOINT ? detectNavOverlap() : false;
+
+            if (temporarilyExpanded) {
+                headerNav.style.visibility = '';
+                headerNav.style.pointerEvents = '';
+                setNavCollapsed(true);
+            }
+            if (wasCompact && header) {
+                header.classList.add('is-compact-mode');
+            }
+
+            const shouldCollapse = window.innerWidth < NAV_COLLAPSE_BREAKPOINT || overlapDetected;
+            if (header) {
+                header.classList.toggle('is-compact-mode', shouldCollapse);
+            }
+            if (shouldCollapse) {
+                headerNav.classList.add('is-collapsible');
+                navToggle.setAttribute('aria-hidden', 'false');
+                navToggle.tabIndex = 0;
+                if (forceCollapse || isNavInCollapsedMode !== true) {
+                    setNavCollapsed(true);
+                } else {
+                    const isCollapsed = headerNav.classList.contains('is-collapsed');
+                    headerNav.setAttribute('aria-hidden', isCollapsed ? 'true' : 'false');
+                    navToggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                }
+            } else {
+                headerNav.classList.remove('is-collapsible');
+                headerNav.classList.remove('is-collapsed');
+                headerNav.style.visibility = '';
+                headerNav.style.pointerEvents = '';
+                headerNav.setAttribute('aria-hidden', 'false');
+                navToggle.setAttribute('aria-hidden', 'true');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.tabIndex = -1;
+            }
+            isNavInCollapsedMode = shouldCollapse;
+            updateHeaderOffset();
+        }
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                if (!headerNav || !headerNav.classList.contains('is-collapsible')) {
+                    return;
+                }
+                const shouldCollapse = headerNav.classList.contains('is-collapsed');
+                setNavCollapsed(!shouldCollapse);
+                window.requestAnimationFrame(updateHeaderOffset);
+            });
+        }
+
+        if (headerNav) {
+            headerNav.addEventListener('click', event => {
+                if (!headerNav.classList.contains('is-collapsible')) {
+                    return;
+                }
+                if (event.target instanceof HTMLElement && event.target.tagName.toLowerCase() === 'a') {
+                    setNavCollapsed(true);
+                }
+            });
+        }
+
+        document.addEventListener('click', event => {
+            if (!headerNav || !navToggle || !headerNav.classList.contains('is-collapsible')) {
+                return;
+            }
+            if (headerNav.contains(event.target) || navToggle.contains(event.target)) {
+                return;
+            }
+            setNavCollapsed(true);
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key !== 'Escape' || !headerNav || !headerNav.classList.contains('is-collapsible')) {
+                return;
+            }
+            if (!headerNav.classList.contains('is-collapsed')) {
+                setNavCollapsed(true);
+            }
+        });
+
+        const handleResize = () => {
+            window.requestAnimationFrame(() => {
+                applyNavMode(false);
+                applyFooterAccordion(false);
+            });
+        };
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('load', updateHeaderOffset);
+        applyFooterAccordion(true);
+        applyNavMode(true);
+
+        function resolveAssetUrl(value, fallback) { 
+            const candidate = (value || '').trim(); 
+            const fallbackValue = (fallback || '').trim(); 
+            const target = candidate || fallbackValue; 
+            if (!target) { 
+                return ''; 
+            } 
+            if (/^(data:|blob:|https?:|ftp:|\/\/)/i.test(target)) { 
+                return target; 
+            } 
+            try { 
+                return new URL(target, window.location.origin).toString(); 
+            } catch (error) { 
+                console.warn('Не удалось преобразовать путь к файлу:', target, error); 
+                return target; 
+            } 
+        } 
+
+        function applyHeroBackground(imageValue) {
+            if (!heroSection) {
+                return;
+            }
+            const backgroundUrl = resolveAssetUrl(imageValue, defaultHeroBackground);
+            if (backgroundUrl) {
+                heroSection.style.backgroundImage = `url("${backgroundUrl}")`;
+                heroSection.classList.add('hero--has-image');
+            } else {
+                heroSection.style.backgroundImage = '';
+                heroSection.classList.remove('hero--has-image');
+            }
+        }
+
+        function applyServicesBackground(imageValue) {
+            if (!servicesSection) {
+                return;
+            }
+            const backgroundUrl = resolveAssetUrl(imageValue);
+            if (backgroundUrl) {
+                servicesSection.style.backgroundImage = `url("${backgroundUrl}")`;
+                servicesSection.classList.add('services--has-background');
+            } else {
+                servicesSection.style.backgroundImage = '';
+                servicesSection.classList.remove('services--has-background');
+            }
+        }
+
+        function sanitizePartnersInterval(value) { 
+            const parsed = Number(value); 
+            if (!Number.isFinite(parsed) || parsed < MIN_PARTNERS_INTERVAL_MS) { 
+                return DEFAULT_PARTNERS_INTERVAL_MS; 
+            } 
+            return Math.round(parsed); 
+        } 
+
+        function formatBytes(bytes) { 
+            if (!Number.isFinite(bytes) || bytes < 0) { 
+                return '0 Б'; 
+            } 
+            const units = ['Б', 'КБ', 'МБ', 'ГБ']; 
+            let value = bytes; 
+            let unitIndex = 0; 
+            while (value >= 1024 && unitIndex < units.length - 1) { 
+                value /= 1024; 
+                unitIndex += 1; 
+            } 
+            return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`; 
+        } 
+
+        function clearRequestErrors() { 
+            [
+                requestNameError,
+                requestEmailError,
+                requestPhoneError,
+                requestCommentError,
+                requestFileError
+            ].forEach(node => {
+                if (node) {
+                    node.textContent = '';
+                }
+            });
+
+            [requestNameInput, requestEmailInput, requestPhoneInput, requestCommentInput, requestFileInput].forEach(input => {
+                if (!input) {
+                    return;
+                }
+                const container = input.closest('.request-field');
+                if (container) {
+                    container.classList.remove('has-error');
+                }
+            });
+        } 
+
+        function setRequestFieldError(input, errorNode, message) { 
+            if (errorNode) {
+                errorNode.textContent = message || '';
+            }
+            if (!input) {
+                return;
+            }
+            const container = input.closest('.request-field');
+            if (container) {
+                container.classList.toggle('has-error', Boolean(message));
+            }
+        } 
+
+        function updateRequestStatus(message, type = 'info') { 
+            if (!requestStatus) {
+                return;
+            }
+            requestStatus.textContent = message || '';
+            requestStatus.classList.remove('is-error', 'is-success');
+            if (!message) {
+                return;
+            }
+            if (type === 'error') {
+                requestStatus.classList.add('is-error');
+            } else if (type === 'success') {
+                requestStatus.classList.add('is-success');
+            }
+        } 
+
+        function updateRequestFileUI(file) { 
+            if (!requestFileStatus) {
+                return;
+            }
+
+            if (!file) {
+                requestFileStatus.textContent = 'Файл не выбран';
+                if (requestFileProgress) {
+                    requestFileProgress.hidden = true;
+                }
+                setRequestFieldError(requestFileInput, requestFileError, '');
+                return;
+            }
+
+            requestFileStatus.textContent = `${file.name} (${formatBytes(file.size)})`;
+            if (requestFileProgress && requestFileProgressBar) {
+                requestFileProgress.hidden = false;
+                requestFileProgressBar.style.width = '100%';
+            }
+        } 
+
+        function resetRequestForm() { 
+            if (requestForm) {
+                requestForm.reset();
+            }
+            updateRequestFileUI(null);
+            clearRequestErrors();
+            updateRequestStatus('');
+        } 
+
+        function setRequestLoadingState(isLoading) { 
+            if (!requestSubmitButton) {
+                return;
+            }
+            requestSubmitButton.disabled = Boolean(isLoading);
+            requestSubmitButton.textContent = isLoading ? 'Отправляем...' : requestSubmitDefaultText;
+        } 
+
+        function openRequestModal() {
+            if (!requestOverlay || !requestModal) {
+                return;
+            }
+            clearRequestErrors();
+            updateRequestStatus('');
+            closeHeaderNav();
+            lastFocusedRequestTrigger = document.activeElement;
+            requestOverlay.classList.add('is-visible');
+            requestOverlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            if (requestNameInput) {
+                setTimeout(() => requestNameInput.focus(), 60);
+            }
+        } 
+
+        function closeRequestModal(options = {}) { 
+            if (!requestOverlay) {
+                return;
+            }
+            requestOverlay.classList.remove('is-visible');
+            requestOverlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            if (options.reset) {
+                resetRequestForm();
+            }
+            if (lastFocusedRequestTrigger && typeof lastFocusedRequestTrigger.focus === 'function') {
+                lastFocusedRequestTrigger.focus();
+            }
+        } 
+
+        function hideRequestToast() { 
+            if (!requestToast) {
+                return;
+            }
+            requestToast.classList.remove('is-visible');
+            requestToast.setAttribute('aria-hidden', 'true');
+            if (requestToastTimer) {
+                clearTimeout(requestToastTimer);
+                requestToastTimer = null;
+            }
+        } 
+
+        function showRequestToast(message) { 
+            if (!requestToast) {
+                return;
+            }
+            const text = message || requestToastDefaultMessage;
+            if (requestToastMessage) {
+                requestToastMessage.textContent = text;
+            }
+            requestToast.classList.add('is-visible');
+            requestToast.setAttribute('aria-hidden', 'false');
+            if (requestToastTimer) {
+                clearTimeout(requestToastTimer);
+            }
+            requestToastTimer = setTimeout(() => {
+                hideRequestToast();
+            }, 3000);
+        } 
+
+        const defaultRequestEmail = 'etl@elektrokonstruktiv.ru';
+
+        function updateRequestContacts(contacts = {}, requestConfig = {}) {
+            const configuredEmail = typeof requestConfig.targetEmail === 'string' && requestConfig.targetEmail.trim()
+                ? requestConfig.targetEmail.trim()
+                : null;
+            const email = configuredEmail
+                || (typeof contacts.email === 'string' && contacts.email.trim() ? contacts.email.trim() : null)
+                || defaultRequestEmail;
+            const phone = typeof contacts.phone === 'string' && contacts.phone.trim() ? contacts.phone.trim() : '+7 (913) 502-52-46';
+            if (requestContactEmail) {
+                requestContactEmail.textContent = email;
+                requestContactEmail.href = `mailto:${email}`;
+            }
+            if (requestContactPhone) {
+                requestContactPhone.textContent = phone;
+                const cleaned = phone.replace(/[^+\d]/g, '');
+                requestContactPhone.href = `tel:${cleaned || phone}`;
+            }
+        } 
+
+        function updateRequestLogo(branding = {}) { 
+            if (!requestModalLogo) {
+                return;
+            }
+            const source = resolveAssetUrl(branding.headerLogo, defaultRequestLogo);
+            requestModalLogo.src = source || defaultRequestLogo;
+        } 
+
+        function handleRequestOverlayClick(event) { 
+            if (event.target === requestOverlay) {
+                closeRequestModal();
+            }
+        } 
+
+        function handleRequestKeydown(event) { 
+            if (
+                event.key === 'Escape' &&
+                requestOverlay &&
+                requestOverlay.classList.contains('is-visible')
+            ) {
+                closeRequestModal();
+            }
+        } 
+
+        async function handleRequestSubmit(event) { 
+            if (!requestForm) {
+                return;
+            }
+            event.preventDefault();
+            clearRequestErrors();
+
+            const nameValue = requestNameInput ? requestNameInput.value.trim() : '';
+            const emailValue = requestEmailInput ? requestEmailInput.value.trim() : '';
+            const phoneValue = requestPhoneInput ? requestPhoneInput.value.trim() : '';
+            const commentValue = requestCommentInput ? requestCommentInput.value.trim() : '';
+            const file = requestFileInput && requestFileInput.files ? requestFileInput.files[0] : null;
+
+            updateRequestFileUI(file);
+
+            let hasError = false;
+
+            if (!nameValue) {
+                setRequestFieldError(requestNameInput, requestNameError, 'Заполните это поле');
+                hasError = true;
+            }
+
+            const hasContact = Boolean(emailValue) || Boolean(phoneValue);
+            if (!hasContact) {
+                const contactMessage = 'Укажите e-mail или телефон';
+                setRequestFieldError(requestEmailInput, requestEmailError, contactMessage);
+                setRequestFieldError(requestPhoneInput, requestPhoneError, contactMessage);
+                hasError = true;
+            } else if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+                setRequestFieldError(requestEmailInput, requestEmailError, 'Введите корректный e-mail');
+                hasError = true;
+            }
+
+            if (file && file.size > MAX_ATTACHMENT_SIZE_BYTES) {
+                setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                hasError = true;
+            }
+
+            if (!commentValue && !file) {
+                const commentMessage = 'Добавьте комментарий или приложите файл';
+                setRequestFieldError(requestCommentInput, requestCommentError, commentMessage);
+                setRequestFieldError(requestFileInput, requestFileError, commentMessage);
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+
+            const formData = new FormData(requestForm);
+            setRequestLoadingState(true);
+            updateRequestStatus('Отправляем заявку...', 'info');
+
+            try {
+                const response = await fetch(new URL('/api/request', window.location.origin).toString(), {
+                    method: 'POST',
+                    body: formData
+                });
+
+                let payload = {};
+                try {
+                    payload = await response.json();
+                } catch (parseError) {
+                    payload = {};
+                }
+
+                if (!response.ok) {
+                    if (response.status === 413 || payload.code === 'FILE_TOO_LARGE') {
+                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                    }
+
+                    if (payload.errors) {
+                        if (payload.errors.name) {
+                            setRequestFieldError(requestNameInput, requestNameError, payload.errors.name);
+                        }
+                        if (payload.errors.email) {
+                            setRequestFieldError(requestEmailInput, requestEmailError, payload.errors.email);
+                        }
+                        if (payload.errors.phone) {
+                            setRequestFieldError(requestPhoneInput, requestPhoneError, payload.errors.phone);
+                        }
+                        if (payload.errors.comment) {
+                            setRequestFieldError(requestCommentInput, requestCommentError, payload.errors.comment);
+                        }
+                        if (payload.errors.attachment) {
+                            setRequestFieldError(requestFileInput, requestFileError, payload.errors.attachment);
+                        }
+                    }
+
+                    updateRequestStatus(payload.error || 'Не удалось отправить заявку.', 'error');
+                    return;
+                }
+
+                updateRequestStatus('', 'success');
+                closeRequestModal({ reset: true });
+                showRequestToast(payload.message || requestToastDefaultMessage);
+            } catch (requestError) {
+                console.error('Не удалось отправить заявку:', requestError);
+                updateRequestStatus('Не удалось отправить заявку. Попробуйте позже.', 'error');
+            } finally {
+                setRequestLoadingState(false);
+            }
+        } 
+
+        function stopPartnersAutoSlide() { 
+            if (partnersAutoTimer) { 
+                clearInterval(partnersAutoTimer); 
+                partnersAutoTimer = null; 
+            } 
+        } 
+
+        function startPartnersAutoSlide() {
+            stopPartnersAutoSlide();
+            const section = document.getElementById('partners');
+            if (!section || section.classList.contains('is-hidden')) {
+                return;
+            }
+            if (partnersMaxIndex <= 0) {
+                return;
+            }
+            partnersAutoInterval = sanitizePartnersInterval(partnersAutoInterval);
+            partnersAutoTimer = setInterval(() => advancePartners(1), partnersAutoInterval);
+        }
+
+        function getPartnerStep(track) {
+            if (!track) {
+                return 0;
+            }
+            const firstCard = track.querySelector('.partner-card');
+            if (!firstCard) {
+                return 0;
+            }
+            const style = window.getComputedStyle(track);
+            const gap = parseFloat(style.columnGap || style.gap || '0');
+            const width = firstCard.getBoundingClientRect().width;
+            if (!Number.isFinite(width)) {
+                return 0;
+            }
+            return width + gap;
+        }
+
+        function updatePartnersTransform(track, immediate = false) {
+            if (!track) {
+                return;
+            }
+            const step = getPartnerStep(track);
+            const offset = step * currentPartnerIndex;
+            if (immediate) {
+                const previousTransition = track.style.transition;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${offset}px)`;
+                void track.offsetWidth;
+                track.style.transition = previousTransition || 'transform 0.6s ease';
+            } else {
+                track.style.transition = 'transform 0.6s ease';
+                track.style.transform = `translateX(-${offset}px)`;
+            }
+        }
+
+        function updatePartnersControls() {
+            const hasMultiple = partnersMaxIndex > 0;
+            if (partnersPrevButton) {
+                partnersPrevButton.style.display = hasMultiple ? 'flex' : 'none';
+                partnersPrevButton.disabled = !hasMultiple;
+                partnersPrevButton.setAttribute('aria-hidden', hasMultiple ? 'false' : 'true');
+            }
+            if (partnersNextButton) {
+                partnersNextButton.style.display = hasMultiple ? 'flex' : 'none';
+                partnersNextButton.disabled = !hasMultiple;
+                partnersNextButton.setAttribute('aria-hidden', hasMultiple ? 'false' : 'true');
+            }
+        }
+
+        function setPartnerIndex(index, { immediate = false } = {}) {
+            const track = document.getElementById('partnersTrack');
+            if (!track || partnersRenderedItems.length === 0) {
+                currentPartnerIndex = 0;
+                if (track) {
+                    track.style.transform = 'translateX(0)';
+                }
+                return;
+            }
+            const positions = partnersMaxIndex + 1;
+            if (positions <= 0) {
+                currentPartnerIndex = 0;
+                updatePartnersTransform(track, true);
+                return;
+            }
+            let nextIndex = Number.isFinite(index) ? index : 0;
+            nextIndex = ((nextIndex % positions) + positions) % positions;
+            currentPartnerIndex = nextIndex;
+            updatePartnersTransform(track, immediate);
+        }
+
+        function advancePartners(step = 1) {
+            if (partnersRenderedItems.length === 0) {
+                return;
+            }
+            if (partnersMaxIndex <= 0) {
+                setPartnerIndex(0, { immediate: true });
+                return;
+            }
+            const positions = partnersMaxIndex + 1;
+            let nextIndex = currentPartnerIndex + step;
+            nextIndex = ((nextIndex % positions) + positions) % positions;
+            setPartnerIndex(nextIndex, { immediate: false });
+        }
+
+        function renderPartners(partners) {
+            const section = document.getElementById('partners');
+            const track = document.getElementById('partnersTrack');
+            const status = document.getElementById('partnersStatus');
+            const viewport = document.getElementById('partnersViewport');
+            if (!section || !track || !status || !viewport) {
+                updateSectionEmptyState('partners', false);
+                partnersRenderedItems = [];
+                partnersMaxIndex = 0;
+                currentPartnerIndex = 0;
+                updatePartnersControls();
+                return;
+            }
+
+            stopPartnersAutoSlide();
+            partnersRenderedItems = [];
+            partnersMaxIndex = 0;
+            currentPartnerIndex = 0;
+            track.innerHTML = '';
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(0)';
+            status.textContent = '';
+            status.style.display = 'none';
+
+            const source = Array.isArray(partners) ? partners : [];
+            const normalized = source
+                .map((partner, index) => {
+                    const name = typeof partner.name === 'string' ? partner.name.trim() : '';
+                    const logo = resolveAssetUrl(partner.logo);
+                    const urlCandidate = typeof partner.url === 'string' ? partner.url.trim() : '';
+                    const safeUrl = /^(https?:\/\/)/i.test(urlCandidate) ? urlCandidate : '#'; 
+                    const fallbackName = `Партнёр ${index + 1}`; 
+                    return { 
+                        name: name || fallbackName, 
+                        logo, 
+                        url: safeUrl 
+                    }; 
+                }) 
+                .filter(partner => Boolean(partner.logo));
+
+            if (normalized.length === 0) {
+                section.classList.add('is-hidden');
+                updateSectionEmptyState('partners', false);
+                status.textContent = 'Партнёры пока не добавлены.';
+                status.style.display = 'block';
+                updatePartnersControls();
+                return;
+            }
+
+            section.classList.remove('is-hidden');
+            updateSectionEmptyState('partners', true);
+
+            const targetLength = Math.max(normalized.length, PARTNERS_VISIBLE_COUNT);
+            const itemsToRender = [...normalized]; 
+            while (itemsToRender.length < targetLength && itemsToRender.length < normalized.length * PARTNERS_VISIBLE_COUNT) { 
+                itemsToRender.push(...normalized); 
+            } 
+            if (itemsToRender.length > targetLength) { 
+                itemsToRender.length = targetLength; 
+            } 
+
+            itemsToRender.forEach(partner => {
+                const link = document.createElement('a');
+                link.className = 'partner-card';
+                link.href = partner.url;
+                if (partner.url && partner.url !== '#') {
+                    link.target = '_blank'; 
+                    link.rel = 'noopener noreferrer'; 
+                } 
+                link.setAttribute('aria-label', `Перейти на сайт: ${partner.name}`); 
+
+                const image = document.createElement('img'); 
+                image.src = partner.logo; 
+                image.alt = partner.name; 
+                image.loading = 'lazy'; 
+
+                link.appendChild(image);
+                track.appendChild(link);
+            });
+
+            partnersRenderedItems = itemsToRender;
+            partnersMaxIndex = Math.max(0, partnersRenderedItems.length - PARTNERS_VISIBLE_COUNT);
+            currentPartnerIndex = 0;
+            updatePartnersControls();
+            setPartnerIndex(0, { immediate: true });
+
+            if (!viewport.dataset.listenersAttached) {
+                viewport.addEventListener('mouseenter', () => stopPartnersAutoSlide());
+                viewport.addEventListener('mouseleave', () => startPartnersAutoSlide());
+                viewport.dataset.listenersAttached = 'true';
+            }
+
+            startPartnersAutoSlide();
+        }
+
+        async function loadContent() { 
+            try { 
+                const response = await fetch(contentEndpoint, { credentials: 'include' }); 
+                if (!response.ok) { 
+                    throw new Error('Не удалось загрузить данные контента'); 
+                } 
+                const data = await response.json(); 
+                applyContent(data); 
+                loadExternalReviews(); 
+            } catch (error) { 
+                console.error(error); 
+            } 
+        } 
+
+        const ICON_STYLE_ALIASES = {
+            fas: 'fa-solid',
+            far: 'fa-regular',
+            fal: 'fa-light',
+            fat: 'fa-thin',
+            fad: 'fa-duotone',
+            fab: 'fa-brands'
+        };
+
+        function normalizeIconClass(value, fallback) {
+            const candidate = typeof value === 'string' ? value.trim() : '';
+            const base = candidate || (typeof fallback === 'string' ? fallback.trim() : '');
+            if (!base) {
+                return 'fa-solid fa-bolt';
+            }
+            const tokens = base
+                .split(/\s+/)
+                .filter(Boolean)
+                .map(token => ICON_STYLE_ALIASES[token] || token);
+            const hasStyle = tokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
+            if (!hasStyle) {
+                tokens.unshift('fa-solid');
+            }
+            return Array.from(new Set(tokens)).join(' ');
+        }
+
+        const SERVICE_ICON_FALLBACK = 'fa-solid fa-screwdriver-wrench';
+        const CONTACT_ICON_FALLBACKS = {
+            address: 'fa-solid fa-map-marker-alt',
+            phone: 'fa-solid fa-phone',
+            email: 'fa-solid fa-envelope',
+            schedule: 'fa-solid fa-clock'
+        };
+
+        function applyContent(data) {
+            if (!data || typeof data !== 'object') { 
+                return; 
+            } 
+
+            const hero = data.hero || {}; 
+            const branding = data.branding || {}; 
+            const features = Array.isArray(data.features) ? data.features : []; 
+            const services = Array.isArray(data.services) ? data.services : [];
+            const servicesSettings = data.servicesSettings && typeof data.servicesSettings === 'object'
+                ? data.servicesSettings
+                : {};
+            const steps = Array.isArray(data.steps) ? data.steps : []; 
+            const about = data.about || {}; 
+            const partners = Array.isArray(data.partners) ? data.partners : []; 
+            partnersAutoInterval = sanitizePartnersInterval(data.partnersSettings?.autoScrollInterval); 
+            const portfolio = Array.isArray(data.portfolio) ? data.portfolio : []; 
+            const reviews = Array.isArray(data.reviews) ? data.reviews : []; 
+            const cta = data.cta || {};
+            const contacts = data.contacts || {};
+            const contactIcons = contacts.icons && typeof contacts.icons === 'object' ? contacts.icons : {};
+
+            const headerLogoImage = document.getElementById('headerLogoImage'); 
+            if (headerLogoImage) { 
+                headerLogoImage.src = resolveAssetUrl(branding.headerLogo, defaultHeaderLogo); 
+            } 
+
+            const heroLogoImage = document.getElementById('heroLogoImage');
+            if (heroLogoImage) {
+                heroLogoImage.src = resolveAssetUrl(branding.heroLogo, defaultHeroLogo);
+            }
+
+            updateRequestLogo(branding);
+
+            document.getElementById('heroTitle').textContent = hero.title || '';
+            document.getElementById('heroSubtitle').textContent = hero.subtitle || '';
+            document.getElementById('heroCta').textContent = hero.cta || '';
+            applyHeroBackground(hero.image);
+            applyServicesBackground(servicesSettings.background);
+
+            const featuresGrid = document.getElementById('featuresGrid');
+            if (featuresGrid) {
+                featuresGrid.innerHTML = '';
+                features.forEach(feature => {
+                    const card = document.createElement('div');
+                    card.className = 'feature-card';
+
+                    const iconElement = document.createElement('i');
+                    iconElement.className = normalizeIconClass(feature.icon, 'fa-solid fa-bolt');
+
+                    const titleElement = document.createElement('h3');
+                    titleElement.textContent = feature.title || '';
+
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.textContent = feature.description || '';
+
+                    card.appendChild(iconElement);
+                    card.appendChild(titleElement);
+                    card.appendChild(descriptionElement);
+                    featuresGrid.appendChild(card);
+                });
+                updateSectionEmptyState('features', featuresGrid.children.length > 0);
+            } else {
+                updateSectionEmptyState('features', false);
+            }
+
+            const servicesGrid = document.getElementById('servicesGrid');
+            if (servicesGrid) {
+                servicesGrid.innerHTML = '';
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card';
+                    const iconWrapper = document.createElement('div');
+                    iconWrapper.className = 'service-card__icon';
+                    iconWrapper.setAttribute('aria-hidden', 'true');
+                    const iconElement = document.createElement('i');
+                    iconElement.className = normalizeIconClass(service.icon, SERVICE_ICON_FALLBACK);
+                    iconWrapper.appendChild(iconElement);
+
+                    const contentWrapper = document.createElement('div');
+                    contentWrapper.className = 'service-card__content';
+
+                    const titleElement = document.createElement('h3');
+                    titleElement.textContent = service.title || '';
+                    contentWrapper.appendChild(titleElement);
+
+                    if (service.description) {
+                        const descriptionElement = document.createElement('p');
+                        descriptionElement.textContent = service.description;
+                        contentWrapper.appendChild(descriptionElement);
+                    }
+
+                    card.appendChild(iconWrapper);
+                    card.appendChild(contentWrapper);
+                    servicesGrid.appendChild(card);
+                });
+                updateSectionEmptyState('services', servicesGrid.children.length > 0);
+            } else {
+                updateSectionEmptyState('services', false);
+            }
+
+            const stepsGrid = document.getElementById('stepsGrid');
+            if (stepsGrid) {
+                stepsGrid.innerHTML = '';
+                steps.forEach((step, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'step-card';
+                    card.setAttribute('data-step', index + 1);
+                    card.innerHTML = `
+                        <h3>${step.title || ''}</h3>
+                        <p>${step.description || ''}</p>
+                    `;
+                    stepsGrid.appendChild(card);
+                });
+                updateSectionEmptyState('process', stepsGrid.children.length > 0);
+            } else {
+                updateSectionEmptyState('process', false);
+            }
+
+            const aboutTitleElement = document.getElementById('aboutTitle');
+            const aboutDescriptionElement = document.getElementById('aboutDescription');
+            let hasAboutContent = false;
+            if (aboutTitleElement) {
+                const safeTitle = typeof about.title === 'string' ? about.title.trim() : '';
+                aboutTitleElement.textContent = safeTitle;
+                if (safeTitle) {
+                    hasAboutContent = true;
+                }
+            }
+            if (aboutDescriptionElement) {
+                const safeDescription = typeof about.description === 'string' ? about.description.trim() : '';
+                aboutDescriptionElement.textContent = safeDescription;
+                if (safeDescription) {
+                    hasAboutContent = true;
+                }
+            }
+            const aboutImage = document.getElementById('aboutImage');
+            const aboutImageContainer = aboutImage ? aboutImage.closest('.about-image') : null;
+            const aboutImageUrl = resolveAssetUrl(about.image);
+            if (aboutImage && aboutImageUrl) {
+                aboutImage.src = aboutImageUrl;
+                aboutImage.removeAttribute('hidden');
+                if (aboutImageContainer) {
+                    aboutImageContainer.classList.remove('is-hidden');
+                }
+                hasAboutContent = true;
+            } else if (aboutImage) {
+                aboutImage.removeAttribute('src');
+                aboutImage.setAttribute('hidden', 'true');
+                if (aboutImageContainer) {
+                    aboutImageContainer.classList.add('is-hidden');
+                }
+            }
+            const aboutStats = Array.isArray(about.stats) ? about.stats : [];
+            const statsContainer = document.getElementById('aboutStats');
+            if (statsContainer) {
+                statsContainer.innerHTML = '';
+                aboutStats.forEach(stat => {
+                    const card = document.createElement('div');
+                    card.className = 'stat-card';
+                    card.innerHTML = `
+                        <h3>${stat.value || ''}</h3>
+                        <p>${stat.label || ''}</p>
+                    `;
+                    statsContainer.appendChild(card);
+                });
+                if (statsContainer.children.length > 0) {
+                    hasAboutContent = true;
+                }
+            }
+            updateSectionEmptyState('about', hasAboutContent);
+
+            renderPartners(partners);
+
+            const portfolioGrid = document.getElementById('portfolioGrid');
+            if (portfolioGrid) {
+                portfolioGrid.innerHTML = '';
+                portfolio.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'portfolio-card';
+                    const projectTitle = escapeHtml(item.title || 'Проект');
+                    const projectDescription = escapeHtml(item.description || '');
+                    const projectImage = resolveAssetUrl(item.image);
+                    const safeImage = escapeHtml(projectImage || '');
+                    const mediaBlock = safeImage
+                        ? `<img src="${safeImage}" alt="${projectTitle}">`
+                        : '<div class="portfolio-placeholder" aria-hidden="true"></div>';
+                    card.innerHTML = `
+                        ${mediaBlock}
+                        <div class="portfolio-info">
+                            <h3>${projectTitle}</h3>
+                            <p>${projectDescription}</p>
+                        </div>
+                    `;
+                    portfolioGrid.appendChild(card);
+                });
+                updateSectionEmptyState('portfolio', portfolioGrid.children.length > 0);
+            } else {
+                updateSectionEmptyState('portfolio', false);
+            }
+
+            reviewsSource = 'content'; 
+            reviewsData = reviews; 
+            renderReviews(); 
+
+            document.getElementById('ctaTitle').textContent = cta.title || ''; 
+            document.getElementById('ctaDescription').textContent = cta.description || ''; 
+            document.getElementById('ctaButton').textContent = cta.button || ''; 
+
+            const footerServices = document.getElementById('footerServices');
+            if (footerServices) {
+                footerServices.innerHTML = '';
+                services.forEach(service => {
+                    const li = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#services';
+                    link.textContent = service.title || '';
+                    li.appendChild(link);
+                    footerServices.appendChild(li);
+                });
+                const footerServicesColumn = footerServices.closest('.footer-col');
+                if (footerServicesColumn) {
+                    footerServicesColumn.classList.toggle('is-hidden', footerServices.children.length === 0);
+                }
+            }
+
+            const phoneLink = document.getElementById('phoneLink');
+            const primaryFooterPhone = document.getElementById('contactPhone');
+            const footerPhonesContainer = document.getElementById('footerPhones');
+            const callButton = document.getElementById('callButton');
+            const contactAddressIconDesktop = document.getElementById('contactAddressIconDesktop');
+            const contactPhoneIconDesktop = document.getElementById('contactPhoneIconDesktop');
+            const contactEmailIconDesktop = document.getElementById('contactEmailIconDesktop');
+            const contactScheduleIconDesktop = document.getElementById('contactScheduleIconDesktop');
+
+            const defaultPhone = '+7 (495) 123-45-67';
+            const defaultTel = normalizePhoneToTel(defaultPhone);
+
+            const footerPhones = [];
+            if (contacts.phone) {
+                footerPhones.push({ number: contacts.phone, note: '' });
+            }
+            if (contacts.phoneRequests) {
+                footerPhones.push({ number: contacts.phoneRequests, note: 'Прием заявок' });
+            }
+            if (contacts.phoneEtl) {
+                footerPhones.push({ number: contacts.phoneEtl, note: 'ЭТЛ' });
+            }
+
+            const primaryPhone = footerPhones.length ? footerPhones[0].number : '';
+            const primaryTel = normalizePhoneToTel(primaryPhone) || '';
+
+            if (phoneLink) {
+                if (primaryPhone) {
+                    phoneLink.textContent = primaryPhone;
+                    phoneLink.href = `tel:${primaryTel || defaultTel}`;
+                } else {
+                    phoneLink.textContent = defaultPhone;
+                    phoneLink.href = `tel:${defaultTel}`;
+                }
+            }
+
+            if (primaryFooterPhone) {
+                primaryFooterPhone.textContent = primaryPhone || defaultPhone;
+                primaryFooterPhone.href = `tel:${primaryTel || defaultTel}`;
+            }
+
+            if (contactAddressIconDesktop) {
+                contactAddressIconDesktop.className = normalizeIconClass(contactIcons.address, CONTACT_ICON_FALLBACKS.address);
+            }
+            if (contactPhoneIconDesktop) {
+                contactPhoneIconDesktop.className = normalizeIconClass(contactIcons.phone, CONTACT_ICON_FALLBACKS.phone);
+            }
+            if (contactEmailIconDesktop) {
+                contactEmailIconDesktop.className = normalizeIconClass(contactIcons.email, CONTACT_ICON_FALLBACKS.email);
+            }
+            if (contactScheduleIconDesktop) {
+                contactScheduleIconDesktop.className = normalizeIconClass(contactIcons.schedule, CONTACT_ICON_FALLBACKS.schedule);
+            }
+
+            if (footerPhonesContainer) {
+                footerPhonesContainer.querySelectorAll('.footer-phone--extra').forEach(node => node.remove());
+                const extraPhones = footerPhones.slice(1);
+                extraPhones.forEach(item => {
+                    if (!item.number) {
+                        return;
+                    }
+                    const row = document.createElement('div');
+                    row.className = 'footer-phone footer-phone--extra';
+
+                    const spacer = document.createElement('span');
+                    spacer.className = 'footer-phone__icon-spacer';
+                    spacer.setAttribute('aria-hidden', 'true');
+                    row.appendChild(spacer);
+
+                    const textWrapper = document.createElement('div');
+                    textWrapper.className = 'footer-phone__text';
+                    const tel = normalizePhoneToTel(item.number);
+                    const link = document.createElement('a');
+                    link.href = `tel:${tel || defaultTel}`;
+                    link.textContent = item.number;
+                    textWrapper.appendChild(link);
+
+                    if (item.note) {
+                        const note = document.createElement('span');
+                        note.className = 'footer-phone__note';
+                        note.textContent = item.note;
+                        textWrapper.appendChild(note);
+                    }
+
+                    row.appendChild(textWrapper);
+                    footerPhonesContainer.appendChild(row);
+                });
+            }
+
+            if (callButton) {
+                if (primaryTel) {
+                    callButton.href = `tel:${primaryTel}`;
+                    callButton.classList.remove('hidden');
+                } else {
+                    callButton.href = `tel:${defaultTel}`;
+                    callButton.classList.remove('hidden');
+                }
+            }
+
+            const contactEmail = document.getElementById('contactEmail');
+            if (contacts.email) {
+                contactEmail.textContent = contacts.email;
+                contactEmail.href = `mailto:${contacts.email}`;
+            }
+
+            document.getElementById('contactAddress').textContent = contacts.address || '';
+            document.getElementById('contactSchedule').textContent = contacts.schedule || '';
+
+            const requestConfig = data.request || {};
+            updateRequestContacts(contacts, requestConfig);
+
+            const footerYearElement = document.getElementById('footerYear');
+            if (footerYearElement) {
+                const foundationStat = Array.isArray(aboutStats)
+                    ? aboutStats.find(stat => typeof stat?.label === 'string' && stat.label.toLowerCase().includes('год основания'))
+                    : null;
+                const foundationYear = foundationStat && foundationStat.value ? String(foundationStat.value) : '2010';
+                footerYearElement.textContent = foundationYear;
+            }
+        }
+
+        async function loadExternalReviews() { 
+            if (reviewsStatusElement) { 
+                reviewsStatusElement.textContent = 'Пробуем загрузить отзывы с 2ГИС...'; 
+            }
+
+            try {
+                const response = await fetch(reviewsEndpoint, { credentials: 'include' }); 
+                let payload = {};
+                try {
+                    payload = await response.json(); 
+                } catch (parseError) {
+                    payload = {};
+                }
+
+                if (!response.ok) { 
+                    throw new Error(payload.error || 'Не удалось загрузить отзывы с 2ГИС');
+                }
+
+                const externalReviews = Array.isArray(payload.reviews) ? payload.reviews : []; 
+                if (externalReviews.length) { 
+                    reviewsData = externalReviews; 
+                    reviewsSource = payload.source === 'external' ? 'external' : 'fallback-external'; 
+                    currentReviewIndex = 0; 
+                    renderReviews(); 
+                    return;
+                }
+
+                if (payload.error) { 
+                    console.warn(payload.error); 
+                }
+
+                reviewsSource = 'fallback-external'; 
+                renderReviews(); 
+            } catch (error) {
+                console.warn('Не удалось загрузить отзывы с 2ГИС:', error); 
+                reviewsSource = 'fallback-external'; 
+                renderReviews(); 
+            }
+        } 
+
+        function escapeHtml(value) {
+            if (typeof value !== 'string') {
+                return '';
+            }
+            const map = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                "\"": "&quot;",
+                "'": "&#39;"
+            };
+            return value.replace(/[&<>"']/g, char => map[char] || char);
+        }
+
+        function normalizePhoneToTel(phoneValue) {
+            if (typeof phoneValue !== 'string') {
+                return '';
+            }
+            const cleaned = phoneValue.replace(/[^+\d]/g, '');
+            return cleaned;
+        }
+
+        function formatReviewDate(rawDate) { 
+            if (!rawDate) { 
+                return ''; 
+            } 
+            const parsed = new Date(rawDate); 
+            if (!Number.isNaN(parsed.getTime())) { 
+                return parsed.toLocaleDateString('ru-RU'); 
+            } 
+            const fallbackMatch = String(rawDate).match(/\d{4}-\d{2}-\d{2}/); 
+            if (fallbackMatch) { 
+                const fallbackDate = new Date(fallbackMatch[0]); 
+                if (!Number.isNaN(fallbackDate.getTime())) { 
+                    return fallbackDate.toLocaleDateString('ru-RU'); 
+                } 
+            } 
+            return ''; 
+        } 
+
+        function getReviewMeta(review, locationText) { 
+            const metaParts = []; 
+            if (locationText) { 
+                metaParts.push(locationText); 
+            } 
+            const formattedDate = formatReviewDate(review.date); 
+            if (formattedDate) { 
+                metaParts.push(formattedDate); 
+            } 
+            return metaParts.join(' • '); 
+        } 
+
+        function stopAutoSlide() { 
+            if (autoSlideTimer) { 
+                clearInterval(autoSlideTimer); 
+                autoSlideTimer = null; 
+            } 
+        } 
+
+        function updateSliderPosition() { 
+            const reviewsContainer = document.getElementById('reviewsContainer'); 
+            if (!reviewsContainer) { 
+                return; 
+            } 
+            const cards = Array.from(reviewsContainer.querySelectorAll('.review-card')); 
+            cards.forEach((card, index) => { 
+                if (index === currentReviewIndex) { 
+                    card.classList.add('active'); 
+                } else { 
+                    card.classList.remove('active'); 
+                } 
+            }); 
+            reviewsContainer.style.transform = `translateX(-${currentReviewIndex * 100}%)`; 
+        } 
+
+        function startAutoSlide() { 
+            stopAutoSlide(); 
+            if (reviewsData.length > 1) { 
+                autoSlideTimer = setInterval(() => advanceReview(1), 5000); 
+            } 
+        } 
+
+        function renderReviews() {
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            const statusElement = reviewsStatusElement;
+            if (!reviewsContainer) {
+                updateSectionEmptyState('reviews', false);
+                return;
+            }
+            reviewsContainer.innerHTML = '';
+            if (!reviewsData.length) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'review-card active';
+                placeholder.innerHTML = `
+                    <div class="review-text">
+                        <p>Отзывы пока не добавлены. Добавьте их через панель управления.</p>
+                    </div>
+                `;
+                reviewsContainer.appendChild(placeholder);
+                if (statusElement) {
+                    statusElement.textContent = 'Отзывы не найдены. Добавьте их в панели управления.';
+                }
+                stopAutoSlide();
+                reviewsContainer.style.transform = 'translateX(0)';
+                updateSectionEmptyState('reviews', false);
+                return;
+            }
+            reviewsData.forEach((review, index) => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                if (index === currentReviewIndex) { 
+                    card.classList.add('active'); 
+                } 
+                const safeName = escapeHtml(review.name || 'Клиент'); 
+                const safeText = escapeHtml(review.text || ''); 
+                const safeLocation = escapeHtml(review.location || ''); 
+                const resolvedReviewImage = resolveAssetUrl(review.image); 
+                const safeImage = escapeHtml(resolvedReviewImage || ''); 
+                const meta = getReviewMeta(review, safeLocation); 
+                const ratingValue = typeof review.rating === 'number' ? Math.max(0, Math.min(5, review.rating)) : null; 
+                const ratingStars = ratingValue ? '★'.repeat(Math.round(ratingValue)) : ''; 
+                const ratingBlock = ratingValue ? `<div class="review-rating" aria-label="Оценка ${ratingValue.toFixed(1)} из 5">${ratingStars}</div>` : ''; 
+                card.innerHTML = `
+                    ${safeImage ? `<img src="${safeImage}" alt="${safeName}">` : '<div class="review-placeholder" aria-hidden="true"></div>'}
+                    <div class="review-text">
+                        <p>"${safeText}"</p>
+                    </div>
+                    <div class="review-author">${safeName}</div>
+                    ${meta ? `<div class="review-meta">${meta}</div>` : ''}
+                    ${ratingBlock}
+                `; 
+                reviewsContainer.appendChild(card);
+            });
+            updateSliderPosition();
+            startAutoSlide();
+            updateSectionEmptyState('reviews', reviewsData.length > 0);
+            if (statusElement) {
+                let statusText = 'Отзывы отображаются из файла контента.';
+                if (reviewsSource === 'external') {
+                    statusText = 'Отзывы загружены с 2ГИС.';
+                } else if (reviewsSource === 'fallback-external') {
+                    statusText = 'Не удалось загрузить отзывы с 2ГИС, показаны данные с сайта.';
+                }
+                statusElement.textContent = statusText; 
+            } 
+        } 
+
+        function advanceReview(step) { 
+            if (!reviewsData.length) { 
+                return; 
+            } 
+            const total = reviewsData.length; 
+            currentReviewIndex = (currentReviewIndex + step + total) % total; 
+            updateSliderPosition(); 
+        } 
+
+        function showNextReview() { 
+            advanceReview(1); 
+        } 
+
+        function showPreviousReview() { 
+            advanceReview(-1); 
+        } 
+
+        const nextReviewButton = document.getElementById('nextReview'); 
+        const prevReviewButton = document.getElementById('prevReview'); 
+
+        if (nextReviewButton) { 
+            nextReviewButton.addEventListener('click', () => { 
+                showNextReview(); 
+                startAutoSlide(); 
+            }); 
+        } 
+
+        if (prevReviewButton) { 
+            prevReviewButton.addEventListener('click', () => { 
+                showPreviousReview(); 
+                startAutoSlide(); 
+            }); 
+        } 
+
+        if (requestTriggers.length) { 
+            requestTriggers.forEach(trigger => {
+                trigger.addEventListener('click', event => {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    openRequestModal();
+                });
+            });
+        }
+
+        if (requestCloseButton) { 
+            requestCloseButton.addEventListener('click', () => closeRequestModal());
+        }
+
+        if (requestOverlay) { 
+            requestOverlay.addEventListener('click', handleRequestOverlayClick);
+        }
+
+        document.addEventListener('keydown', handleRequestKeydown); 
+
+        if (requestForm) { 
+            requestForm.addEventListener('submit', handleRequestSubmit);
+        }
+
+        if (requestFileInput) {
+            requestFileInput.addEventListener('change', () => {
+                const file = requestFileInput.files && requestFileInput.files[0] ? requestFileInput.files[0] : null;
+                updateRequestFileUI(file);
+                if (file) {
+                    if (file.size > MAX_ATTACHMENT_SIZE_BYTES) {
+                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                    } else {
+                        setRequestFieldError(requestFileInput, requestFileError, '');
+                        setRequestFieldError(requestCommentInput, requestCommentError, '');
+                    }
+                } else {
+                    setRequestFieldError(requestFileInput, requestFileError, '');
+                }
+            });
+        }
+
+        if (requestEmailInput) {
+            requestEmailInput.addEventListener('input', () => {
+                if (requestEmailInput.value.trim()) {
+                    setRequestFieldError(requestEmailInput, requestEmailError, '');
+                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
+                }
+            });
+        }
+
+        if (requestPhoneInput) {
+            requestPhoneInput.addEventListener('input', () => {
+                if (requestPhoneInput.value.trim()) {
+                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
+                    setRequestFieldError(requestEmailInput, requestEmailError, '');
+                }
+            });
+        }
+
+        if (requestCommentInput) {
+            requestCommentInput.addEventListener('input', () => {
+                if (requestCommentInput.value.trim()) {
+                    setRequestFieldError(requestCommentInput, requestCommentError, '');
+                    setRequestFieldError(requestFileInput, requestFileError, '');
+                }
+            });
+        }
+
+        if (requestToastClose) { 
+            requestToastClose.addEventListener('click', () => hideRequestToast());
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { 
+            anchor.addEventListener('click', event => { 
+                const target = document.querySelector(anchor.getAttribute('href')); 
+                if (target) { 
+                    event.preventDefault(); 
+                    target.scrollIntoView({ behavior: 'smooth' }); 
+                } 
+            }); 
+        }); 
+
+        if (partnersPrevButton) {
+            partnersPrevButton.addEventListener('click', () => {
+                stopPartnersAutoSlide();
+                advancePartners(-1);
+                startPartnersAutoSlide();
+            });
+        }
+
+        if (partnersNextButton) {
+            partnersNextButton.addEventListener('click', () => {
+                stopPartnersAutoSlide();
+                advancePartners(1);
+                startPartnersAutoSlide();
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!header) {
+                return;
+            }
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            setPartnerIndex(currentPartnerIndex, { immediate: true });
+            startPartnersAutoSlide();
+        });
+
+        document.addEventListener('visibilitychange', () => { 
+            if (document.hidden) { 
+                stopPartnersAutoSlide(); 
+            } else { 
+                startPartnersAutoSlide(); 
+            } 
+        }); 
+
+        loadContent(); 
+    </script> 
+</body> 
+</html> 

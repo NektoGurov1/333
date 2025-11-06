@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <defs>
+    <linearGradient id="houseBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14222f" />
+      <stop offset="100%" stop-color="#1d3243" />
+    </linearGradient>
+    <linearGradient id="houseRoof" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd400" />
+      <stop offset="100%" stop-color="#ffe566" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#houseBg)" />
+  <g transform="translate(140 130)">
+    <path d="M0 120L160 0l160 120" fill="url(#houseRoof)" opacity="0.85" />
+    <rect x="40" y="110" width="240" height="150" rx="18" fill="rgba(255,255,255,0.08)" stroke="#ffe566" stroke-width="6" />
+    <rect x="110" y="150" width="80" height="110" rx="12" fill="#101622" stroke="#ffe566" stroke-width="4" />
+    <rect x="70" y="130" width="60" height="40" rx="10" fill="#ffd400" opacity="0.65" />
+    <rect x="210" y="130" width="60" height="40" rx="10" fill="#ffd400" opacity="0.65" />
+    <path d="M-40 260h440" stroke="#ffe566" stroke-width="6" stroke-linecap="round" />
+  </g>
+  <text x="60" y="360" font-family="'Segoe UI',sans-serif" font-size="36" font-weight="600" fill="#ffe566">
+    Загородный дом
+  </text>
+</svg>

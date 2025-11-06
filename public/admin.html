@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления контентом</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #ffd400;
+            --accent: #ffe566;
+            --light: #f5f5f5;
+            --muted: #6c6c6c;
+            --border: #d7d7d7;
+            --card-bg: #ffffff;
+            --danger: #d64545;
+            --danger-dark: #bb3636;
+            --success: #2e7d32;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        header p {
+            margin: 0;
+            max-width: 720px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .header-actions button,
+        .header-actions a {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .logout-button {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .logout-button:hover {
+            background-color: var(--danger-dark);
+        }
+
+        .site-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .site-link:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="number"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            width: 180px;
+            max-width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(17,17,17,0.9), rgba(255,212,0,0.35));
+        }
+
+        .image-preview[hidden] {
+            display: none;
+        }
+
+        .item-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #ffffff;
+            position: relative;
+        }
+
+        .item-card button.remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            background: none;
+            color: var(--danger);
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .controls button,
+        .controls a {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .primary {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .secondary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .info {
+            background-color: var(--muted);
+            color: white;
+        }
+
+        .controls button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .tab-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .tab-button {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tab-button.is-active {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(17, 17, 17, 0.12);
+        }
+
+        .tab-button:focus-visible {
+            outline: 3px solid rgba(255, 212, 0, 0.6);
+            outline-offset: 3px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.is-active {
+            display: block;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field label {
+            margin-top: 0;
+        }
+
+        .smtp-settings {
+            margin-top: 25px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .smtp-settings h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .smtp-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        }
+
+        .status {
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .hint {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        .array-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .array-header button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .array-header button:hover {
+            background-color: var(--accent);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .controls button,
+            .controls a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Панель управления контентом</h1>
+        <div class="header-actions">
+            <a class="site-link" href="/" target="_blank" rel="noopener" data-site-link="landing">Открыть сайт</a>
+        </div>
+    </header>
+    <main>
+        <div class="tab-controls" role="tablist" aria-label="Режимы редактирования">
+            <button type="button" class="tab-button is-active" data-tab-button="desktop" id="desktopTab" role="tab" aria-selected="true" aria-controls="desktopPanel">Версия для ПК</button>
+            <button type="button" class="tab-button" data-tab-button="mobile" id="mobileTab" role="tab" aria-selected="false" aria-controls="mobilePanel">Мобильная версия</button>
+        </div>
+        <div class="tab-panel is-active" data-tab-panel="desktop" id="desktopPanel" role="tabpanel" aria-labelledby="desktopTab">
+        <div class="section">
+            <h2>Hero</h2>
+            <label for="heroTitle">Заголовок</label>
+            <input type="text" id="heroTitle">
+            <label for="heroSubtitle">Подзаголовок</label>
+            <textarea id="heroSubtitle"></textarea>
+            <label for="heroCta">Текст кнопки</label>
+            <input type="text" id="heroCta">
+            <label for="heroImage">URL фонового изображения</label>
+            <input type="url" id="heroImage">
+        </div>
+
+        <div class="section">
+            <h2>Логотипы</h2>
+            <p class="hint">Укажите ссылки на изображения логотипов в шапке и в hero-блоке.</p>
+            <label for="brandingHeaderLogo">Логотип в шапке</label>
+            <input type="url" id="brandingHeaderLogo">
+            <label for="brandingHeroLogo">Логотип над заголовком</label>
+            <input type="url" id="brandingHeroLogo">
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Преимущества</h2>
+                <button id="addFeature">Добавить преимущество</button>
+            </div>
+            <div id="featuresList"></div>
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Услуги</h2>
+                <button id="addService">Добавить услугу</button>
+            </div>
+            <div class="form-field">
+                <label for="servicesBackground">URL фонового изображения</label>
+                <input type="url" id="servicesBackground">
+                <p class="hint">Изображение отобразится под блоком «Наши услуги» на десктопной версии.</p>
+            </div>
+            <div id="servicesList"></div>
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Этапы работы</h2>
+                <button id="addStep">Добавить этап</button>
+            </div>
+            <div id="stepsList"></div>
+        </div>
+
+        <div class="section">
+            <h2>О компании</h2>
+            <div class="two-columns">
+                <div>
+                    <label for="aboutTitle">Заголовок</label>
+                    <input type="text" id="aboutTitle">
+                    <label for="aboutDescription">Описание</label>
+                    <textarea id="aboutDescription"></textarea>
+                </div>
+                <div>
+                    <label for="aboutImage">URL изображения</label>
+                    <input type="url" id="aboutImage">
+                </div>
+            </div>
+            <div class="array-header">
+                <h3>Статистика</h3>
+                <button id="addStat">Добавить показатель</button>
+            </div>
+            <div id="statsList"></div>
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Наши партнёры</h2>
+                <button id="addPartner">Добавить партнёра</button>
+            </div>
+            <p class="hint">Добавьте название, ссылку на сайт и логотип, который появится на лендинге.</p>
+            <label for="partnersAutoInterval">Интервал автопрокрутки (секунды)</label>
+            <input type="number" id="partnersAutoInterval" min="1" step="1" value="5">
+            <p class="hint">Укажите, как часто карусель партнёров будет переключать логотипы. Минимум — одна секунда.</p>
+            <div id="partnersList"></div>
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Портфолио</h2>
+                <button id="addPortfolio">Добавить проект</button>
+            </div>
+            <div id="portfolioList"></div>
+        </div>
+
+        <div class="section">
+            <div class="array-header">
+                <h2>Отзывы</h2>
+                <button id="addReview">Добавить отзыв</button>
+            </div>
+            <div id="reviewsList"></div>
+        </div>
+
+        <div class="section">
+            <h2>CTA</h2>
+            <label for="ctaTitle">Заголовок</label>
+            <input type="text" id="ctaTitle">
+            <label for="ctaDescription">Описание</label>
+            <textarea id="ctaDescription"></textarea>
+            <label for="ctaButton">Текст кнопки</label>
+            <input type="text" id="ctaButton">
+        </div>
+
+        <div class="section">
+            <h2>Контакты</h2>
+            <label for="contactAddress">Адрес</label>
+            <input type="text" id="contactAddress">
+            <label for="contactPhone">Телефон</label>
+            <input type="text" id="contactPhone">
+            <label for="contactPhoneRequests">Телефон для приёма заявок</label>
+            <input type="text" id="contactPhoneRequests" placeholder="+7 (495) 765-43-21">
+            <p class="hint">Отображается как «Прием заявок» рядом с номером в подвале.</p>
+            <label for="contactPhoneEtl">Телефон ЭТЛ</label>
+            <input type="text" id="contactPhoneEtl" placeholder="+7 (495) 555-00-11">
+            <p class="hint">Показывается с подписью «ЭТЛ».</p>
+            <label for="contactEmail">Email</label>
+            <input type="text" id="contactEmail">
+            <label for="contactSchedule">График работы</label>
+            <input type="text" id="contactSchedule">
+        </div>
+
+        <div class="section">
+            <h2>Заявки</h2>
+            <label for="requestEmail">E-mail для заявок</label>
+            <input type="text" id="requestEmail">
+            <div class="smtp-settings">
+                <h3>SMTP-настройки</h3>
+                <div class="smtp-grid">
+                    <div class="form-field">
+                        <label for="requestSmtpHost">Сервер (SMTP-хост)</label>
+                        <input type="text" id="requestSmtpHost" placeholder="smtp.example.com">
+                    </div>
+                    <div class="form-field">
+                        <label for="requestSmtpPort">Порт</label>
+                        <input type="number" id="requestSmtpPort" min="1" placeholder="587">
+                    </div>
+                    <div class="form-field">
+                        <label for="requestSmtpSecurity">Шифрование</label>
+                        <select id="requestSmtpSecurity">
+                            <option value="starttls">STARTTLS</option>
+                            <option value="ssl">SSL/TLS</option>
+                            <option value="none">Без шифрования</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="requestSmtpUser">Логин</label>
+                        <input type="text" id="requestSmtpUser" autocomplete="off">
+                    </div>
+                    <div class="form-field">
+                        <label for="requestSmtpPassword">Пароль</label>
+                        <input type="password" id="requestSmtpPassword" autocomplete="new-password">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="controls">
+                <button class="primary" id="saveButton">Сохранить изменения</button>
+                <button class="info" id="reloadContent">Обновить данные</button>
+                <a class="secondary" href="/" target="_blank" rel="noopener" data-site-link="landing">Открыть лендинг</a>
+            </div>
+            <div class="status" id="statusMessage"></div>
+        </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="mobile" id="mobilePanel" role="tabpanel" aria-labelledby="mobileTab" aria-hidden="true" tabindex="-1" hidden>
+            <div class="section">
+                <h2>Hero (мобильная версия)</h2>
+                <label for="mobileHeroTitle">Заголовок</label>
+                <input type="text" id="mobileHeroTitle">
+                <label for="mobileHeroSubtitle">Подзаголовок</label>
+                <textarea id="mobileHeroSubtitle"></textarea>
+                <label for="mobileHeroPrimary">Текст основной кнопки</label>
+                <input type="text" id="mobileHeroPrimary">
+                <label for="mobileHeroSecondary">Текст кнопки звонка</label>
+                <input type="text" id="mobileHeroSecondary">
+            </div>
+
+            <div class="section">
+                <div class="array-header">
+                    <h2>Ключевые блоки</h2>
+                    <button id="addMobileHighlight">Добавить блок</button>
+                </div>
+                <p class="hint">Каждый блок отображается с иконкой и коротким описанием. Можно указать CSS-класс Font Awesome или URL изображения.</p>
+                <div id="mobileHighlightsList"></div>
+            </div>
+
+            <div class="section">
+                <div class="array-header">
+                    <h2>Услуги (мобильная версия)</h2>
+                    <button id="addMobileService">Добавить услугу</button>
+                </div>
+                <p class="hint">Список отображается компактно, текст должен быть кратким. Допускается CSS-класс или собственное изображение для иконки.</p>
+                <div id="mobileServicesList"></div>
+            </div>
+
+            <div class="section">
+                <h2>Контакты (мобильная версия)</h2>
+                <label for="mobileContactTitle">Заголовок блока</label>
+                <input type="text" id="mobileContactTitle">
+                <label for="mobileContactPhone">Телефон</label>
+                <input type="text" id="mobileContactPhone">
+                <label for="mobileContactPhoneRequests">Телефон для приёма заявок</label>
+                <input type="text" id="mobileContactPhoneRequests">
+                <label for="mobileContactPhoneEtl">Телефон ЭТЛ</label>
+                <input type="text" id="mobileContactPhoneEtl">
+                <label for="mobileContactEmail">E-mail</label>
+                <input type="text" id="mobileContactEmail">
+                <label for="mobileContactAddress">Адрес</label>
+                <input type="text" id="mobileContactAddress">
+                <label for="mobileContactSchedule">График</label>
+                <input type="text" id="mobileContactSchedule">
+                <label for="mobileContactCta">Текст кнопки заявки</label>
+                <input type="text" id="mobileContactCta">
+                <h3>Иконки контактов</h3>
+                <div class="two-columns">
+                    <div class="form-field">
+                        <label for="mobileContactPhoneIcon">Иконка телефона (CSS-класс)</label>
+                        <input type="text" id="mobileContactPhoneIcon" placeholder="fa-solid fa-phone">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactPhoneImage">URL изображения телефона</label>
+                        <input type="url" id="mobileContactPhoneImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
+                        <label for="mobileContactEmailIcon">Иконка e-mail (CSS-класс)</label>
+                        <input type="text" id="mobileContactEmailIcon" placeholder="fa-solid fa-envelope">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactEmailImage">URL изображения e-mail</label>
+                        <input type="url" id="mobileContactEmailImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
+                        <label for="mobileContactAddressIcon">Иконка адреса (CSS-класс)</label>
+                        <input type="text" id="mobileContactAddressIcon" placeholder="fa-solid fa-location-dot">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactAddressImage">URL изображения адреса</label>
+                        <input type="url" id="mobileContactAddressImage">
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="controls">
+                    <button class="primary" id="mobileSaveButton">Сохранить изменения</button>
+                    <button class="info" id="mobileReloadButton">Обновить данные</button>
+                    <a class="secondary" href="/mobile" target="_blank" rel="noopener" data-site-link="mobile">Открыть мобильную версию</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const featuresList = document.getElementById('featuresList');
+        const servicesList = document.getElementById('servicesList');
+        const stepsList = document.getElementById('stepsList');
+        const statsList = document.getElementById('statsList');
+        const partnersList = document.getElementById('partnersList');
+        const partnersAutoIntervalInput = document.getElementById('partnersAutoInterval');
+        const portfolioList = document.getElementById('portfolioList');
+        const reviewsList = document.getElementById('reviewsList');
+        const requestEmailInput = document.getElementById('requestEmail');
+        const requestSmtpHostInput = document.getElementById('requestSmtpHost');
+        const requestSmtpPortInput = document.getElementById('requestSmtpPort');
+        const requestSmtpSecurityInput = document.getElementById('requestSmtpSecurity');
+        const requestSmtpUserInput = document.getElementById('requestSmtpUser');
+        const requestSmtpPasswordInput = document.getElementById('requestSmtpPassword');
+        const heroImageInput = document.getElementById('heroImage');
+        const servicesBackgroundInput = document.getElementById('servicesBackground');
+        const aboutImageInput = document.getElementById('aboutImage');
+        const mobileHeroTitleInput = document.getElementById('mobileHeroTitle');
+        const mobileHeroSubtitleInput = document.getElementById('mobileHeroSubtitle');
+        const mobileHeroPrimaryInput = document.getElementById('mobileHeroPrimary');
+        const mobileHeroSecondaryInput = document.getElementById('mobileHeroSecondary');
+        const mobileHighlightsList = document.getElementById('mobileHighlightsList');
+        const mobileServicesList = document.getElementById('mobileServicesList');
+        const mobileContactTitleInput = document.getElementById('mobileContactTitle');
+        const mobileContactPhoneInput = document.getElementById('mobileContactPhone');
+        const mobileContactPhoneRequestsInput = document.getElementById('mobileContactPhoneRequests');
+        const mobileContactPhoneEtlInput = document.getElementById('mobileContactPhoneEtl');
+        const mobileContactEmailInput = document.getElementById('mobileContactEmail');
+        const mobileContactAddressInput = document.getElementById('mobileContactAddress');
+        const mobileContactScheduleInput = document.getElementById('mobileContactSchedule');
+        const mobileContactCtaInput = document.getElementById('mobileContactCta');
+        const mobileContactPhoneIconInput = document.getElementById('mobileContactPhoneIcon');
+        const mobileContactPhoneImageInput = document.getElementById('mobileContactPhoneImage');
+        const mobileContactEmailIconInput = document.getElementById('mobileContactEmailIcon');
+        const mobileContactEmailImageInput = document.getElementById('mobileContactEmailImage');
+        const mobileContactAddressIconInput = document.getElementById('mobileContactAddressIcon');
+        const mobileContactAddressImageInput = document.getElementById('mobileContactAddressImage');
+        const contactPhoneRequestsInput = document.getElementById('contactPhoneRequests');
+        const contactPhoneEtlInput = document.getElementById('contactPhoneEtl');
+        const tabButtons = Array.from(document.querySelectorAll('[data-tab-button]'));
+        const tabPanels = Array.from(document.querySelectorAll('[data-tab-panel]'));
+
+        const statusMessage = document.getElementById('statusMessage');
+        const saveButton = document.getElementById('saveButton');
+        const reloadButton = document.getElementById('reloadContent');
+        const mobileSaveButton = document.getElementById('mobileSaveButton');
+        const mobileReloadButton = document.getElementById('mobileReloadButton');
+        const headerLogoInput = document.getElementById('brandingHeaderLogo');
+        const heroLogoInput = document.getElementById('brandingHeroLogo');
+
+        const siteOrigin = window.location.origin;
+        const routes = {
+            landing: new URL('/', siteOrigin).toString(),
+            login: new URL('/login', siteOrigin).toString(),
+            admin: new URL('/admin', siteOrigin).toString(),
+            content: new URL('/api/content', siteOrigin).toString()
+        };
+
+        const previewBindings = new Map();
+
+        function normaliseSmtpSecurity(value) {
+            if (typeof value !== 'string') {
+                return 'starttls';
+            }
+            const lower = value.trim().toLowerCase();
+            return ['starttls', 'ssl', 'none'].includes(lower) ? lower : 'starttls';
+        }
+
+        function isImageLikeValue(value) {
+            if (typeof value !== 'string') {
+                return false;
+            }
+            const trimmed = value.trim();
+            if (!trimmed) {
+                return false;
+            }
+            if (trimmed.startsWith('data:') || trimmed.startsWith('blob:')) {
+                return true;
+            }
+            if (trimmed.includes(' ')) {
+                return false;
+            }
+            const lower = trimmed.toLowerCase();
+            const extensions = ['.svg', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.avif'];
+            return extensions.some(ext => lower.endsWith(ext));
+        }
+
+        function extractIconClassFromEntry(entry) {
+            if (!entry) {
+                return '';
+            }
+            if (typeof entry === 'string') {
+                return isImageLikeValue(entry) ? '' : entry;
+            }
+            if (typeof entry === 'object') {
+                if (typeof entry.icon === 'string' && entry.icon.trim()) {
+                    return entry.icon.trim();
+                }
+                if (typeof entry.class === 'string' && entry.class.trim()) {
+                    return entry.class.trim();
+                }
+            }
+            return '';
+        }
+
+        function extractIconImageFromEntry(entry) {
+            if (!entry) {
+                return '';
+            }
+            if (typeof entry === 'string') {
+                return isImageLikeValue(entry) ? entry : '';
+            }
+            if (typeof entry === 'object') {
+                if (typeof entry.image === 'string' && entry.image.trim()) {
+                    return entry.image.trim();
+                }
+                if (typeof entry.src === 'string' && entry.src.trim()) {
+                    return entry.src.trim();
+                }
+            }
+            return '';
+        }
+
+        function buildIconPayload(classInput, imageInput) {
+            const iconValue = classInput ? classInput.value.trim() : '';
+            const imageValue = imageInput ? imageInput.value.trim() : '';
+            const payload = {};
+            if (iconValue) {
+                payload.icon = iconValue;
+            }
+            if (imageValue) {
+                payload.image = imageValue;
+            }
+            return payload;
+        }
+
+        function collectContactIconsPayload() {
+            const icons = {
+                phone: buildIconPayload(mobileContactPhoneIconInput, mobileContactPhoneImageInput),
+                email: buildIconPayload(mobileContactEmailIconInput, mobileContactEmailImageInput),
+                address: buildIconPayload(mobileContactAddressIconInput, mobileContactAddressImageInput),
+            };
+            return Object.fromEntries(
+                Object.entries(icons).filter(([, value]) => value && (value.icon || value.image))
+            );
+        }
+
+        function setSmtpFormValues(settings) {
+            const smtpSettings = settings && typeof settings === 'object' ? settings : {};
+            if (requestSmtpHostInput) {
+                requestSmtpHostInput.value = typeof smtpSettings.host === 'string' ? smtpSettings.host : '';
+            }
+            if (requestSmtpPortInput) {
+                const portValue = smtpSettings.port;
+                requestSmtpPortInput.value = portValue === undefined || portValue === null || portValue === ''
+                    ? ''
+                    : String(portValue);
+            }
+            if (requestSmtpSecurityInput) {
+                requestSmtpSecurityInput.value = normaliseSmtpSecurity(smtpSettings.security);
+            }
+            if (requestSmtpUserInput) {
+                requestSmtpUserInput.value = typeof smtpSettings.username === 'string' ? smtpSettings.username : '';
+            }
+            if (requestSmtpPasswordInput) {
+                requestSmtpPasswordInput.value = typeof smtpSettings.password === 'string' ? smtpSettings.password : '';
+            }
+        }
+
+        function readSmtpSettingsFromForm() {
+            const result = {
+                host: requestSmtpHostInput ? requestSmtpHostInput.value.trim() : '',
+                port: null,
+                security: requestSmtpSecurityInput ? normaliseSmtpSecurity(requestSmtpSecurityInput.value) : 'starttls',
+                username: requestSmtpUserInput ? requestSmtpUserInput.value.trim() : '',
+                password: requestSmtpPasswordInput ? requestSmtpPasswordInput.value : ''
+            };
+
+            if (requestSmtpPortInput) {
+                const raw = requestSmtpPortInput.value.trim();
+                if (raw) {
+                    const parsed = Number.parseInt(raw, 10);
+                    if (!Number.isNaN(parsed)) {
+                        result.port = parsed;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        function resolvePreviewUrl(value) {
+            const candidate = (value || '').trim();
+            if (!candidate) {
+                return '';
+            }
+            if (/^(data:|blob:|https?:|ftp:|\/\/)/i.test(candidate)) {
+                return candidate;
+            }
+            const normalized = candidate.replace(/^\/+/, '');
+            return `${siteOrigin}/${normalized}`;
+        }
+
+        function updateImagePreview(input) {
+            const preview = previewBindings.get(input);
+            if (!preview) {
+                return;
+            }
+            const value = (input.value || '').trim();
+            if (!value) {
+                preview.hidden = true;
+                preview.removeAttribute('src');
+                return;
+            }
+            preview.src = resolvePreviewUrl(value);
+            preview.hidden = false;
+        }
+
+        function attachImagePreview(input) {
+            if (!input || previewBindings.has(input)) {
+                if (input) {
+                    updateImagePreview(input);
+                }
+                return;
+            }
+            const preview = document.createElement('img');
+            preview.className = 'image-preview';
+            preview.alt = 'Превью изображения';
+            preview.hidden = true;
+            const parent = input.parentNode;
+            if (parent) {
+                parent.appendChild(preview);
+            } else {
+                input.insertAdjacentElement('afterend', preview);
+            }
+            previewBindings.set(input, preview);
+            input.addEventListener('input', () => updateImagePreview(input));
+            updateImagePreview(input);
+        }
+
+        function refreshAllImagePreviews() {
+            previewBindings.forEach((_, input) => updateImagePreview(input));
+        }
+
+        document.querySelectorAll('[data-site-link="landing"]').forEach(link => {
+            link.href = routes.landing;
+        });
+        document.querySelectorAll('[data-site-link="mobile"]').forEach(link => {
+            link.href = new URL('/mobile', siteOrigin).toString();
+        });
+
+        const rootStyles = getComputedStyle(document.documentElement);
+        const palette = {
+            muted: rootStyles.getPropertyValue('--muted').trim() || '#6c6c6c',
+            success: rootStyles.getPropertyValue('--success').trim() || '#2e7d32',
+            error: rootStyles.getPropertyValue('--danger').trim() || '#d64545'
+        };
+
+        [
+            heroImageInput,
+            servicesBackgroundInput,
+            aboutImageInput,
+            headerLogoInput,
+            heroLogoInput,
+            mobileContactPhoneImageInput,
+            mobileContactEmailImageInput,
+            mobileContactAddressImageInput,
+        ].forEach(attachImagePreview);
+
+        const DEFAULT_PARTNERS_INTERVAL_MS = 5000;
+        const MIN_PARTNERS_INTERVAL_MS = 1000;
+        const MIN_PARTNERS_INTERVAL_SECONDS = MIN_PARTNERS_INTERVAL_MS / 1000;
+
+        function activateTab(name) {
+            if (!name) {
+                return;
+            }
+            tabButtons.forEach(button => {
+                const isActive = button.dataset.tabButton === name;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+            tabPanels.forEach(panel => {
+                const isActive = panel.dataset.tabPanel === name;
+                panel.classList.toggle('is-active', isActive);
+                panel.hidden = !isActive;
+                panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                panel.tabIndex = isActive ? 0 : -1;
+            });
+        }
+
+        function focusAdjacentTab(currentIndex, direction) {
+            const buttons = tabButtons;
+            if (!buttons.length) {
+                return;
+            }
+            const nextIndex = (currentIndex + direction + buttons.length) % buttons.length;
+            const nextButton = buttons[nextIndex];
+            if (nextButton) {
+                nextButton.focus();
+                activateTab(nextButton.dataset.tabButton);
+            }
+        }
+
+        function initTabs() {
+            if (!tabButtons.length || !tabPanels.length) {
+                return;
+            }
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    activateTab(button.dataset.tabButton);
+                });
+                button.addEventListener('keydown', event => {
+                    if (event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        focusAdjacentTab(index, 1);
+                    } else if (event.key === 'ArrowLeft') {
+                        event.preventDefault();
+                        focusAdjacentTab(index, -1);
+                    }
+                });
+            });
+            activateTab('desktop');
+        }
+
+        if (partnersAutoIntervalInput) {
+            partnersAutoIntervalInput.min = String(MIN_PARTNERS_INTERVAL_SECONDS);
+            partnersAutoIntervalInput.step = '1';
+        }
+
+        let contentLoaded = false;
+        let isLoading = false;
+        let isSaving = false;
+        let lastLoadedRequest = {};
+
+        function setStatus(message, color = palette.muted) {
+            statusMessage.textContent = message;
+            statusMessage.style.color = color;
+        }
+
+        function updateActionButtons() {
+            saveButton.disabled = !contentLoaded || isLoading || isSaving;
+            reloadButton.disabled = isLoading || isSaving;
+            if (mobileSaveButton) {
+                mobileSaveButton.disabled = !contentLoaded || isLoading || isSaving;
+            }
+            if (mobileReloadButton) {
+                mobileReloadButton.disabled = isLoading || isSaving;
+            }
+        }
+
+        function redirectToLogin() {
+            const redirectTarget = `${window.location.pathname}${window.location.search}`; 
+            const loginUrl = new URL(routes.login); 
+            loginUrl.searchParams.set('redirect', redirectTarget); 
+            window.location.replace(loginUrl.toString()); 
+        }
+
+        function createInput(labelText, value = '', type = 'text') {
+            const label = document.createElement('label');
+            label.textContent = labelText;
+            const input = document.createElement(type === 'textarea' ? 'textarea' : 'input');
+            if (type !== 'textarea') {
+                input.type = type;
+            }
+            input.value = value;
+            label.appendChild(input);
+            return { label, input };
+        }
+
+        function createItemCard(fields, values = {}, container) {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            const remove = document.createElement('button');
+            remove.className = 'remove';
+            remove.innerHTML = '&times;';
+            remove.addEventListener('click', () => {
+                card.querySelectorAll('input, textarea').forEach(element => {
+                    const preview = previewBindings.get(element);
+                    if (preview) {
+                        preview.remove();
+                        previewBindings.delete(element);
+                    }
+                });
+                container.removeChild(card);
+            });
+            card.appendChild(remove);
+
+            fields.forEach(field => {
+                const { label, input } = createInput(field.label, values[field.name] || '', field.type || 'text');
+                input.dataset.field = field.name;
+                card.appendChild(label);
+                if (field.preview === 'image') {
+                    attachImagePreview(input);
+                }
+            });
+
+            container.appendChild(card);
+            return card;
+        }
+
+        function getItemsFromContainer(container) {
+            const items = [];
+            container.querySelectorAll('.item-card').forEach(card => {
+                const item = {};
+                card.querySelectorAll('[data-field]').forEach(input => {
+                    if (input.tagName.toLowerCase() === 'textarea') {
+                        item[input.dataset.field] = input.value.trim();
+                    } else {
+                        item[input.dataset.field] = input.value.trim();
+                    }
+                });
+                items.push(item);
+            });
+            return items;
+        }
+
+        function populateArray(container, items, fields) {
+            container.innerHTML = '';
+            items.forEach(item => createItemCard(fields, item, container));
+        }
+
+        function sanitizePartnersIntervalMs(value) {
+            const parsed = Number(value);
+            if (!Number.isFinite(parsed) || parsed < MIN_PARTNERS_INTERVAL_MS) {
+                return DEFAULT_PARTNERS_INTERVAL_MS;
+            }
+            return Math.round(parsed);
+        }
+
+        function getPartnersIntervalMsFromInput() {
+            if (!partnersAutoIntervalInput) {
+                return DEFAULT_PARTNERS_INTERVAL_MS;
+            }
+            const seconds = Number(partnersAutoIntervalInput.value);
+            if (!Number.isFinite(seconds) || seconds < MIN_PARTNERS_INTERVAL_SECONDS) {
+                return DEFAULT_PARTNERS_INTERVAL_MS;
+            }
+            return Math.max(Math.round(seconds), MIN_PARTNERS_INTERVAL_SECONDS) * 1000;
+        }
+
+        async function loadContent(options = {}) {
+            const { showStatus = true } = options;
+            if (isLoading) {
+                return;
+            }
+            isLoading = true;
+            contentLoaded = false;
+            updateActionButtons();
+            if (showStatus) {
+                setStatus('Загрузка контента...', palette.muted);
+            }
+            try {
+                const response = await fetch(routes.content, { credentials: 'include' });
+                if (response.status === 401 || response.status === 403) {
+                    redirectToLogin();
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить контент');
+                }
+                const data = await response.json();
+                applyContent(data);
+                contentLoaded = true;
+                if (showStatus) {
+                    setStatus('Контент загружен.', palette.success);
+                }
+            } catch (error) {
+                console.error(error);
+                const message = error.message || 'Не удалось загрузить контент';
+                setStatus(message, palette.error);
+            } finally {
+                isLoading = false;
+                updateActionButtons();
+            }
+        }
+
+        function applyContent(data) {
+            document.getElementById('heroTitle').value = data.hero?.title || '';
+            document.getElementById('heroSubtitle').value = data.hero?.subtitle || '';
+            document.getElementById('heroCta').value = data.hero?.cta || '';
+            if (heroImageInput) {
+                heroImageInput.value = data.hero?.image || '';
+            }
+
+            headerLogoInput.value = data.branding?.headerLogo || '';
+            heroLogoInput.value = data.branding?.heroLogo || '';
+
+            populateArray(featuresList, data.features || [], [
+                { name: 'icon', label: 'CSS-класс иконки' },
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ]);
+
+            populateArray(servicesList, data.services || [], [
+                { name: 'icon', label: 'CSS-класс иконки' },
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ]);
+
+            if (servicesBackgroundInput) {
+                servicesBackgroundInput.value = data.servicesSettings?.background || '';
+            }
+
+            populateArray(stepsList, data.steps || [], [
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ]);
+
+            document.getElementById('aboutTitle').value = data.about?.title || '';
+            document.getElementById('aboutDescription').value = data.about?.description || '';
+            if (aboutImageInput) {
+                aboutImageInput.value = data.about?.image || '';
+            }
+
+            populateArray(statsList, data.about?.stats || [], [
+                { name: 'value', label: 'Значение' },
+                { name: 'label', label: 'Описание' }
+            ]);
+
+            const partnersIntervalMs = sanitizePartnersIntervalMs(data.partnersSettings?.autoScrollInterval);
+            if (partnersAutoIntervalInput) {
+                partnersAutoIntervalInput.value = String(Math.max(Math.round(partnersIntervalMs / 1000), MIN_PARTNERS_INTERVAL_SECONDS));
+            }
+
+            populateArray(partnersList, data.partners || [], [
+                { name: 'name', label: 'Название партнёра' },
+                { name: 'url', label: 'Ссылка на сайт' },
+                { name: 'logo', label: 'URL логотипа', preview: 'image' }
+            ]);
+
+            populateArray(portfolioList, data.portfolio || [], [
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' },
+                { name: 'image', label: 'URL изображения', preview: 'image' }
+            ]);
+
+            populateArray(reviewsList, data.reviews || [], [
+                { name: 'name', label: 'Имя' },
+                { name: 'location', label: 'Город' },
+                { name: 'text', label: 'Текст отзыва', type: 'textarea' },
+                { name: 'image', label: 'URL изображения', preview: 'image' }
+            ]);
+
+            document.getElementById('ctaTitle').value = data.cta?.title || '';
+            document.getElementById('ctaDescription').value = data.cta?.description || '';
+            document.getElementById('ctaButton').value = data.cta?.button || '';
+
+            document.getElementById('contactAddress').value = data.contacts?.address || '';
+            document.getElementById('contactPhone').value = data.contacts?.phone || '';
+            if (contactPhoneRequestsInput) {
+                contactPhoneRequestsInput.value = data.contacts?.phoneRequests || '';
+            }
+            if (contactPhoneEtlInput) {
+                contactPhoneEtlInput.value = data.contacts?.phoneEtl || '';
+            }
+            document.getElementById('contactEmail').value = data.contacts?.email || '';
+            document.getElementById('contactSchedule').value = data.contacts?.schedule || '';
+            const mobile = data.mobile && typeof data.mobile === 'object' ? data.mobile : {};
+            const mobileHero = mobile.hero && typeof mobile.hero === 'object' ? mobile.hero : {};
+            if (mobileHeroTitleInput) {
+                mobileHeroTitleInput.value = mobileHero.title || '';
+            }
+            if (mobileHeroSubtitleInput) {
+                mobileHeroSubtitleInput.value = mobileHero.subtitle || '';
+            }
+            if (mobileHeroPrimaryInput) {
+                mobileHeroPrimaryInput.value = mobileHero.primaryAction || '';
+            }
+            if (mobileHeroSecondaryInput) {
+                mobileHeroSecondaryInput.value = mobileHero.secondaryAction || '';
+            }
+            if (mobileHighlightsList) {
+                populateArray(mobileHighlightsList, mobile.highlights || [], [
+                    { name: 'icon', label: 'CSS-класс иконки' },
+                    { name: 'iconImage', label: 'URL изображения иконки', type: 'url', preview: 'image' },
+                    { name: 'title', label: 'Заголовок' },
+                    { name: 'description', label: 'Описание', type: 'textarea' }
+                ]);
+            }
+            if (mobileServicesList) {
+                populateArray(mobileServicesList, mobile.services || [], [
+                    { name: 'icon', label: 'CSS-класс иконки' },
+                    { name: 'iconImage', label: 'URL изображения иконки', type: 'url', preview: 'image' },
+                    { name: 'title', label: 'Заголовок' },
+                    { name: 'description', label: 'Описание', type: 'textarea' }
+                ]);
+            }
+            const mobileContact = mobile.contact && typeof mobile.contact === 'object' ? mobile.contact : {};
+            if (mobileContactTitleInput) {
+                mobileContactTitleInput.value = mobileContact.title || '';
+            }
+            if (mobileContactPhoneInput) {
+                mobileContactPhoneInput.value = mobileContact.phone || '';
+            }
+            if (mobileContactPhoneRequestsInput) {
+                mobileContactPhoneRequestsInput.value = mobileContact.phoneRequests || '';
+            }
+            if (mobileContactPhoneEtlInput) {
+                mobileContactPhoneEtlInput.value = mobileContact.phoneEtl || '';
+            }
+            if (mobileContactEmailInput) {
+                mobileContactEmailInput.value = mobileContact.email || '';
+            }
+            if (mobileContactAddressInput) {
+                mobileContactAddressInput.value = mobileContact.address || '';
+            }
+            if (mobileContactScheduleInput) {
+                mobileContactScheduleInput.value = mobileContact.schedule || '';
+            }
+            if (mobileContactCtaInput) {
+                mobileContactCtaInput.value = mobileContact.cta || '';
+            }
+            const mobileContactIcons = mobileContact.icons && typeof mobileContact.icons === 'object' ? mobileContact.icons : {};
+            if (mobileContactPhoneIconInput) {
+                mobileContactPhoneIconInput.value = extractIconClassFromEntry(mobileContactIcons.phone);
+            }
+            if (mobileContactPhoneImageInput) {
+                mobileContactPhoneImageInput.value = extractIconImageFromEntry(mobileContactIcons.phone);
+            }
+            if (mobileContactEmailIconInput) {
+                mobileContactEmailIconInput.value = extractIconClassFromEntry(mobileContactIcons.email);
+            }
+            if (mobileContactEmailImageInput) {
+                mobileContactEmailImageInput.value = extractIconImageFromEntry(mobileContactIcons.email);
+            }
+            if (mobileContactAddressIconInput) {
+                mobileContactAddressIconInput.value = extractIconClassFromEntry(mobileContactIcons.address);
+            }
+            if (mobileContactAddressImageInput) {
+                mobileContactAddressImageInput.value = extractIconImageFromEntry(mobileContactIcons.address);
+            }
+            lastLoadedRequest = data.request && typeof data.request === 'object' ? { ...data.request } : {};
+            if (requestEmailInput) {
+                requestEmailInput.value = typeof lastLoadedRequest.targetEmail === 'string' ? lastLoadedRequest.targetEmail : '';
+            }
+            setSmtpFormValues(lastLoadedRequest.smtp);
+
+            refreshAllImagePreviews();
+        }
+
+        function collectData() {
+            const partnersIntervalMs = getPartnersIntervalMsFromInput();
+            return {
+                hero: {
+                    title: document.getElementById('heroTitle').value.trim(),
+                    subtitle: document.getElementById('heroSubtitle').value.trim(),
+                    cta: document.getElementById('heroCta').value.trim(),
+                    image: heroImageInput ? heroImageInput.value.trim() : ''
+                },
+                branding: {
+                    headerLogo: headerLogoInput.value.trim(),
+                    heroLogo: heroLogoInput.value.trim()
+                },
+                features: getItemsFromContainer(featuresList),
+                services: getItemsFromContainer(servicesList),
+                servicesSettings: {
+                    background: servicesBackgroundInput ? servicesBackgroundInput.value.trim() : ''
+                },
+                steps: getItemsFromContainer(stepsList),
+                about: {
+                    title: document.getElementById('aboutTitle').value.trim(),
+                    description: document.getElementById('aboutDescription').value.trim(),
+                    image: aboutImageInput ? aboutImageInput.value.trim() : '',
+                    stats: getItemsFromContainer(statsList)
+                },
+                partners: getItemsFromContainer(partnersList),
+                partnersSettings: {
+                    autoScrollInterval: partnersIntervalMs
+                },
+                portfolio: getItemsFromContainer(portfolioList),
+                reviews: getItemsFromContainer(reviewsList),
+                cta: {
+                    title: document.getElementById('ctaTitle').value.trim(),
+                    description: document.getElementById('ctaDescription').value.trim(),
+                    button: document.getElementById('ctaButton').value.trim()
+                },
+                contacts: {
+                    address: document.getElementById('contactAddress').value.trim(),
+                    phone: document.getElementById('contactPhone').value.trim(),
+                    phoneRequests: contactPhoneRequestsInput ? contactPhoneRequestsInput.value.trim() : '',
+                    phoneEtl: contactPhoneEtlInput ? contactPhoneEtlInput.value.trim() : '',
+                    email: document.getElementById('contactEmail').value.trim(),
+                    schedule: document.getElementById('contactSchedule').value.trim()
+                },
+                mobile: {
+                    hero: {
+                        title: mobileHeroTitleInput ? mobileHeroTitleInput.value.trim() : '',
+                        subtitle: mobileHeroSubtitleInput ? mobileHeroSubtitleInput.value.trim() : '',
+                        primaryAction: mobileHeroPrimaryInput ? mobileHeroPrimaryInput.value.trim() : '',
+                        secondaryAction: mobileHeroSecondaryInput ? mobileHeroSecondaryInput.value.trim() : ''
+                    },
+                    highlights: mobileHighlightsList ? getItemsFromContainer(mobileHighlightsList) : [],
+                    services: mobileServicesList ? getItemsFromContainer(mobileServicesList) : [],
+                    contact: {
+                        title: mobileContactTitleInput ? mobileContactTitleInput.value.trim() : '',
+                        phone: mobileContactPhoneInput ? mobileContactPhoneInput.value.trim() : '',
+                        phoneRequests: mobileContactPhoneRequestsInput ? mobileContactPhoneRequestsInput.value.trim() : '',
+                        phoneEtl: mobileContactPhoneEtlInput ? mobileContactPhoneEtlInput.value.trim() : '',
+                        email: mobileContactEmailInput ? mobileContactEmailInput.value.trim() : '',
+                        address: mobileContactAddressInput ? mobileContactAddressInput.value.trim() : '',
+                        schedule: mobileContactScheduleInput ? mobileContactScheduleInput.value.trim() : '',
+                        cta: mobileContactCtaInput ? mobileContactCtaInput.value.trim() : '',
+                        icons: collectContactIconsPayload()
+                    }
+                },
+                request: {
+                    ...lastLoadedRequest,
+                    targetEmail: requestEmailInput ? requestEmailInput.value.trim() : '',
+                    smtp: readSmtpSettingsFromForm()
+                }
+            };
+        }
+
+        async function saveContent() {
+            if (!contentLoaded) {
+                setStatus('Подождите, пока загрузится текущий контент.', palette.error);
+                return;
+            }
+            if (isSaving) {
+                return;
+            }
+            try {
+                isSaving = true;
+                updateActionButtons();
+                setStatus('Сохранение...', palette.muted);
+                const response = await fetch(routes.content, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        data: collectData()
+                    })
+                });
+                if (response.status === 401 || response.status === 403) {
+                    setStatus('Сессия истекла. Войдите снова.', palette.error);
+                    setTimeout(() => redirectToLogin(), 600);
+                    return;
+                }
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.error || 'Не удалось сохранить данные');
+                }
+                await loadContent({ showStatus: false });
+                setStatus('Изменения сохранены.', palette.success);
+            } catch (error) {
+                const message = error.message || 'Не удалось сохранить данные';
+                setStatus(message, palette.error);
+            } finally {
+                isSaving = false;
+                updateActionButtons();
+            }
+        }
+
+        document.getElementById('addFeature').addEventListener('click', () => {
+            createItemCard([
+                { name: 'icon', label: 'CSS-класс иконки' },
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ], {}, featuresList);
+        });
+
+        document.getElementById('addService').addEventListener('click', () => {
+            createItemCard([
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ], {}, servicesList);
+        });
+
+        document.getElementById('addStep').addEventListener('click', () => {
+            createItemCard([
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' }
+            ], {}, stepsList);
+        });
+
+        document.getElementById('addStat').addEventListener('click', () => {
+            createItemCard([
+                { name: 'value', label: 'Значение' },
+                { name: 'label', label: 'Описание' }
+            ], {}, statsList);
+        });
+
+        document.getElementById('addPartner').addEventListener('click', () => {
+            createItemCard([
+                { name: 'name', label: 'Название партнёра' },
+                { name: 'url', label: 'Ссылка на сайт' },
+                { name: 'logo', label: 'URL логотипа', preview: 'image' }
+            ], {}, partnersList);
+        });
+
+        document.getElementById('addPortfolio').addEventListener('click', () => {
+            createItemCard([
+                { name: 'title', label: 'Заголовок' },
+                { name: 'description', label: 'Описание', type: 'textarea' },
+                { name: 'image', label: 'URL изображения', preview: 'image' }
+            ], {}, portfolioList);
+        });
+
+        document.getElementById('addReview').addEventListener('click', () => {
+            createItemCard([
+                { name: 'name', label: 'Имя' },
+                { name: 'location', label: 'Город' },
+                { name: 'text', label: 'Текст отзыва', type: 'textarea' },
+                { name: 'image', label: 'URL изображения', preview: 'image' }
+            ], {}, reviewsList);
+        });
+
+        const addMobileHighlightButton = document.getElementById('addMobileHighlight');
+        if (addMobileHighlightButton && mobileHighlightsList) {
+            addMobileHighlightButton.addEventListener('click', () => {
+                createItemCard([
+                    { name: 'icon', label: 'CSS-класс иконки' },
+                    { name: 'iconImage', label: 'URL изображения иконки', type: 'url', preview: 'image' },
+                    { name: 'title', label: 'Заголовок' },
+                    { name: 'description', label: 'Описание', type: 'textarea' }
+                ], {}, mobileHighlightsList);
+            });
+        }
+
+        const addMobileServiceButton = document.getElementById('addMobileService');
+        if (addMobileServiceButton && mobileServicesList) {
+            addMobileServiceButton.addEventListener('click', () => {
+                createItemCard([
+                    { name: 'icon', label: 'CSS-класс иконки' },
+                    { name: 'iconImage', label: 'URL изображения иконки', type: 'url', preview: 'image' },
+                    { name: 'title', label: 'Заголовок' },
+                    { name: 'description', label: 'Описание', type: 'textarea' }
+                ], {}, mobileServicesList);
+            });
+        }
+
+        saveButton.addEventListener('click', saveContent);
+        reloadButton.addEventListener('click', () => loadContent());
+        if (mobileSaveButton) {
+            mobileSaveButton.addEventListener('click', saveContent);
+        }
+        if (mobileReloadButton) {
+            mobileReloadButton.addEventListener('click', () => loadContent());
+        }
+        initTabs();
+        updateActionButtons();
+        loadContent();
+    </script>
+</body>
+</html>

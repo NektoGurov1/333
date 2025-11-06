@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <defs>
+    <linearGradient id="factoryBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111823" />
+      <stop offset="100%" stop-color="#1f2938" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#factoryBg)" />
+  <g fill="none" stroke="#ffe566" stroke-width="5" stroke-linejoin="round" opacity="0.8">
+    <path d="M80 300h160l40-80 40 80h240v40H80z" />
+    <path d="M120 220h80v80h-80zM280 200h80v100h-80zM420 180h80v120h-80z" />
+    <path d="M120 160h60l30-50 30 80 30-110 30 60 40-90 40 120" />
+  </g>
+  <circle cx="520" cy="120" r="38" fill="#ffd400" opacity="0.65" />
+  <text x="60" y="360" font-family="'Segoe UI',sans-serif" font-size="34" font-weight="600" fill="#ffe566">
+    Производственный комплекс
+  </text>
+</svg>

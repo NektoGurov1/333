@@ -1,0 +1,319 @@
+{
+  "hero": {
+    "title": "Профессиональные электромонтажные работы",
+    "subtitle": "Электромонтажные услуги любой сложности с гарантией качества. Работаем в Москве и области с 2010 года.",
+    "cta": "Получить консультацию",
+    "image": "assets/hero-background-blue.svg"
+  },
+  "features": [
+    {
+      "icon": "fa-solid fa-bolt",
+      "title": "15 лет опыта",
+      "description": "Команда сертифицированных специалистов с подтвержденной квалификацией."
+    },
+    {
+      "icon": "fa-solid fa-shield-halved",
+      "title": "Гарантия до 5 лет",
+      "description": "На все работы предоставляется официальная гарантия от 1 до 5 лет."
+    },
+    {
+      "icon": "fa-solid fa-clock",
+      "title": "Соблюдение сроков",
+      "description": "Выезжаем в день обращения, составляем график и строго его придерживаемся."
+    },
+    {
+      "icon": "fas fa-headset",
+      "title": "Поддержка 24/7",
+      "description": "Круглосуточная техническая поддержка и оперативное реагирование на заявки."
+    }
+  ],
+  "services": [
+    {
+      "title": "Электромонтажные работы",
+      "description": "Полный комплекс работ по монтажу электропроводки в квартирах, домах и офисах.",
+      "icon": "fa-solid fa-screwdriver-wrench"
+    },
+    {
+      "title": "Сборка электрощитов",
+      "description": "Профессиональная сборка, настройка и обслуживание электрощитов любой сложности.",
+      "icon": "fa-solid fa-toolbox"
+    },
+    {
+      "title": "Монтаж освещения",
+      "description": "Проектирование и установка систем освещения под ключ для жилых и коммерческих помещений.",
+      "icon": "fa-solid fa-lightbulb"
+    },
+    {
+      "title": "Ремонт электропроводки",
+      "description": "Диагностика и устранение неисправностей электросетей, аварийный выезд специалистов.",
+      "icon": "fa-solid fa-plug"
+    },
+    {
+      "title": "Устройство заземления",
+      "description": "Монтаж контуров заземления, молниезащиты и систем выравнивания потенциалов.",
+      "icon": "fa-solid fa-shield-halved"
+    },
+    {
+      "title": "Проектирование",
+      "description": "Разработка проектов электроснабжения с учетом норм ПУЭ и технических требований.",
+      "icon": "fa-solid fa-compass-drafting"
+    }
+  ],
+  "servicesSettings": {
+    "background": "assets/hero-background-blue.svg"
+  },
+  "steps": [
+    {
+      "title": "Заявка",
+      "description": "Вы оставляете заявку на сайте или по телефону"
+    },
+    {
+      "title": "Консультация",
+      "description": "Специалист выезжает на объект для оценки работ"
+    },
+    {
+      "title": "Коммерческое предложение",
+      "description": "Составляем смету и согласовываем сроки"
+    },
+    {
+      "title": "Выполнение работ",
+      "description": "Выполняем работы согласно договору и нормам безопасности"
+    },
+    {
+      "title": "Сдача объекта",
+      "description": "Проверяем работу всех систем и подписываем акт"
+    },
+    {
+      "title": "Гарантийное обслуживание",
+      "description": "Предоставляем гарантию и поддержку на весь срок"
+    }
+  ],
+  "about": {
+    "title": "Профессионалы в электромонтаже",
+    "description": "Мы выполняем полный комплекс электромонтажных работ для жилых и коммерческих объектов. Используем только сертифицированные материалы и профессиональное оборудование. Все специалисты имеют профильное образование и допуск к работам.",
+    "image": "assets/about-illustration.svg",
+    "stats": [
+      {
+        "value": "1500+",
+        "label": "Реализованных проектов"
+      },
+      {
+        "value": "25",
+        "label": "Сертифицированных специалистов"
+      },
+      {
+        "value": "2010",
+        "label": "Год основания компании"
+      }
+    ]
+  },
+  "partners": [
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner1"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner2"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner3"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner4"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner5"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner6"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner7"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner8"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner9"
+    },
+    {
+      "name": "Норникель",
+      "logo": "assets/partner-nornikel.svg",
+      "url": "https://www.nornickel.com/?ref=partner10"
+    }
+  ],
+  "partnersSettings": {
+    "autoScrollInterval": 5000
+  },
+  "portfolio": [
+    {
+      "title": "Офисный центр",
+      "description": "Проектирование и монтаж электросетей для бизнес-центра класса А",
+      "image": "assets/portfolio-industrial.svg"
+    },
+    {
+      "title": "Загородный дом",
+      "description": "Полный электромонтаж дома 350 кв.м с умной системой управления",
+      "image": "assets/portfolio-house.svg"
+    },
+    {
+      "title": "Производственный цех",
+      "description": "Модернизация электроснабжения промышленного предприятия",
+      "image": "assets/portfolio-factory.svg"
+    },
+    {
+      "title": "Торговый центр",
+      "description": "Монтаж освещения и электросетей для ТЦ площадью 10 000 кв.м",
+      "image": "assets/portfolio-mall.svg"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Александр",
+      "location": "Москва",
+      "text": "Заказывал замену электропроводки в квартире. Работу выполнили качественно и в срок. Особенно порадовало внимательное отношение к деталям и чистота после работ. Рекомендую!",
+      "image": "assets/review-alexander.svg"
+    },
+    {
+      "name": "Елена",
+      "location": "Подольск",
+      "text": "Обратилась в компанию для монтажа освещения в новом доме. Специалисты предложили несколько вариантов, помогли с выбором. Результат превзошел ожидания - все работает идеально.",
+      "image": "assets/review-elena.svg"
+    },
+    {
+      "name": "Дмитрий",
+      "location": "Балашиха",
+      "text": "Нужно было срочно устранить неисправность в электрощите. Мастер приехал в течение часа, быстро нашел проблему и устранил ее. Цены адекватные, качество на высоте.",
+      "image": "assets/review-dmitry.svg"
+    }
+  ],
+  "cta": {
+    "title": "Готовы начать сотрудничество?",
+    "description": "Оставьте заявку и наш специалист свяжется с вами в ближайшее время для консультации и расчета стоимости работ.",
+    "button": "Оставить заявку"
+  },
+  "contacts": {
+    "address": "Москва, ул. Электромонтажная, 15",
+    "phone": "+7 (495) 123-45-67",
+    "phoneRequests": "+7 (495) 765-43-21",
+    "phoneEtl": "+7 (495) 555-00-11",
+    "email": "etl@elektrokonstruktiv.ru",
+    "schedule": "Пн-Пт: 9:00 - 19:00",
+    "icons": {
+      "address": "fa-solid fa-map-marker-alt",
+      "phone": "fa-solid fa-phone",
+      "email": "fa-solid fa-envelope",
+      "schedule": "fa-solid fa-clock"
+    }
+  },
+  "request": {
+    "targetEmail": "etl@elektrokonstruktiv.ru",
+    "smtp": {
+      "host": "",
+      "port": null,
+      "security": "starttls",
+      "username": "",
+      "password": ""
+    }
+  },
+  "mobile": {
+    "hero": {
+      "title": "Профессиональные электромонтажные работы",
+      "subtitle": "Работаем по Москве и области. Быстро, безопасно, с гарантией до 5 лет.",
+      "primaryAction": "Оставить заявку",
+      "secondaryAction": "Позвонить",
+      "image": "assets/hero-background-blue.svg"
+    },
+    "highlights": [
+      {
+        "icon": "fa-solid fa-bolt",
+        "iconImage": "",
+        "title": "15 лет опыта",
+        "description": "Сертифицированные инженеры и точные сметы"
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "iconImage": "",
+        "title": "Гарантия до 5 лет",
+        "description": "Фиксируем обязательства в договоре"
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "iconImage": "",
+        "title": "Быстрый старт",
+        "description": "Выезд на объект в день обращения"
+      }
+    ],
+    "services": [
+      {
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "iconImage": "",
+        "title": "Электромонтаж",
+        "description": "Монтаж и ремонт электропроводки"
+      },
+      {
+        "icon": "fa-solid fa-lightbulb",
+        "iconImage": "",
+        "title": "Освещение",
+        "description": "Проектирование и установка света"
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "iconImage": "",
+        "title": "Заземление",
+        "description": "Контуры заземления и молниезащита"
+      },
+      {
+        "icon": "fa-solid fa-compass-drafting",
+        "iconImage": "",
+        "title": "Проектирование",
+        "description": "Расчёт нагрузок и подготовка схем"
+      }
+    ],
+    "contact": {
+      "title": "Свяжитесь с нами",
+      "phone": "+7 (495) 123-45-67",
+      "phoneRequests": "+7 (495) 765-43-21",
+      "phoneEtl": "+7 (495) 555-00-11",
+      "email": "etl@elektrokonstruktiv.ru",
+      "address": "Москва, ул. Электромонтажная, 15",
+      "schedule": "Пн-Пт: 9:00 - 19:00",
+      "cta": "Получить консультацию",
+      "icons": {
+        "phone": {
+          "icon": "fa-solid fa-phone",
+          "image": ""
+        },
+        "email": {
+          "icon": "fa-solid fa-envelope",
+          "image": ""
+        },
+        "address": {
+          "icon": "fa-solid fa-location-dot",
+          "image": ""
+        }
+      }
+    }
+  },
+  "branding": {
+    "headerLogo": "assets/logo-inline.svg",
+    "heroLogo": "assets/logo-hero.svg"
+  }
+}

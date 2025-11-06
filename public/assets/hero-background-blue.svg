@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0c2d55"/>
+      <stop offset="45%" stop-color="#0a1f3a"/>
+      <stop offset="100%" stop-color="#05070b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#184c82" stop-opacity="0.75"/>
+      <stop offset="55%" stop-color="#12345c" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#05070b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rightGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#060b14" stop-opacity="0"/>
+      <stop offset="65%" stop-color="#060b14" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </linearGradient>
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="rgba(0,0,0,0)"/>
+      <rect y="3" width="8" height="2" fill="rgba(6,12,24,0.4)"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <rect width="1920" height="1080" fill="url(#scanlines)" opacity="0.6"/>
+  <rect width="1920" height="1080" fill="url(#rightGlow)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+</svg>

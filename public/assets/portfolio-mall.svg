@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <defs>
+    <linearGradient id="mallBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#152034" />
+      <stop offset="100%" stop-color="#233448" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#mallBg)" />
+  <g fill="rgba(255,255,255,0.08)" stroke="#ffe566" stroke-width="4" opacity="0.85">
+    <rect x="120" y="180" width="120" height="140" rx="12" />
+    <rect x="260" y="140" width="120" height="180" rx="12" />
+    <rect x="400" y="200" width="120" height="120" rx="12" />
+    <rect x="140" y="210" width="40" height="60" rx="8" fill="#ffd400" />
+    <rect x="300" y="190" width="40" height="70" rx="8" fill="#ffd400" />
+    <rect x="440" y="240" width="40" height="50" rx="8" fill="#ffd400" />
+  </g>
+  <path d="M80 340h480" stroke="#ffe566" stroke-width="6" stroke-linecap="round" opacity="0.7" />
+  <text x="60" y="360" font-family="'Segoe UI',sans-serif" font-size="34" font-weight="600" fill="#ffe566">
+    Торговый центр
+  </text>
+</svg>
