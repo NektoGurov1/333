@@ -275,6 +275,14 @@
             flex-shrink: 0;
         }
 
+        .logo-slogan {
+            display: none;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
         .logo-name,
         .logo-tagline {
             display: block;
@@ -367,6 +375,32 @@
 
             .header-nav__list a {
                 font-size: clamp(11px, 0.22vw + 9.6px, 12.6px);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                margin-top: 0;
+            }
+
+            .hero {
+                padding-top: calc(var(--section-padding-block) * 1.05 + var(--header-offset));
+                padding-bottom: calc(var(--section-padding-block) * 1.05);
+            }
+
+            header.is-compact-mode .header-container {
+                margin-inline: auto;
+            }
+
+            header.is-compact-mode .logo {
+                justify-content: center;
+                gap: clamp(8px, 2vw, 16px);
+            }
+
+            header.is-compact-mode .logo-slogan {
+                display: inline-flex;
+                align-items: center;
+                font-size: clamp(11px, 2.4vw, 13px);
             }
         }
 
@@ -1895,6 +1929,7 @@
             <div class="header-brand">
                 <a href="#top" class="logo">
                     <img src="assets/logo-inline.svg" alt="Логотип Электроконструктив" loading="lazy" id="headerLogoImage">
+                    <span class="logo-slogan">Энергия надежных решений</span>
                 </a>
             </div>
             <div class="header-tagline">
