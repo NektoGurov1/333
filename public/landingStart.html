@@ -1283,25 +1283,24 @@
             position: relative;
             overflow: hidden;
             --about-background-image: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
+            --about-overlay-opacity: 0;
             background-image: var(--about-background-image);
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            padding-bottom: calc(var(--section-padding-block) * 0.6);
         }
 
         .about::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(255, 255, 255, 0.86);
-            opacity: 0;
-            transition: opacity var(--transition-base);
+            background: rgba(255, 255, 255, var(--about-overlay-opacity));
+            transition: background var(--transition-base);
             pointer-events: none;
         }
 
-        .about.about--has-background::before {
-            opacity: 1;
+        .about.about--has-background {
+            --about-overlay-opacity: 0.3;
         }
 
         .about > .container {
