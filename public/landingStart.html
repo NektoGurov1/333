@@ -144,8 +144,8 @@
             position: relative;
             display: grid;
             width: min(100%, clamp(320px, 98vw, 1500px));
-            grid-template-columns: clamp(36px, 3.2vw, 56px) minmax(220px, 1.2fr) minmax(480px, 2.6fr) minmax(156px, 0.9fr) minmax(156px, 1fr) auto;
-            grid-template-areas: "brand tagline nav phone cta toggle";
+            grid-template-columns: clamp(36px, 3.2vw, 56px) minmax(220px, 1.2fr) minmax(480px, 2.6fr) minmax(156px, 0.9fr) minmax(156px, 1fr);
+            grid-template-areas: "brand tagline nav phone cta";
             align-items: center;
             column-gap: clamp(4px, 0.8vw, 10px);
             row-gap: clamp(2px, 0.6vw, 8px);
@@ -196,49 +196,6 @@
             justify-self: center;
             align-self: center;
             width: 100%;
-        }
-
-        .header-nav.is-collapsible {
-            width: 100%;
-            max-height: clamp(320px, 60vh, 440px);
-            overflow: hidden;
-            transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease, margin-top 0.3s ease;
-        }
-
-        .header-nav.is-collapsible:not(.is-collapsed) {
-            margin-top: clamp(10px, 2vw, 18px);
-            border-radius: clamp(12px, 2vw, 18px);
-            background: rgba(0, 0, 0, 0.92);
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        .header-nav.is-collapsible.is-collapsed {
-            max-height: 0;
-            margin-top: 0;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-8px);
-        }
-
-        .header-nav.is-collapsible .header-nav__list {
-            flex-direction: column;
-            align-items: stretch;
-            white-space: normal;
-            gap: clamp(12px, 1.8vw, 20px);
-            padding: clamp(12px, 2vw, 20px);
-        }
-
-        .header-nav.is-collapsible .header-nav__list li,
-        .header-nav.is-collapsible .header-nav__list a {
-            width: 100%;
-        }
-
-        .header-nav.is-collapsible .header-nav__list a {
-            font-size: clamp(12px, 0.4vw + 11px, 14px);
-            letter-spacing: 0.04em;
-            text-align: center;
         }
 
         .header-nav__list {
@@ -300,53 +257,6 @@
         .header-nav__list a:active::after {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .nav-toggle {
-            grid-area: toggle;
-            display: none;
-            width: clamp(40px, 3.2vw, 48px);
-            height: clamp(40px, 3.2vw, 48px);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.32);
-            background: transparent;
-            color: inherit;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .nav-toggle:focus-visible {
-            outline: 3px solid var(--secondary);
-            outline-offset: 2px;
-        }
-
-        .nav-toggle:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .nav-toggle__line {
-            display: block;
-            width: 20px;
-            height: 2px;
-            border-radius: 999px;
-            background-color: currentColor;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
-            transform: translateY(6px) rotate(45deg);
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
-            transform: translateY(-6px) rotate(-45deg);
         }
 
         .logo {
@@ -425,45 +335,25 @@
         }
 
         header.is-compact-mode .header-container {
-            grid-template-columns: auto minmax(0, 1fr) auto;
-            grid-template-areas:
-                "cta brand toggle"
-                "tagline tagline tagline"
-                "nav nav nav";
+            grid-template-columns: 1fr;
+            grid-template-areas: "brand";
+            justify-items: center;
             align-items: center;
-            column-gap: clamp(6px, 1.4vw, 16px);
-            row-gap: clamp(2px, 0.8vw, 8px);
-            padding-block: clamp(4px, 1vw, 8px);
+            row-gap: 0;
+            column-gap: 0;
+            padding-block: clamp(6px, 1.2vw, 12px);
             width: min(100%, clamp(320px, 90vw, 720px));
         }
 
-        header.is-compact-mode .header-brand,
-        header.is-compact-mode .header-tagline {
-            align-self: center;
-        }
-
-        header.is-compact-mode .header-tagline {
-            justify-content: center;
+        header.is-compact-mode .header-brand {
             justify-self: center;
-            align-items: center;
-            text-align: center;
-            margin-top: clamp(2px, 0.6vw, 6px);
         }
 
-        header.is-compact-mode .header-phone {
+        header.is-compact-mode .header-tagline,
+        header.is-compact-mode .header-phone,
+        header.is-compact-mode .header-cta,
+        header.is-compact-mode .header-nav {
             display: none;
-        }
-
-        header.is-compact-mode .nav-toggle {
-            display: inline-flex;
-        }
-
-        header.is-compact-mode .header-cta {
-            justify-self: center;
-            align-self: center;
-            width: auto;
-            min-width: auto;
-            max-width: 100%;
         }
 
         @media (max-width: 1280px) {
@@ -477,48 +367,6 @@
 
             .header-nav__list a {
                 font-size: clamp(11px, 0.22vw + 9.6px, 12.6px);
-            }
-        }
-
-        @media (max-width: 1019px) {
-            header.is-compact-mode .header-tagline {
-                min-width: clamp(200px, 42vw, 264.8px);
-                max-width: 264.8px;
-            }
-
-            header.is-compact-mode .header-cta {
-                font-size: clamp(11px, 0.4vw + 10px, 13px);
-                align-self: center;
-            }
-        }
-
-        @media (max-width: 680px) {
-            header.is-compact-mode .header-container {
-                grid-template-columns: auto minmax(0, 1fr) auto;
-                grid-template-areas:
-                    "brand cta toggle"
-                    "tagline tagline tagline"
-                    "nav nav nav";
-                row-gap: clamp(4px, 2vw, 14px);
-            }
-
-            header.is-compact-mode .header-tagline {
-                width: 100%;
-                justify-self: stretch;
-            }
-
-            .logo-tagline {
-                display: none;
-            }
-
-            header.is-compact-mode .header-cta {
-                justify-self: stretch;
-                width: 100%;
-                font-size: clamp(11px, 2vw + 9px, 13px);
-            }
-
-            .header-nav.is-collapsible .header-nav__list {
-                gap: clamp(10px, 2.4vw, 18px);
             }
         }
 
@@ -1886,72 +1734,6 @@
             }
         }
 
-        @media (max-width: 992px) {
-            main section > .container,
-            footer > .container {
-                gap: clamp(28px, 8vw, 44px);
-            }
-
-            .header-container {
-                grid-template-columns: auto minmax(0, 1fr) auto;
-                grid-template-areas:
-                    "brand phone toggle"
-                    "tagline tagline tagline"
-                    "cta cta cta"
-                    "nav nav nav";
-                row-gap: clamp(14px, 4vw, 22px);
-            }
-
-            .header-brand {
-                justify-self: flex-start;
-                width: auto;
-            }
-
-            .nav-toggle {
-                display: inline-flex;
-                grid-area: toggle;
-                margin-left: 0;
-                justify-self: flex-end;
-            }
-
-            .header-tagline {
-                grid-area: tagline;
-                justify-self: center;
-                justify-items: center;
-                text-align: center;
-                align-items: center;
-            }
-
-            .header-phone {
-                grid-area: phone;
-                justify-content: flex-end;
-                min-width: 0;
-            }
-
-            .header-nav {
-                grid-area: nav;
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .header-nav__list {
-                align-items: flex-start;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .header-cta {
-                grid-area: cta;
-                justify-self: stretch;
-                text-align: center;
-            }
-
-            .phone {
-                flex: 1 1 auto;
-                justify-content: center;
-            }
-        }
-
         @media (max-width: 768px) {
             main section > .container,
             footer > .container {
@@ -1960,10 +1742,6 @@
 
             header {
                 position: sticky;
-            }
-
-            .header-nav.is-collapsible .header-nav__list {
-                align-items: center;
             }
 
             .logo img {
@@ -2143,11 +1921,6 @@
                 </div>
             </div>
             <a href="#request" class="header-cta" data-open-request="true">Заказать звонок</a>
-            <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="siteNav" aria-hidden="true">
-                <span class="nav-toggle__line"></span>
-                <span class="nav-toggle__line"></span>
-                <span class="nav-toggle__line"></span>
-            </button>
         </div>
     </header>
 
@@ -2406,7 +2179,6 @@
         const CONTACT_REQUIRED_ERROR = 'Укажите e-mail или телефон';
         const COMMENT_OR_FILE_REQUIRED_ERROR = 'Добавьте комментарий или приложите файл';
         const FILE_TOO_LARGE_ERROR = 'Файл слишком большой';
-        const navToggle = document.querySelector('.nav-toggle');
         const headerNav = document.getElementById('siteNav');
         const header = document.querySelector('header');
         const headerContainer = document.querySelector('.header-container');
@@ -2447,7 +2219,6 @@
         const NAV_COLLAPSE_BREAKPOINT = 1020;
         const HEADER_TOUCH_TOLERANCE = 0.5;
         const rootElement = document.documentElement;
-        let isNavInCollapsedMode = null;
         const footerColumns = Array.from(document.querySelectorAll('.footer-col'));
         const FOOTER_ACCORDION_BREAKPOINT = 768;
         let footerAccordionActive = false;
@@ -2518,7 +2289,7 @@
             }
             navItem.classList.toggle('is-hidden', !shouldShow);
             window.requestAnimationFrame(() => {
-                applyNavMode(false);
+                applyNavMode();
                 applyFooterAccordion(false);
             });
         }
@@ -2658,22 +2429,12 @@
             }
         }
 
-        function setNavCollapsed(collapsed) {
-            if (!headerNav || !navToggle) {
-                return;
-            }
-            headerNav.classList.toggle('is-collapsed', collapsed);
-            headerNav.setAttribute('aria-hidden', collapsed ? 'true' : 'false');
-            navToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-            window.requestAnimationFrame(updateHeaderOffset);
-        }
-
         function closeHeaderNav() {
-            if (!headerNav) {
+            if (!headerNav || !header) {
                 return;
             }
-            if (headerNav.classList.contains('is-collapsible')) {
-                setNavCollapsed(true);
+            if (header.classList.contains('is-compact-mode')) {
+                headerNav.setAttribute('aria-hidden', 'true');
             }
         }
 
@@ -2726,108 +2487,42 @@
             return false;
         }
 
-        function applyNavMode(forceCollapse = false) {
-            if (!headerNav || !navToggle) {
+        function applyNavMode() {
+            if (!header) {
                 return;
             }
-            const wasCompact = header && header.classList.contains('is-compact-mode');
-            const wasCollapsible = headerNav.classList.contains('is-collapsible');
-            const wasCollapsed = wasCollapsible && headerNav.classList.contains('is-collapsed');
-            if (wasCompact && header) {
+            const wasCompact = header.classList.contains('is-compact-mode');
+            if (wasCompact) {
                 header.classList.remove('is-compact-mode');
-            }
-            let temporarilyExpanded = false;
-            if (wasCollapsed) {
-                headerNav.classList.remove('is-collapsed');
-                headerNav.style.visibility = 'hidden';
-                headerNav.style.pointerEvents = 'none';
-                temporarilyExpanded = true;
+                if (headerNav) {
+                    headerNav.setAttribute('aria-hidden', 'false');
+                }
             }
 
-            const overlapDetected = window.innerWidth >= NAV_COLLAPSE_BREAKPOINT ? detectNavOverlap() : false;
+            const overlapDetected = headerNav && window.innerWidth >= NAV_COLLAPSE_BREAKPOINT
+                ? detectNavOverlap()
+                : false;
+            const shouldCompact = window.innerWidth < NAV_COLLAPSE_BREAKPOINT || overlapDetected;
 
-            if (temporarilyExpanded) {
-                headerNav.style.visibility = '';
-                headerNav.style.pointerEvents = '';
-                setNavCollapsed(true);
-            }
-            if (wasCompact && header) {
+            if (shouldCompact) {
                 header.classList.add('is-compact-mode');
             }
 
-            const shouldCollapse = window.innerWidth < NAV_COLLAPSE_BREAKPOINT || overlapDetected;
-            if (header) {
-                header.classList.toggle('is-compact-mode', shouldCollapse);
+            if (headerNav) {
+                headerNav.setAttribute('aria-hidden', shouldCompact ? 'true' : 'false');
             }
-            if (shouldCollapse) {
-                headerNav.classList.add('is-collapsible');
-                navToggle.setAttribute('aria-hidden', 'false');
-                navToggle.tabIndex = 0;
-                if (forceCollapse || isNavInCollapsedMode !== true) {
-                    setNavCollapsed(true);
-                } else {
-                    const isCollapsed = headerNav.classList.contains('is-collapsed');
-                    headerNav.setAttribute('aria-hidden', isCollapsed ? 'true' : 'false');
-                    navToggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-                }
-            } else {
-                headerNav.classList.remove('is-collapsible');
-                headerNav.classList.remove('is-collapsed');
+
+            if (!shouldCompact && wasCompact && headerNav) {
                 headerNav.style.visibility = '';
                 headerNav.style.pointerEvents = '';
-                headerNav.setAttribute('aria-hidden', 'false');
-                navToggle.setAttribute('aria-hidden', 'true');
-                navToggle.setAttribute('aria-expanded', 'false');
-                navToggle.tabIndex = -1;
             }
-            isNavInCollapsedMode = shouldCollapse;
+
             updateHeaderOffset();
         }
 
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                if (!headerNav || !headerNav.classList.contains('is-collapsible')) {
-                    return;
-                }
-                const shouldCollapse = headerNav.classList.contains('is-collapsed');
-                setNavCollapsed(!shouldCollapse);
-                window.requestAnimationFrame(updateHeaderOffset);
-            });
-        }
-
-        if (headerNav) {
-            headerNav.addEventListener('click', event => {
-                if (!headerNav.classList.contains('is-collapsible')) {
-                    return;
-                }
-                if (event.target instanceof HTMLElement && event.target.tagName.toLowerCase() === 'a') {
-                    setNavCollapsed(true);
-                }
-            });
-        }
-
-        document.addEventListener('click', event => {
-            if (!headerNav || !navToggle || !headerNav.classList.contains('is-collapsible')) {
-                return;
-            }
-            if (headerNav.contains(event.target) || navToggle.contains(event.target)) {
-                return;
-            }
-            setNavCollapsed(true);
-        });
-
-        document.addEventListener('keydown', event => {
-            if (event.key !== 'Escape' || !headerNav || !headerNav.classList.contains('is-collapsible')) {
-                return;
-            }
-            if (!headerNav.classList.contains('is-collapsed')) {
-                setNavCollapsed(true);
-            }
-        });
-
         const handleResize = () => {
             window.requestAnimationFrame(() => {
-                applyNavMode(false);
+                applyNavMode();
                 applyFooterAccordion(false);
             });
         };
@@ -2835,7 +2530,7 @@
         window.addEventListener('resize', handleResize);
         window.addEventListener('load', updateHeaderOffset);
         applyFooterAccordion(true);
-        applyNavMode(true);
+        applyNavMode();
 
         function resolveAssetUrl(value, fallback) { 
             const candidate = (value || '').trim(); 
