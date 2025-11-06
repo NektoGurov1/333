@@ -417,6 +417,46 @@
             outline: none;
         }
 
+        .cta-fab {
+            position: fixed;
+            left: 50%;
+            bottom: calc(env(safe-area-inset-bottom, 0px) + var(--call-fab-offset));
+            transform: translate3d(-50%, 16px, 0);
+            padding: clamp(14px, 4.8vw, 18px) clamp(24px, 7.6vw, 36px);
+            border-radius: 999px;
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: clamp(15px, 4.6vw, 17px);
+            line-height: 1.2;
+            border: none;
+            box-shadow: 0 20px 34px rgba(255, 212, 0, 0.34);
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 92;
+            width: min(360px, calc(100vw - clamp(176px, 48vw, 256px)));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .cta-fab:focus-visible {
+            outline: 2px solid rgba(17, 17, 17, 0.4);
+            outline-offset: 4px;
+        }
+
+        .cta-fab.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate3d(-50%, 0, 0);
+            box-shadow: 0 24px 40px rgba(255, 212, 0, 0.42);
+        }
+
         .request-overlay {
             position: fixed;
             inset: 0;
@@ -787,6 +827,10 @@
         </svg>
     </a>
 
+    <button type="button" class="cta-fab" id="scrollCompletionCta" data-open-request="true">
+        Оставить заявку
+    </button>
+
     <div class="request-overlay" id="requestOverlay" aria-hidden="true">
         <div class="request-modal" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
             <button type="button" class="request-close" id="requestClose" aria-label="Закрыть форму">
@@ -853,6 +897,7 @@
         const contactCallButton = document.getElementById('contactCallButton');
         const contactRequestButton = document.getElementById('contactRequestButton');
         const floatingCallButton = document.getElementById('floatingCallButton');
+        const scrollCompletionCta = document.getElementById('scrollCompletionCta');
         const contactPhoneIconNode = document.getElementById('contactPhoneIcon');
         const contactEmailIconNode = document.getElementById('contactEmailIcon');
         const contactAddressIconNode = document.getElementById('contactAddressIcon');
@@ -934,6 +979,9 @@
             }
             if (scrollProgressIcon) {
                 scrollProgressIcon.classList.toggle('is-complete', isComplete);
+            }
+            if (scrollCompletionCta) {
+                scrollCompletionCta.classList.toggle('is-visible', isComplete);
             }
         }
 
@@ -1332,6 +1380,10 @@
             }
             if (heroPhoneButton) {
                 heroPhoneButton.textContent = hero.secondaryAction || 'Позвонить';
+            }
+            if (scrollCompletionCta) {
+                const ctaText = hero.primaryAction || content.cta?.button || scrollCompletionCta.textContent || 'Оставить заявку';
+                scrollCompletionCta.textContent = ctaText;
             }
 
             applyHeroBackground(hero.image || content.hero?.image);
