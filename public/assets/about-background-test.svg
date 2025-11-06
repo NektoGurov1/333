@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f6ff" />
+      <stop offset="50%" stop-color="#e3f0ff" />
+      <stop offset="100%" stop-color="#fef9e6" />
+    </linearGradient>
+    <radialGradient id="highlight" cx="25%" cy="25%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bgGradient)" />
+  <circle cx="260" cy="180" r="420" fill="url(#highlight)" />
+  <circle cx="1220" cy="780" r="380" fill="url(#highlight)" />
+  <path d="M0 720 Q360 600 720 720 T1440 720 V900 H0 Z" fill="#ffffff" fill-opacity="0.55" />
+</svg>

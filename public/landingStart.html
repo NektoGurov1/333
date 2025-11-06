@@ -1280,8 +1280,33 @@
         } 
 
         .about {
-            background: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+            --about-background-image: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
+            background-image: var(--about-background-image);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
             padding-bottom: calc(var(--section-padding-block) * 0.6);
+        }
+
+        .about::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.86);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            pointer-events: none;
+        }
+
+        .about.about--has-background::before {
+            opacity: 1;
+        }
+
+        .about > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .about-content {
@@ -2347,6 +2372,7 @@
         const defaultHeroBackground = 'assets/hero-background-blue.svg';
         const heroSection = document.querySelector('.hero');
         const servicesSection = document.getElementById('services');
+        const aboutSection = document.getElementById('about');
         const PARTNERS_VISIBLE_COUNT = 4;
         const DEFAULT_PARTNERS_INTERVAL_MS = 5000;
         const MIN_PARTNERS_INTERVAL_MS = 1000;
@@ -2840,6 +2866,20 @@
             } else {
                 servicesSection.style.backgroundImage = '';
                 servicesSection.classList.remove('services--has-background');
+            }
+        }
+
+        function applyAboutBackground(imageValue) {
+            if (!aboutSection) {
+                return;
+            }
+            const backgroundUrl = resolveAssetUrl(imageValue);
+            if (backgroundUrl) {
+                aboutSection.style.setProperty('--about-background-image', `url("${backgroundUrl}")`);
+                aboutSection.classList.add('about--has-background');
+            } else {
+                aboutSection.style.removeProperty('--about-background-image');
+                aboutSection.classList.remove('about--has-background');
             }
         }
 
@@ -3440,9 +3480,12 @@
             const servicesSettings = data.servicesSettings && typeof data.servicesSettings === 'object'
                 ? data.servicesSettings
                 : {};
-            const steps = Array.isArray(data.steps) ? data.steps : []; 
-            const about = data.about || {}; 
-            const partners = Array.isArray(data.partners) ? data.partners : []; 
+            const steps = Array.isArray(data.steps) ? data.steps : [];
+            const about = data.about || {};
+            const aboutSettings = data.aboutSettings && typeof data.aboutSettings === 'object'
+                ? data.aboutSettings
+                : {};
+            const partners = Array.isArray(data.partners) ? data.partners : [];
             partnersAutoInterval = sanitizePartnersInterval(data.partnersSettings?.autoScrollInterval); 
             const portfolio = Array.isArray(data.portfolio) ? data.portfolio : []; 
             const reviews = Array.isArray(data.reviews) ? data.reviews : []; 
@@ -3467,6 +3510,7 @@
             document.getElementById('heroCta').textContent = hero.cta || '';
             applyHeroBackground(hero.image);
             applyServicesBackground(servicesSettings.background);
+            applyAboutBackground(aboutSettings.background);
 
             const featuresGrid = document.getElementById('featuresGrid');
             if (featuresGrid) {

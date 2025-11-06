@@ -389,6 +389,9 @@
                 <div>
                     <label for="aboutImage">URL изображения</label>
                     <input type="url" id="aboutImage">
+                    <label for="aboutBackground">URL фонового изображения</label>
+                    <input type="url" id="aboutBackground">
+                    <p class="hint">Это изображение появится в фоне блока «О компании» на десктопной версии.</p>
                 </div>
             </div>
             <div class="array-header">
@@ -607,6 +610,7 @@
         const heroImageInput = document.getElementById('heroImage');
         const servicesBackgroundInput = document.getElementById('servicesBackground');
         const aboutImageInput = document.getElementById('aboutImage');
+        const aboutBackgroundInput = document.getElementById('aboutBackground');
         const mobileHeroTitleInput = document.getElementById('mobileHeroTitle');
         const mobileHeroSubtitleInput = document.getElementById('mobileHeroSubtitle');
         const mobileHeroPrimaryInput = document.getElementById('mobileHeroPrimary');
@@ -851,6 +855,7 @@
         [
             heroImageInput,
             servicesBackgroundInput,
+            aboutBackgroundInput,
             aboutImageInput,
             headerLogoInput,
             heroLogoInput,
@@ -1104,6 +1109,9 @@
             if (aboutImageInput) {
                 aboutImageInput.value = data.about?.image || '';
             }
+            if (aboutBackgroundInput) {
+                aboutBackgroundInput.value = data.aboutSettings?.background || '';
+            }
 
             populateArray(statsList, data.about?.stats || [], [
                 { name: 'value', label: 'Значение' },
@@ -1255,6 +1263,9 @@
                     description: document.getElementById('aboutDescription').value.trim(),
                     image: aboutImageInput ? aboutImageInput.value.trim() : '',
                     stats: getItemsFromContainer(statsList)
+                },
+                aboutSettings: {
+                    background: aboutBackgroundInput ? aboutBackgroundInput.value.trim() : ''
                 },
                 partners: getItemsFromContainer(partnersList),
                 partnersSettings: {

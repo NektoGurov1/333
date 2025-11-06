@@ -107,6 +107,9 @@
       }
     ]
   },
+  "aboutSettings": {
+    "background": "assets/about-background-test.svg"
+  },
   "partners": [
     {
       "name": "Норникель",
