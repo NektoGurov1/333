@@ -50,10 +50,10 @@
 
         .desktop-switch {
             position: fixed;
-            top: calc(env(safe-area-inset-top, 0px) + 23px);
-            left: calc(env(safe-area-inset-left, 0px) + 16px);
-            width: clamp(44px, 12vw, 54px);
-            height: clamp(44px, 12vw, 54px);
+            top: 50%;
+            left: max(4px, env(safe-area-inset-left, 0px) + 4px);
+            width: clamp(28px, 7.2vw, 32px);
+            height: clamp(28px, 7.2vw, 32px);
             border-radius: 999px;
             background: #ffd400;
             color: #111111;
@@ -64,17 +64,19 @@
             border: none;
             z-index: 12;
             transition: transform var(--transition), box-shadow var(--transition);
+            --desktop-switch-translate: -50%;
+            transform: translate3d(0, var(--desktop-switch-translate), 0);
         }
 
         .desktop-switch:focus-visible,
         .desktop-switch:hover {
-            transform: translateY(-1px);
+            --desktop-switch-translate: calc(-50% - 1px);
             box-shadow: 0 16px 32px rgba(17, 17, 17, 0.3);
         }
 
         .desktop-switch svg {
-            width: 60%;
-            height: 60%;
+            width: 62%;
+            height: 62%;
         }
 
         header.site-header {
