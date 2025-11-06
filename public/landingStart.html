@@ -917,12 +917,31 @@
             box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.25); 
         } 
 
-        .field-error { 
-            margin-top: 6px; 
-            font-size: 14px; 
-            color: #d93025; 
-            min-height: 18px; 
-        } 
+        .request-errors {
+            display: none;
+            border-radius: 12px;
+            background: rgba(217, 48, 37, 0.08);
+            padding: 12px 16px;
+            color: #d93025;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .request-errors[hidden] {
+            display: none;
+        }
+
+        .request-errors:not([hidden]) {
+            display: block;
+        }
+
+        .request-errors__list {
+            margin: 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 6px;
+        }
 
         .request-file-control {
             display: flex;
@@ -2283,36 +2302,32 @@
                 <div class="request-field">
                     <label for="requestName">Ваше имя</label>
                     <input type="text" id="requestName" name="name" placeholder="Введите ваше имя" autocomplete="name" required>
-                    <p class="field-error" id="requestNameError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestEmail">E-mail</label>
                     <input type="email" id="requestEmail" name="email" placeholder="Введите ваш e-mail" autocomplete="email">
-                    <p class="field-error" id="requestEmailError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestPhone">Телефон</label>
                     <input type="tel" id="requestPhone" name="phone" placeholder="Введите номер телефона" autocomplete="tel">
-                    <p class="field-error" id="requestPhoneError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestComment">Комментарий</label>
                     <textarea id="requestComment" name="comment" placeholder="Опишите ваш проект или вопрос"></textarea>
-                    <p class="field-error" id="requestCommentError"></p>
                 </div>
-                <div class="request-field"> 
-                    <label for="requestFile">Прикрепить проект (PDF, DOC, JPG, PNG)</label> 
-                    <div class="request-file-control"> 
-                        <label class="request-file-button" for="requestFile">Выберите файл</label> 
-                        <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.rar"> 
-                        <div class="request-file-status" id="requestFileStatus">Файл не выбран</div> 
-                    </div> 
-                    <div class="request-progress" id="requestFileProgress" hidden> 
-                        <div class="request-progress-bar" id="requestFileProgressBar"></div> 
-                    </div> 
-                    <p class="field-error" id="requestFileError"></p> 
-                </div> 
+                <div class="request-field">
+                    <label for="requestFile">Прикрепить проект (PDF, DOC, JPG, PNG)</label>
+                    <div class="request-file-control">
+                        <label class="request-file-button" for="requestFile">Выберите файл</label>
+                        <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.rar">
+                        <div class="request-file-status" id="requestFileStatus">Файл не выбран</div>
+                    </div>
+                    <div class="request-progress" id="requestFileProgress" hidden>
+                        <div class="request-progress-bar" id="requestFileProgressBar"></div>
+                    </div>
+                </div>
                 <div class="request-actions">
+                    <div class="request-errors" id="requestErrors" role="alert" aria-live="assertive" hidden></div>
                     <button type="submit" class="request-submit" id="requestSubmit">Заказать консультацию</button>
                     <p class="request-status" id="requestStatus"></p>
                 </div>
@@ -2387,7 +2402,10 @@
         let reviewsSource = 'content'; 
         let currentReviewIndex = 0; 
         let autoSlideTimer = null; 
-        const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024; 
+        const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024;
+        const CONTACT_REQUIRED_ERROR = 'Укажите e-mail или телефон';
+        const COMMENT_OR_FILE_REQUIRED_ERROR = 'Добавьте комментарий или приложите файл';
+        const FILE_TOO_LARGE_ERROR = 'Файл слишком большой';
         const navToggle = document.querySelector('.nav-toggle');
         const headerNav = document.getElementById('siteNav');
         const header = document.querySelector('header');
@@ -2405,16 +2423,12 @@
         const requestPhoneInput = document.getElementById('requestPhone'); 
         const requestCommentInput = document.getElementById('requestComment'); 
         const requestFileInput = document.getElementById('requestFile'); 
-        const requestFileStatus = document.getElementById('requestFileStatus'); 
-        const requestFileError = document.getElementById('requestFileError');
+        const requestFileStatus = document.getElementById('requestFileStatus');
         const requestFileProgress = document.getElementById('requestFileProgress');
         const requestFileProgressBar = document.getElementById('requestFileProgressBar');
         const requestSubmitButton = document.getElementById('requestSubmit');
         const requestStatus = document.getElementById('requestStatus');
-        const requestNameError = document.getElementById('requestNameError');
-        const requestEmailError = document.getElementById('requestEmailError');
-        const requestPhoneError = document.getElementById('requestPhoneError');
-        const requestCommentError = document.getElementById('requestCommentError');
+        const requestErrorsContainer = document.getElementById('requestErrors');
         const requestContactEmail = document.getElementById('requestContactEmail');
         const requestContactPhone = document.getElementById('requestContactPhone');
         const requestModalLogo = document.getElementById('requestModalLogo');
@@ -2428,6 +2442,7 @@
             ? requestToastMessage.textContent
             : 'Ваша заявка отправлена, скоро с вами свяжутся наши специалисты.';
         let requestToastTimer = null;
+        let requestErrorMessages = new Map();
         let lastFocusedRequestTrigger = null;
         const NAV_COLLAPSE_BREAKPOINT = 1020;
         const HEADER_TOUCH_TOLERANCE = 0.5;
@@ -2904,18 +2919,54 @@
             return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`; 
         } 
 
-        function clearRequestErrors() { 
-            [
-                requestNameError,
-                requestEmailError,
-                requestPhoneError,
-                requestCommentError,
-                requestFileError
-            ].forEach(node => {
-                if (node) {
-                    node.textContent = '';
-                }
+        function resetRequestErrorMessages() {
+            requestErrorMessages = new Map();
+        }
+
+        function registerRequestError(message, key) {
+            const text = typeof message === 'string' ? message.trim() : '';
+            if (!text) {
+                return;
+            }
+            const errorKey = key || text;
+            requestErrorMessages.set(errorKey, text);
+        }
+
+        function removeRequestError(key) {
+            if (!key) {
+                return;
+            }
+            requestErrorMessages.delete(key);
+        }
+
+        function renderRequestErrors() {
+            if (!requestErrorsContainer) {
+                return;
+            }
+
+            if (!requestErrorMessages.size) {
+                requestErrorsContainer.innerHTML = '';
+                requestErrorsContainer.hidden = true;
+                return;
+            }
+
+            const list = document.createElement('ul');
+            list.className = 'request-errors__list';
+
+            requestErrorMessages.forEach(error => {
+                const item = document.createElement('li');
+                item.textContent = error;
+                list.appendChild(item);
             });
+
+            requestErrorsContainer.innerHTML = '';
+            requestErrorsContainer.appendChild(list);
+            requestErrorsContainer.hidden = false;
+        }
+
+        function clearRequestErrors() {
+            resetRequestErrorMessages();
+            renderRequestErrors();
 
             [requestNameInput, requestEmailInput, requestPhoneInput, requestCommentInput, requestFileInput].forEach(input => {
                 if (!input) {
@@ -2926,20 +2977,33 @@
                     container.classList.remove('has-error');
                 }
             });
-        } 
+        }
 
-        function setRequestFieldError(input, errorNode, message) { 
-            if (errorNode) {
-                errorNode.textContent = message || '';
+        function setRequestFieldError(input, message, options = {}) {
+            const { silent = false, key } = options;
+            const hasError = Boolean(message);
+
+            if (!silent) {
+                if (hasError) {
+                    registerRequestError(message, key);
+                } else if (key) {
+                    removeRequestError(key);
+                }
             }
+
             if (!input) {
                 return;
             }
+
             const container = input.closest('.request-field');
             if (container) {
-                container.classList.toggle('has-error', Boolean(message));
+                container.classList.toggle('has-error', hasError);
             }
-        } 
+
+            if (!silent) {
+                renderRequestErrors();
+            }
+        }
 
         function updateRequestStatus(message, type = 'info') { 
             if (!requestStatus) {
@@ -2967,7 +3031,7 @@
                 if (requestFileProgress) {
                     requestFileProgress.hidden = true;
                 }
-                setRequestFieldError(requestFileInput, requestFileError, '');
+                setRequestFieldError(requestFileInput, '', { key: 'attachment' });
                 return;
             }
 
@@ -3119,34 +3183,33 @@
             let hasError = false;
 
             if (!nameValue) {
-                setRequestFieldError(requestNameInput, requestNameError, 'Заполните это поле');
+                setRequestFieldError(requestNameInput, 'Заполните это поле', { key: 'name' });
                 hasError = true;
             }
 
             const hasContact = Boolean(emailValue) || Boolean(phoneValue);
             if (!hasContact) {
-                const contactMessage = 'Укажите e-mail или телефон';
-                setRequestFieldError(requestEmailInput, requestEmailError, contactMessage);
-                setRequestFieldError(requestPhoneInput, requestPhoneError, contactMessage);
+                setRequestFieldError(requestEmailInput, CONTACT_REQUIRED_ERROR, { key: 'contact' });
+                setRequestFieldError(requestPhoneInput, CONTACT_REQUIRED_ERROR, { key: 'contact', silent: true });
                 hasError = true;
             } else if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
-                setRequestFieldError(requestEmailInput, requestEmailError, 'Введите корректный e-mail');
+                setRequestFieldError(requestEmailInput, 'Введите корректный e-mail', { key: 'email' });
                 hasError = true;
             }
 
             if (file && file.size > MAX_ATTACHMENT_SIZE_BYTES) {
-                setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                 hasError = true;
             }
 
             if (!commentValue && !file) {
-                const commentMessage = 'Добавьте комментарий или приложите файл';
-                setRequestFieldError(requestCommentInput, requestCommentError, commentMessage);
-                setRequestFieldError(requestFileInput, requestFileError, commentMessage);
+                setRequestFieldError(requestCommentInput, COMMENT_OR_FILE_REQUIRED_ERROR, { key: 'commentOrFile' });
+                setRequestFieldError(requestFileInput, COMMENT_OR_FILE_REQUIRED_ERROR, { key: 'commentOrFile', silent: true });
                 hasError = true;
             }
 
             if (hasError) {
+                renderRequestErrors();
                 return;
             }
 
@@ -3169,27 +3232,42 @@
 
                 if (!response.ok) {
                     if (response.status === 413 || payload.code === 'FILE_TOO_LARGE') {
-                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                        setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                     }
 
                     if (payload.errors) {
                         if (payload.errors.name) {
-                            setRequestFieldError(requestNameInput, requestNameError, payload.errors.name);
+                            setRequestFieldError(requestNameInput, payload.errors.name, { key: 'name' });
                         }
                         if (payload.errors.email) {
-                            setRequestFieldError(requestEmailInput, requestEmailError, payload.errors.email);
+                            const emailMessage = payload.errors.email;
+                            const isContactError = emailMessage === CONTACT_REQUIRED_ERROR;
+                            setRequestFieldError(requestEmailInput, emailMessage, { key: isContactError ? 'contact' : 'email' });
                         }
                         if (payload.errors.phone) {
-                            setRequestFieldError(requestPhoneInput, requestPhoneError, payload.errors.phone);
+                            const phoneMessage = payload.errors.phone;
+                            const isContactError = phoneMessage === CONTACT_REQUIRED_ERROR;
+                            setRequestFieldError(requestPhoneInput, phoneMessage, {
+                                key: isContactError ? 'contact' : 'phone',
+                                silent: isContactError && requestErrorMessages.has('contact')
+                            });
                         }
                         if (payload.errors.comment) {
-                            setRequestFieldError(requestCommentInput, requestCommentError, payload.errors.comment);
+                            const commentMessage = payload.errors.comment;
+                            const commentKey = commentMessage === COMMENT_OR_FILE_REQUIRED_ERROR ? 'commentOrFile' : 'comment';
+                            setRequestFieldError(requestCommentInput, commentMessage, { key: commentKey });
                         }
                         if (payload.errors.attachment) {
-                            setRequestFieldError(requestFileInput, requestFileError, payload.errors.attachment);
+                            const attachmentMessage = payload.errors.attachment;
+                            const attachmentKey = attachmentMessage === COMMENT_OR_FILE_REQUIRED_ERROR ? 'commentOrFile' : 'attachment';
+                            setRequestFieldError(requestFileInput, attachmentMessage, {
+                                key: attachmentKey,
+                                silent: attachmentKey === 'commentOrFile' && requestErrorMessages.has('commentOrFile')
+                            });
                         }
                     }
 
+                    renderRequestErrors();
                     updateRequestStatus(payload.error || 'Не удалось отправить заявку.', 'error');
                     return;
                 }
@@ -4062,13 +4140,14 @@
                 updateRequestFileUI(file);
                 if (file) {
                     if (file.size > MAX_ATTACHMENT_SIZE_BYTES) {
-                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                        setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                     } else {
-                        setRequestFieldError(requestFileInput, requestFileError, '');
-                        setRequestFieldError(requestCommentInput, requestCommentError, '');
+                        setRequestFieldError(requestFileInput, '', { key: 'attachment' });
+                        setRequestFieldError(requestFileInput, '', { key: 'commentOrFile', silent: true });
+                        setRequestFieldError(requestCommentInput, '', { key: 'commentOrFile' });
                     }
                 } else {
-                    setRequestFieldError(requestFileInput, requestFileError, '');
+                    setRequestFieldError(requestFileInput, '', { key: 'attachment' });
                 }
             });
         }
@@ -4076,8 +4155,9 @@
         if (requestEmailInput) {
             requestEmailInput.addEventListener('input', () => {
                 if (requestEmailInput.value.trim()) {
-                    setRequestFieldError(requestEmailInput, requestEmailError, '');
-                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
+                    setRequestFieldError(requestEmailInput, '', { key: 'email' });
+                    setRequestFieldError(requestEmailInput, '', { key: 'contact' });
+                    setRequestFieldError(requestPhoneInput, '', { key: 'contact', silent: true });
                 }
             });
         }
@@ -4085,8 +4165,9 @@
         if (requestPhoneInput) {
             requestPhoneInput.addEventListener('input', () => {
                 if (requestPhoneInput.value.trim()) {
-                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
-                    setRequestFieldError(requestEmailInput, requestEmailError, '');
+                    setRequestFieldError(requestPhoneInput, '', { key: 'phone' });
+                    setRequestFieldError(requestPhoneInput, '', { key: 'contact' });
+                    setRequestFieldError(requestEmailInput, '', { key: 'contact', silent: true });
                 }
             });
         }
@@ -4094,8 +4175,9 @@
         if (requestCommentInput) {
             requestCommentInput.addEventListener('input', () => {
                 if (requestCommentInput.value.trim()) {
-                    setRequestFieldError(requestCommentInput, requestCommentError, '');
-                    setRequestFieldError(requestFileInput, requestFileError, '');
+                    setRequestFieldError(requestCommentInput, '', { key: 'comment' });
+                    setRequestFieldError(requestCommentInput, '', { key: 'commentOrFile' });
+                    setRequestFieldError(requestFileInput, '', { key: 'commentOrFile', silent: true });
                 }
             });
         }
