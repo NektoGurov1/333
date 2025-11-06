@@ -50,7 +50,7 @@
 
         .desktop-switch {
             position: fixed;
-            top: calc(env(safe-area-inset-top, 0px) + 16px);
+            top: calc(env(safe-area-inset-top, 0px) + 23px);
             left: calc(env(safe-area-inset-left, 0px) + 16px);
             width: clamp(44px, 12vw, 54px);
             height: clamp(44px, 12vw, 54px);
@@ -464,7 +464,7 @@
             opacity: 0;
             pointer-events: none;
             z-index: 92;
-            width: min(360px, calc(100vw - clamp(176px, 48vw, 256px)));
+            width: min(540px, calc(100vw - clamp(116px, 32vw, 192px)));
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -472,6 +472,7 @@
             cursor: pointer;
             text-decoration: none;
             text-align: center;
+            white-space: nowrap;
         }
 
         .cta-fab:focus-visible {
