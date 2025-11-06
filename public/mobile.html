@@ -48,6 +48,35 @@
             padding-bottom: clamp(120px, 22vw, 160px);
         }
 
+        .desktop-switch {
+            position: fixed;
+            top: calc(env(safe-area-inset-top, 0px) + 16px);
+            left: calc(env(safe-area-inset-left, 0px) + 16px);
+            width: clamp(44px, 12vw, 54px);
+            height: clamp(44px, 12vw, 54px);
+            border-radius: 999px;
+            background: #ffd400;
+            color: #111111;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 24px rgba(17, 17, 17, 0.25);
+            border: none;
+            z-index: 12;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .desktop-switch:focus-visible,
+        .desktop-switch:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 32px rgba(17, 17, 17, 0.3);
+        }
+
+        .desktop-switch svg {
+            width: 60%;
+            height: 60%;
+        }
+
         header.site-header {
             display: flex;
             justify-content: center;
@@ -728,6 +757,13 @@
     </style>
 </head>
 <body>
+    <a class="desktop-switch" href="landingStart.html" aria-label="Перейти на полную версию сайта">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <rect x="3.5" y="5" width="17" height="11" rx="1.8" fill="currentColor"></rect>
+            <rect x="7" y="18" width="10" height="1.8" rx="0.9" fill="currentColor"></rect>
+            <circle cx="12" cy="16.5" r="1" fill="#111111"></circle>
+        </svg>
+    </a>
     <div class="page">
         <header class="site-header">
             <a class="brand" href="#top" id="brandLink">
