@@ -379,8 +379,28 @@
         }
 
         @media (max-width: 1200px) {
+            :root {
+                --container-max: 100vw;
+                --content-narrow: clamp(320px, 92vw, 860px);
+            }
+
             main {
-                margin-top: 0;
+                margin: 0;
+            }
+
+            .container {
+                width: 100%;
+                padding-inline: clamp(16px, 4vw, 24px);
+            }
+
+            main section > .container,
+            footer > .container {
+                justify-items: stretch;
+                padding-inline: clamp(16px, 4vw, 24px);
+            }
+
+            main section > .container > * {
+                width: 100%;
             }
 
             .hero {
@@ -389,7 +409,9 @@
             }
 
             header.is-compact-mode .header-container {
+                width: 100%;
                 margin-inline: auto;
+                padding-inline: clamp(16px, 4vw, 32px);
             }
 
             header.is-compact-mode .logo {
