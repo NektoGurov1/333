@@ -3388,6 +3388,10 @@
             fab: 'fa-brands'
         };
 
+        const ICON_CLASS_ALIASES = {
+            'fa-shield-halved': ['fa-shield-alt', 'fa-shield']
+        };
+
         function normalizeIconClass(value, fallback) {
             const candidate = typeof value === 'string' ? value.trim() : '';
             const base = candidate || (typeof fallback === 'string' ? fallback.trim() : '');
@@ -3398,11 +3402,22 @@
                 .split(/\s+/)
                 .filter(Boolean)
                 .map(token => ICON_STYLE_ALIASES[token] || token);
-            const hasStyle = tokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
+            const expandedTokens = tokens.flatMap(token => {
+                const alias = ICON_CLASS_ALIASES[token];
+                if (!alias) {
+                    return [token];
+                }
+                if (Array.isArray(alias)) {
+                    return [token, ...alias];
+                }
+                return [token, alias];
+            });
+            const dedupedTokens = Array.from(new Set(expandedTokens));
+            const hasStyle = dedupedTokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
             if (!hasStyle) {
-                tokens.unshift('fa-solid');
+                dedupedTokens.unshift('fa-solid');
             }
-            return Array.from(new Set(tokens)).join(' ');
+            return dedupedTokens.join(' ');
         }
 
         const SERVICE_ICON_FALLBACK = 'fa-solid fa-screwdriver-wrench';
