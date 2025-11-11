@@ -1534,27 +1534,31 @@
             width: clamp(48px, 4vw, 56px);
             height: clamp(48px, 4vw, 56px);
             border-radius: 50%;
-            background-color: var(--primary);
-            color: var(--surface);
+            background-color: var(--secondary);
+            color: var(--primary);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             border: none;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 30px rgba(17, 17, 17, 0.18);
             transition: transform var(--transition-base), background-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
         }
 
         .slider-button:hover,
         .slider-button:focus-visible {
-            background-color: var(--accent);
-            color: var(--primary);
+            background-color: var(--primary);
+            color: var(--secondary);
             transform: translateY(-1px);
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.32);
+            box-shadow: 0 16px 36px rgba(17, 17, 17, 0.28);
+        }
+
+        .slider-button:active {
+            transform: scale(0.97);
         }
 
         .slider-button__icon {
-            width: 45%;
+            width: 46%;
             height: auto;
             display: block;
             transition: transform var(--transition-base);
@@ -2106,12 +2110,12 @@
                     <div class="slider-controls"> 
                         <button class="slider-button slider-button--prev" id="prevReview" aria-label="Предыдущий отзыв">
                             <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
-                                <path d="M14.828 12l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364a1 1 0 0 0 0-1.414l-6.364-6.364a1 1 0 1 0-1.414 1.414L14.828 12z" fill="currentColor"/>
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
                         <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">
                             <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
-                                <path d="M14.828 12l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364a1 1 0 0 0 0-1.414l-6.364-6.364a1 1 0 1 0-1.414 1.414L14.828 12z" fill="currentColor"/>
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
                     </div> 
