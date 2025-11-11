@@ -483,31 +483,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(200px, 45vw, 360px);
-            height: clamp(200px, 45vw, 360px);
+            width: clamp(100px, 22.5vw, 180px);
+            height: clamp(100px, 22.5vw, 180px);
             border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(255, 212, 0, 0.55) 0%, rgba(255, 212, 0, 0.18) 55%, rgba(255, 212, 0, 0) 75%);
+            background: radial-gradient(circle at center, rgba(255, 212, 0, 0.275) 0%, rgba(255, 212, 0, 0.09) 55%, rgba(255, 212, 0, 0) 75%);
             filter: blur(3px);
             opacity: 1;
             pointer-events: none;
             z-index: -1;
-        }
-
-        .hero-logo-wrapper::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: calc(clamp(8px, 1.4vw, 16px) * -1);
-            transform: translateX(-50%) scaleX(1);
-            transform-origin: center;
-            width: 120%;
-            height: clamp(6px, 1vw, 10px);
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            box-shadow: 0 12px 28px rgba(255, 212, 0, 0.35);
-            opacity: 1;
-            pointer-events: none;
-            transition: transform var(--transition-base), opacity var(--transition-base), box-shadow var(--transition-base);
         }
 
         .hero-logo {
