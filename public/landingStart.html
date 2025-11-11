@@ -1516,13 +1516,6 @@
             letter-spacing: 2px; 
         } 
 
-        .reviews-status { 
-            margin-top: 15px; 
-            text-align: center; 
-            font-size: 14px; 
-            color: var(--muted); 
-        } 
-
         .slider-controls {
             display: flex;
             justify-content: center;
@@ -2103,11 +2096,10 @@
                     <h2>Отзывы клиентов</h2> 
                 </div> 
                 <div class="reviews-slider"> 
-                    <div id="reviewsContainer"> 
-                         
-                    </div> 
-                    <p class="reviews-status" id="reviewsStatus">Отзывы загружаются...</p> 
-                    <div class="slider-controls"> 
+                    <div id="reviewsContainer">
+
+                    </div>
+                    <div class="slider-controls">
                         <button class="slider-button slider-button--prev" id="prevReview" aria-label="Предыдущий отзыв">
                             <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
                                 <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
@@ -2246,9 +2238,7 @@
         let partnersRenderedItems = [];
         let partnersMaxIndex = 0;
         let currentPartnerIndex = 0;
-        const reviewsStatusElement = document.getElementById('reviewsStatus'); 
-        let reviewsData = []; 
-        let reviewsSource = 'content'; 
+        let reviewsData = [];
         let currentReviewIndex = 0; 
         let autoSlideTimer = null; 
         const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024;
@@ -3514,8 +3504,7 @@
                 updateSectionEmptyState('portfolio', false);
             }
 
-            reviewsSource = 'content'; 
-            reviewsData = reviews; 
+            reviewsData = reviews;
             renderReviews(); 
 
             document.getElementById('ctaTitle').textContent = cta.title || ''; 
@@ -3660,13 +3649,9 @@
             }
         }
 
-        async function loadExternalReviews() { 
-            if (reviewsStatusElement) { 
-                reviewsStatusElement.textContent = 'Пробуем загрузить отзывы с 2ГИС...'; 
-            }
-
+        async function loadExternalReviews() {
             try {
-                const response = await fetch(reviewsEndpoint, { credentials: 'include' }); 
+                const response = await fetch(reviewsEndpoint, { credentials: 'include' });
                 let payload = {};
                 try {
                     payload = await response.json(); 
@@ -3680,8 +3665,7 @@
 
                 const externalReviews = Array.isArray(payload.reviews) ? payload.reviews : []; 
                 if (externalReviews.length) { 
-                    reviewsData = externalReviews; 
-                    reviewsSource = payload.source === 'external' ? 'external' : 'fallback-external'; 
+                    reviewsData = externalReviews;
                     currentReviewIndex = 0; 
                     renderReviews(); 
                     return;
@@ -3691,12 +3675,10 @@
                     console.warn(payload.error); 
                 }
 
-                reviewsSource = 'fallback-external'; 
-                renderReviews(); 
+                renderReviews();
             } catch (error) {
-                console.warn('Не удалось загрузить отзывы с 2ГИС:', error); 
-                reviewsSource = 'fallback-external'; 
-                renderReviews(); 
+                console.warn('Не удалось загрузить отзывы с 2ГИС:', error);
+                renderReviews();
             }
         } 
 
@@ -3784,7 +3766,6 @@
 
         function renderReviews() {
             const reviewsContainer = document.getElementById('reviewsContainer');
-            const statusElement = reviewsStatusElement;
             if (!reviewsContainer) {
                 updateSectionEmptyState('reviews', false);
                 return;
@@ -3799,9 +3780,6 @@
                     </div>
                 `;
                 reviewsContainer.appendChild(placeholder);
-                if (statusElement) {
-                    statusElement.textContent = 'Отзывы не найдены. Добавьте их в панели управления.';
-                }
                 stopAutoSlide();
                 reviewsContainer.style.transform = 'translateX(0)';
                 updateSectionEmptyState('reviews', false);
@@ -3836,16 +3814,7 @@
             updateSliderPosition();
             startAutoSlide();
             updateSectionEmptyState('reviews', reviewsData.length > 0);
-            if (statusElement) {
-                let statusText = 'Отзывы отображаются из файла контента.';
-                if (reviewsSource === 'external') {
-                    statusText = 'Отзывы загружены с 2ГИС.';
-                } else if (reviewsSource === 'fallback-external') {
-                    statusText = 'Не удалось загрузить отзывы с 2ГИС, показаны данные с сайта.';
-                }
-                statusElement.textContent = statusText; 
-            } 
-        } 
+        }
 
         function advanceReview(step) { 
             if (!reviewsData.length) { 
