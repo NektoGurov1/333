@@ -1531,24 +1531,37 @@
         }
 
         .slider-button {
-            width: 44px;
-            height: 44px;
+            width: clamp(48px, 4vw, 56px);
+            height: clamp(48px, 4vw, 56px);
             border-radius: 50%;
-            background-color: var(--secondary);
-            color: var(--dark);
+            background-color: var(--primary);
+            color: var(--surface);
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            font-weight: 700;
-            line-height: 1;
-            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            transition: transform var(--transition-base), background-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
         }
 
-        .slider-button:hover {
+        .slider-button:hover,
+        .slider-button:focus-visible {
             background-color: var(--accent);
+            color: var(--primary);
             transform: translateY(-1px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.32);
+        }
+
+        .slider-button__icon {
+            width: 45%;
+            height: auto;
+            display: block;
+            transition: transform var(--transition-base);
+        }
+
+        .slider-button--prev .slider-button__icon {
+            transform: scaleX(-1);
         }
 
         .cta {
@@ -2091,8 +2104,16 @@
                     </div> 
                     <p class="reviews-status" id="reviewsStatus">Отзывы загружаются...</p> 
                     <div class="slider-controls"> 
-                        <button class="slider-button" id="prevReview" aria-label="Предыдущий отзыв">&#8592;</button> 
-                        <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">&#8594;</button> 
+                        <button class="slider-button slider-button--prev" id="prevReview" aria-label="Предыдущий отзыв">
+                            <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
+                                <path d="M14.828 12l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364a1 1 0 0 0 0-1.414l-6.364-6.364a1 1 0 1 0-1.414 1.414L14.828 12z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">
+                            <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
+                                <path d="M14.828 12l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364a1 1 0 0 0 0-1.414l-6.364-6.364a1 1 0 1 0-1.414 1.414L14.828 12z" fill="currentColor"/>
+                            </svg>
+                        </button>
                     </div> 
                 </div> 
             </div> 
