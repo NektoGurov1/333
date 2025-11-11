@@ -302,8 +302,21 @@
 
         .card__extra {
             display: grid;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .card__extra-item {
+            display: grid;
             gap: 4px;
-            margin-top: 6px;
+        }
+
+        .card__extra-item .card__title {
+            font-size: clamp(15px, 4.6vw, 17px);
+            font-weight: 700;
+        }
+
+        .card__extra-item .card__text {
             font-size: clamp(12px, 3.6vw, 14px);
             color: var(--muted);
         }
@@ -1469,16 +1482,32 @@
             if (contactPhoneExtraEl) {
                 const extraItems = [];
                 if (phoneRequests) {
-                    extraItems.push(`${phoneRequests} Прием заявок`);
+                    extraItems.push({ number: phoneRequests, label: 'Прием заявок' });
                 }
                 if (phoneEtl) {
-                    extraItems.push(`${phoneEtl} ЭТЛ`);
+                    extraItems.push({ number: phoneEtl, label: 'ЭТЛ' });
                 }
                 contactPhoneExtraEl.innerHTML = '';
-                extraItems.forEach(text => {
-                    const span = document.createElement('span');
-                    span.textContent = text;
-                    contactPhoneExtraEl.appendChild(span);
+                extraItems.forEach(item => {
+                    if (!item || !item.number) {
+                        return;
+                    }
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'card__extra-item';
+
+                    const numberEl = document.createElement('div');
+                    numberEl.className = 'card__title';
+                    numberEl.textContent = item.number;
+                    wrapper.appendChild(numberEl);
+
+                    if (item.label) {
+                        const labelEl = document.createElement('div');
+                        labelEl.className = 'card__text';
+                        labelEl.textContent = item.label;
+                        wrapper.appendChild(labelEl);
+                    }
+
+                    contactPhoneExtraEl.appendChild(wrapper);
                 });
                 contactPhoneExtraEl.hidden = extraItems.length === 0;
             }
