@@ -316,16 +316,6 @@
             margin-top: 6px;
         }
 
-        .contact-card__extra .card__title {
-            font-size: clamp(15px, 4.6vw, 17px);
-            font-weight: 700;
-        }
-
-        .contact-card__extra .card__text {
-            font-size: clamp(12px, 3.6vw, 14px);
-            color: var(--muted);
-        }
-
         .services .card {
             grid-template-columns: auto 1fr;
             column-gap: 14px;
@@ -843,7 +833,7 @@
                     <article class="card">
                         <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-phone" id="contactPhoneIcon"></i></div>
                         <div class="contact-card">
-                            <div class="contact-card__line">
+                            <div class="contact-card__line contact-card__line--primary" id="contactPhonePrimary">
                                 <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
                                 <div class="card__text" id="contactPhoneLabel">Звоните в рабочее время</div>
                             </div>
