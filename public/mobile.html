@@ -300,23 +300,28 @@
             font-size: clamp(13px, 4vw, 15px);
         }
 
-        .card__extra {
+        .contact-card {
             display: grid;
             gap: 12px;
-            margin-top: 10px;
         }
 
-        .card__extra-item {
+        .contact-card__line {
             display: grid;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .card__extra-item .card__title {
+        .contact-card__extra {
+            display: grid;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .contact-card__extra .card__title {
             font-size: clamp(15px, 4.6vw, 17px);
             font-weight: 700;
         }
 
-        .card__extra-item .card__text {
+        .contact-card__extra .card__text {
             font-size: clamp(12px, 3.6vw, 14px);
             color: var(--muted);
         }
@@ -837,10 +842,12 @@
                 <div class="contact-info" id="contactInfo">
                     <article class="card">
                         <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-phone" id="contactPhoneIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
-                            <div class="card__text">Звоните в рабочее время</div>
-                            <div class="card__extra" id="contactPhoneExtra" hidden></div>
+                        <div class="contact-card">
+                            <div class="contact-card__line">
+                                <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
+                                <div class="card__text" id="contactPhoneLabel">Звоните в рабочее время</div>
+                            </div>
+                            <div class="contact-card__extra" id="contactPhoneExtra" hidden></div>
                         </div>
                     </article>
                     <article class="card">
@@ -949,6 +956,7 @@
         const servicesList = document.getElementById('mobileServicesList');
         const contactTitleEl = document.getElementById('contactTitle');
         const contactPhoneEl = document.getElementById('contactPhone');
+        const contactPhoneLabelEl = document.getElementById('contactPhoneLabel');
         const contactEmailEl = document.getElementById('contactEmail');
         const contactAddressEl = document.getElementById('contactAddress');
         const contactScheduleEl = document.getElementById('contactSchedule');
@@ -1471,12 +1479,16 @@
             const phone = contact.phone || content.contacts?.phone || defaultPhone;
             const phoneRequests = contact.phoneRequests || content.contacts?.phoneRequests;
             const phoneEtl = contact.phoneEtl || content.contacts?.phoneEtl;
+            const phoneLabel = contact.phoneLabel || content.contacts?.phoneLabel || 'Звоните в рабочее время';
             const email = contact.email || content.contacts?.email;
             const address = contact.address || content.contacts?.address;
             const schedule = contact.schedule || content.contacts?.schedule;
 
             if (contactPhoneEl) {
                 contactPhoneEl.textContent = phone || contactPhoneEl.textContent;
+            }
+            if (contactPhoneLabelEl) {
+                contactPhoneLabelEl.textContent = phoneLabel;
             }
             const contactPhoneExtraEl = document.getElementById('contactPhoneExtra');
             if (contactPhoneExtraEl) {
@@ -1493,7 +1505,7 @@
                         return;
                     }
                     const wrapper = document.createElement('div');
-                    wrapper.className = 'card__extra-item';
+                    wrapper.className = 'contact-card__line';
 
                     const numberEl = document.createElement('div');
                     numberEl.className = 'card__title';
