@@ -330,7 +330,28 @@
         }
 
         .contact-card__line.contact-card__line--primary {
-            background: rgba(255, 212, 0, 0.08);
+            background: transparent;
+        }
+
+        .contact-card__line.contact-card__line--highlight {
+            animation: contact-card-highlight 2s ease forwards;
+        }
+
+        @keyframes contact-card-highlight {
+            0% {
+                background: rgba(255, 212, 0, 0.16);
+                box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+            }
+
+            70% {
+                background: rgba(255, 212, 0, 0.08);
+                box-shadow: 0 8px 18px rgba(17, 17, 17, 0.06);
+            }
+
+            100% {
+                background: transparent;
+                box-shadow: none;
+            }
         }
 
         .contact-card__line.contact-card__line--static {
@@ -1036,6 +1057,7 @@
         let requestToastTimer = null;
         let scrollUpdateScheduled = false;
         const SCROLL_COMPLETE_THRESHOLD = 0.995;
+        const CONTACT_LINE_HIGHLIGHT_DURATION = 2000;
 
         function resolveAssetUrl(value, fallback) {
             const candidate = (value || '').trim();
@@ -1246,6 +1268,22 @@
             wrapper.setAttribute('aria-hidden', 'true');
             setIconContent(wrapper, source, fallbackIcon);
             return wrapper;
+        }
+
+        function flashContactLine(element) {
+            if (!element) {
+                return;
+            }
+            const existingTimeoutId = element.dataset.highlightTimeoutId;
+            if (existingTimeoutId) {
+                clearTimeout(Number(existingTimeoutId));
+            }
+            element.classList.add('contact-card__line--highlight');
+            const timeoutId = window.setTimeout(() => {
+                element.classList.remove('contact-card__line--highlight');
+                delete element.dataset.highlightTimeoutId;
+            }, CONTACT_LINE_HIGHLIGHT_DURATION);
+            element.dataset.highlightTimeoutId = String(timeoutId);
         }
 
         function createHighlightCard(item) {
@@ -1591,6 +1629,9 @@
 
                     link.appendChild(contentEl);
                     contactPhoneExtraEl.appendChild(link);
+                    if (telHref) {
+                        flashContactLine(link);
+                    }
                 });
                 contactPhoneExtraEl.hidden = extraItems.length === 0;
             }
@@ -1628,6 +1669,7 @@
                 if (callHref) {
                     contactPhonePrimaryLink.href = `tel:${callHref}`;
                     contactPhonePrimaryLink.classList.remove('contact-card__line--disabled');
+                    flashContactLine(contactPhonePrimaryLink);
                 } else {
                     contactPhonePrimaryLink.href = '#';
                     contactPhonePrimaryLink.classList.add('contact-card__line--disabled');
