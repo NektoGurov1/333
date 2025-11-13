@@ -144,8 +144,8 @@
             position: relative;
             display: grid;
             width: min(100%, clamp(320px, 98vw, 1500px));
-            grid-template-columns: clamp(36px, 3.2vw, 56px) minmax(220px, 1.2fr) minmax(480px, 2.6fr) minmax(156px, 0.9fr) minmax(156px, 1fr) auto;
-            grid-template-areas: "brand tagline nav phone cta toggle";
+            grid-template-columns: clamp(36px, 3.2vw, 56px) minmax(220px, 1.2fr) minmax(480px, 2.6fr) minmax(156px, 0.9fr) minmax(156px, 1fr);
+            grid-template-areas: "brand tagline nav phone cta";
             align-items: center;
             column-gap: clamp(4px, 0.8vw, 10px);
             row-gap: clamp(2px, 0.6vw, 8px);
@@ -196,49 +196,6 @@
             justify-self: center;
             align-self: center;
             width: 100%;
-        }
-
-        .header-nav.is-collapsible {
-            width: 100%;
-            max-height: clamp(320px, 60vh, 440px);
-            overflow: hidden;
-            transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease, margin-top 0.3s ease;
-        }
-
-        .header-nav.is-collapsible:not(.is-collapsed) {
-            margin-top: clamp(10px, 2vw, 18px);
-            border-radius: clamp(12px, 2vw, 18px);
-            background: rgba(0, 0, 0, 0.92);
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        .header-nav.is-collapsible.is-collapsed {
-            max-height: 0;
-            margin-top: 0;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-8px);
-        }
-
-        .header-nav.is-collapsible .header-nav__list {
-            flex-direction: column;
-            align-items: stretch;
-            white-space: normal;
-            gap: clamp(12px, 1.8vw, 20px);
-            padding: clamp(12px, 2vw, 20px);
-        }
-
-        .header-nav.is-collapsible .header-nav__list li,
-        .header-nav.is-collapsible .header-nav__list a {
-            width: 100%;
-        }
-
-        .header-nav.is-collapsible .header-nav__list a {
-            font-size: clamp(12px, 0.4vw + 11px, 14px);
-            letter-spacing: 0.04em;
-            text-align: center;
         }
 
         .header-nav__list {
@@ -302,53 +259,6 @@
             transform: translateY(0);
         }
 
-        .nav-toggle {
-            grid-area: toggle;
-            display: none;
-            width: clamp(40px, 3.2vw, 48px);
-            height: clamp(40px, 3.2vw, 48px);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.32);
-            background: transparent;
-            color: inherit;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .nav-toggle:focus-visible {
-            outline: 3px solid var(--secondary);
-            outline-offset: 2px;
-        }
-
-        .nav-toggle:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .nav-toggle__line {
-            display: block;
-            width: 20px;
-            height: 2px;
-            border-radius: 999px;
-            background-color: currentColor;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
-            transform: translateY(6px) rotate(45deg);
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
-            transform: translateY(-6px) rotate(-45deg);
-        }
-
         .logo {
             display: inline-flex;
             align-items: center;
@@ -363,6 +273,14 @@
             width: 36px;
             height: 36px;
             flex-shrink: 0;
+        }
+
+        .logo-slogan {
+            display: none;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.88);
         }
 
         .logo-name,
@@ -425,45 +343,25 @@
         }
 
         header.is-compact-mode .header-container {
-            grid-template-columns: auto minmax(0, 1fr) auto;
-            grid-template-areas:
-                "cta brand toggle"
-                "tagline tagline tagline"
-                "nav nav nav";
+            grid-template-columns: 1fr;
+            grid-template-areas: "brand";
+            justify-items: center;
             align-items: center;
-            column-gap: clamp(6px, 1.4vw, 16px);
-            row-gap: clamp(2px, 0.8vw, 8px);
-            padding-block: clamp(4px, 1vw, 8px);
+            row-gap: 0;
+            column-gap: 0;
+            padding-block: clamp(6px, 1.2vw, 12px);
             width: min(100%, clamp(320px, 90vw, 720px));
         }
 
-        header.is-compact-mode .header-brand,
-        header.is-compact-mode .header-tagline {
-            align-self: center;
-        }
-
-        header.is-compact-mode .header-tagline {
-            justify-content: center;
+        header.is-compact-mode .header-brand {
             justify-self: center;
-            align-items: center;
-            text-align: center;
-            margin-top: clamp(2px, 0.6vw, 6px);
         }
 
-        header.is-compact-mode .header-phone {
+        header.is-compact-mode .header-tagline,
+        header.is-compact-mode .header-phone,
+        header.is-compact-mode .header-cta,
+        header.is-compact-mode .header-nav {
             display: none;
-        }
-
-        header.is-compact-mode .nav-toggle {
-            display: inline-flex;
-        }
-
-        header.is-compact-mode .header-cta {
-            justify-self: center;
-            align-self: center;
-            width: auto;
-            min-width: auto;
-            max-width: 100%;
         }
 
         @media (max-width: 1280px) {
@@ -480,45 +378,42 @@
             }
         }
 
-        @media (max-width: 1019px) {
-            header.is-compact-mode .header-tagline {
-                min-width: clamp(200px, 42vw, 264.8px);
-                max-width: 264.8px;
+        @media (max-width: 1200px) {
+            :root {
+                --container-max: 100vw;
+                --content-narrow: clamp(320px, 92vw, 860px);
             }
 
-            header.is-compact-mode .header-cta {
-                font-size: clamp(11px, 0.4vw + 10px, 13px);
-                align-self: center;
+            .container {
+                width: 100%;
+                padding-inline: clamp(16px, 4vw, 24px);
             }
-        }
 
-        @media (max-width: 680px) {
+            main section > .container,
+            footer > .container {
+                justify-items: stretch;
+                padding-inline: clamp(16px, 4vw, 24px);
+            }
+
+            main section > .container > * {
+                width: 100%;
+            }
+
             header.is-compact-mode .header-container {
-                grid-template-columns: auto minmax(0, 1fr) auto;
-                grid-template-areas:
-                    "brand cta toggle"
-                    "tagline tagline tagline"
-                    "nav nav nav";
-                row-gap: clamp(4px, 2vw, 14px);
-            }
-
-            header.is-compact-mode .header-tagline {
                 width: 100%;
-                justify-self: stretch;
+                margin-inline: auto;
+                padding-inline: clamp(16px, 4vw, 32px);
             }
 
-            .logo-tagline {
-                display: none;
+            header.is-compact-mode .logo {
+                justify-content: center;
+                gap: clamp(8px, 2vw, 16px);
             }
 
-            header.is-compact-mode .header-cta {
-                justify-self: stretch;
-                width: 100%;
-                font-size: clamp(11px, 2vw + 9px, 13px);
-            }
-
-            .header-nav.is-collapsible .header-nav__list {
-                gap: clamp(10px, 2.4vw, 18px);
+            header.is-compact-mode .logo-slogan {
+                display: inline-flex;
+                align-items: center;
+                font-size: clamp(11px, 2.4vw, 13px);
             }
         }
 
@@ -571,15 +466,41 @@
             outline: none;
         }
 
+        .hero-logo-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto clamp(16px, 3vw, 24px);
+            padding-inline: clamp(4px, 0.8vw, 14px);
+            isolation: isolate;
+            z-index: 0;
+        }
+
+        .hero-logo-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(100px, 22.5vw, 180px);
+            height: clamp(100px, 22.5vw, 180px);
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255, 212, 0, 0.275) 0%, rgba(255, 212, 0, 0.09) 55%, rgba(255, 212, 0, 0) 75%);
+            filter: blur(3px);
+            opacity: 1;
+            pointer-events: none;
+            z-index: -1;
+        }
+
         .hero-logo {
             width: clamp(160px, 18vw, 220px);
             height: auto;
-            margin: 0 auto clamp(16px, 3vw, 24px);
             display: block;
         }
 
         main {
-            margin-top: var(--header-offset);
+            margin-top: 0;
         }
 
         main section {
@@ -635,7 +556,8 @@
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;
-            padding-block: calc(var(--section-padding-block) * 1.05);
+            padding-top: calc(var(--section-padding-block) * 1.05 + var(--header-offset));
+            padding-bottom: calc(var(--section-padding-block) * 1.05);
         }
 
         .hero::before {
@@ -917,12 +839,31 @@
             box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.25); 
         } 
 
-        .field-error { 
-            margin-top: 6px; 
-            font-size: 14px; 
-            color: #d93025; 
-            min-height: 18px; 
-        } 
+        .request-errors {
+            display: none;
+            border-radius: 12px;
+            background: rgba(217, 48, 37, 0.08);
+            padding: 12px 16px;
+            color: #d93025;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .request-errors[hidden] {
+            display: none;
+        }
+
+        .request-errors:not([hidden]) {
+            display: block;
+        }
+
+        .request-errors__list {
+            margin: 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 6px;
+        }
 
         .request-file-control {
             display: flex;
@@ -1234,57 +1175,12 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: var(--card-gap);
             width: 100%;
             align-items: stretch;
             justify-items: stretch;
             grid-auto-rows: 1fr;
-        }
-
-        .service-card {
-            background-color: var(--surface);
-            border-radius: 18px;
-            box-shadow: 0 16px 32px rgba(10,10,10,0.08);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            column-gap: clamp(14px, 3vw, 20px);
-            row-gap: clamp(8px, 1.6vw, 16px);
-            transition: transform var(--transition-base), box-shadow var(--transition-base);
-            height: 100%;
-            padding: var(--card-padding);
-            align-items: start;
-        }
-
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 46px rgba(17,17,17,0.14);
-        }
-
-        .service-card__icon {
-            width: clamp(48px, 5vw, 64px);
-            height: clamp(48px, 5vw, 64px);
-            border-radius: 16px;
-            background: rgba(255, 212, 0, 0.14);
-            color: var(--secondary);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(22px, 3vw, 30px);
-            box-shadow: inset 0 0 0 1px rgba(255, 212, 0, 0.18);
-        }
-
-        .service-card__icon i {
-            line-height: 1;
-        }
-
-        .service-card__content {
-            display: grid;
-            row-gap: clamp(10px, 2vw, 16px);
-        }
-
-        .service-card__content h3 {
-            margin: 0;
         }
 
         .steps-grid {
@@ -1325,8 +1221,37 @@
         } 
 
         .about {
-            background: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
-            padding-bottom: calc(var(--section-padding-block) * 0.6);
+            position: relative;
+            overflow: hidden;
+            --about-background-image: linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%);
+            --about-overlay-opacity: 0;
+            background-image: var(--about-background-image);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-block: 0;
+        }
+
+        .about::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, var(--about-overlay-opacity));
+            transition: background var(--transition-base);
+            pointer-events: none;
+        }
+
+        .about.about--has-background {
+            --about-overlay-opacity: 0.3;
+        }
+
+        .about > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about > .container > .section-title {
+            margin-top: 30px;
         }
 
         .about-content {
@@ -1358,6 +1283,8 @@
             box-shadow: 0 18px 34px rgba(10, 10, 10, 0.08);
             display: grid;
             gap: 6px;
+            justify-items: center;
+            align-items: center;
             padding: var(--card-padding-tight);
         }
 
@@ -1549,9 +1476,14 @@
             padding: var(--card-padding-tight);
         }
 
-        .reviews { 
-            background-color: var(--light); 
-        } 
+        .reviews {
+            background-color: var(--light);
+            padding-block: 0;
+        }
+
+        .reviews > .container {
+            margin-bottom: 25px;
+        }
 
         .reviews-slider {
             position: relative;
@@ -1620,13 +1552,6 @@
             letter-spacing: 2px; 
         } 
 
-        .reviews-status { 
-            margin-top: 15px; 
-            text-align: center; 
-            font-size: 14px; 
-            color: var(--muted); 
-        } 
-
         .slider-controls {
             display: flex;
             justify-content: center;
@@ -1635,24 +1560,41 @@
         }
 
         .slider-button {
-            width: 44px;
-            height: 44px;
+            width: clamp(48px, 4vw, 56px);
+            height: clamp(48px, 4vw, 56px);
             border-radius: 50%;
             background-color: var(--secondary);
-            color: var(--dark);
+            color: var(--primary);
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            font-weight: 700;
-            line-height: 1;
-            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            box-shadow: 0 12px 30px rgba(17, 17, 17, 0.18);
+            transition: transform var(--transition-base), background-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
         }
 
-        .slider-button:hover {
-            background-color: var(--accent);
+        .slider-button:hover,
+        .slider-button:focus-visible {
+            background-color: var(--primary);
+            color: var(--secondary);
             transform: translateY(-1px);
+            box-shadow: 0 16px 36px rgba(17, 17, 17, 0.28);
+        }
+
+        .slider-button:active {
+            transform: scale(0.97);
+        }
+
+        .slider-button__icon {
+            width: 46%;
+            height: auto;
+            display: block;
+            transition: transform var(--transition-base);
+        }
+
+        .slider-button--prev .slider-button__icon {
+            transform: scaleX(-1);
         }
 
         .cta {
@@ -1675,6 +1617,8 @@
 
         .cta p {
             max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         footer {
@@ -1888,72 +1832,6 @@
             }
         }
 
-        @media (max-width: 992px) {
-            main section > .container,
-            footer > .container {
-                gap: clamp(28px, 8vw, 44px);
-            }
-
-            .header-container {
-                grid-template-columns: auto minmax(0, 1fr) auto;
-                grid-template-areas:
-                    "brand phone toggle"
-                    "tagline tagline tagline"
-                    "cta cta cta"
-                    "nav nav nav";
-                row-gap: clamp(14px, 4vw, 22px);
-            }
-
-            .header-brand {
-                justify-self: flex-start;
-                width: auto;
-            }
-
-            .nav-toggle {
-                display: inline-flex;
-                grid-area: toggle;
-                margin-left: 0;
-                justify-self: flex-end;
-            }
-
-            .header-tagline {
-                grid-area: tagline;
-                justify-self: center;
-                justify-items: center;
-                text-align: center;
-                align-items: center;
-            }
-
-            .header-phone {
-                grid-area: phone;
-                justify-content: flex-end;
-                min-width: 0;
-            }
-
-            .header-nav {
-                grid-area: nav;
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .header-nav__list {
-                align-items: flex-start;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .header-cta {
-                grid-area: cta;
-                justify-self: stretch;
-                text-align: center;
-            }
-
-            .phone {
-                flex: 1 1 auto;
-                justify-content: center;
-            }
-        }
-
         @media (max-width: 768px) {
             main section > .container,
             footer > .container {
@@ -1962,10 +1840,6 @@
 
             header {
                 position: sticky;
-            }
-
-            .header-nav.is-collapsible .header-nav__list {
-                align-items: center;
             }
 
             .logo img {
@@ -2119,6 +1993,7 @@
             <div class="header-brand">
                 <a href="#top" class="logo">
                     <img src="assets/logo-inline.svg" alt="Логотип Электроконструктив" loading="lazy" id="headerLogoImage">
+                    <span class="logo-slogan">Энергия надежных решений</span>
                 </a>
             </div>
             <div class="header-tagline">
@@ -2145,11 +2020,6 @@
                 </div>
             </div>
             <a href="#request" class="header-cta" data-open-request="true">Заказать звонок</a>
-            <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="siteNav" aria-hidden="true">
-                <span class="nav-toggle__line"></span>
-                <span class="nav-toggle__line"></span>
-                <span class="nav-toggle__line"></span>
-            </button>
         </div>
     </header>
 
@@ -2158,7 +2028,9 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-text">
-                        <img src="assets/logo-hero.svg" alt="Эмблема Электроконструктив" class="hero-logo" loading="lazy" id="heroLogoImage">
+                        <div class="hero-logo-wrapper">
+                            <img src="assets/logo-hero.svg" alt="Эмблема Электроконструктив" class="hero-logo" loading="lazy" id="heroLogoImage">
+                        </div>
                         <div class="hero-heading">
                             <h1 id="heroTitle">Заголовок загружается...</h1>
                             <p id="heroSubtitle">Описание загружается...</p>
@@ -2188,7 +2060,7 @@
                 <div class="section-title"> 
                     <h2>Наши услуги</h2> 
                 </div> 
-                <div class="services-grid" id="servicesGrid"> 
+                <div class="features-grid services-grid" id="servicesGrid">
                      
                 </div> 
             </div> 
@@ -2264,13 +2136,20 @@
                     <h2>Отзывы клиентов</h2> 
                 </div> 
                 <div class="reviews-slider"> 
-                    <div id="reviewsContainer"> 
-                         
-                    </div> 
-                    <p class="reviews-status" id="reviewsStatus">Отзывы загружаются...</p> 
-                    <div class="slider-controls"> 
-                        <button class="slider-button" id="prevReview" aria-label="Предыдущий отзыв">&#8592;</button> 
-                        <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">&#8594;</button> 
+                    <div id="reviewsContainer">
+
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-button slider-button--prev" id="prevReview" aria-label="Предыдущий отзыв">
+                            <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="slider-button" id="nextReview" aria-label="Следующий отзыв">
+                            <svg class="slider-button__icon" viewBox="0 0 24 24" role="img" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
                     </div> 
                 </div> 
             </div> 
@@ -2279,7 +2158,7 @@
         <section class="cta" id="cta"> 
             <div class="container"> 
                 <h2 id="ctaTitle">Готовы начать сотрудничество?</h2> 
-                <p id="ctaDescription">Оставьте заявку и наш специалист свяжется с вами.</p> 
+                <p id="ctaDescription">Оставьте заявку и наш специалист свяжется с вами в ближайшее время для консультации и расчета стоимости работ.</p>
                 <a href="#request" class="btn" id="ctaButton" data-open-request="true">Оставить заявку</a> 
             </div> 
         </section> 
@@ -2304,36 +2183,32 @@
                 <div class="request-field">
                     <label for="requestName">Ваше имя</label>
                     <input type="text" id="requestName" name="name" placeholder="Введите ваше имя" autocomplete="name" required>
-                    <p class="field-error" id="requestNameError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestEmail">E-mail</label>
                     <input type="email" id="requestEmail" name="email" placeholder="Введите ваш e-mail" autocomplete="email">
-                    <p class="field-error" id="requestEmailError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestPhone">Телефон</label>
                     <input type="tel" id="requestPhone" name="phone" placeholder="Введите номер телефона" autocomplete="tel">
-                    <p class="field-error" id="requestPhoneError"></p>
                 </div>
                 <div class="request-field">
                     <label for="requestComment">Комментарий</label>
                     <textarea id="requestComment" name="comment" placeholder="Опишите ваш проект или вопрос"></textarea>
-                    <p class="field-error" id="requestCommentError"></p>
                 </div>
-                <div class="request-field"> 
-                    <label for="requestFile">Прикрепить проект (PDF, DOC, JPG, PNG)</label> 
-                    <div class="request-file-control"> 
-                        <label class="request-file-button" for="requestFile">Выберите файл</label> 
-                        <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.rar"> 
-                        <div class="request-file-status" id="requestFileStatus">Файл не выбран</div> 
-                    </div> 
-                    <div class="request-progress" id="requestFileProgress" hidden> 
-                        <div class="request-progress-bar" id="requestFileProgressBar"></div> 
-                    </div> 
-                    <p class="field-error" id="requestFileError"></p> 
-                </div> 
+                <div class="request-field">
+                    <label for="requestFile">Прикрепить проект (PDF, DOC, JPG, PNG)</label>
+                    <div class="request-file-control">
+                        <label class="request-file-button" for="requestFile">Выберите файл</label>
+                        <input type="file" id="requestFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.rar">
+                        <div class="request-file-status" id="requestFileStatus">Файл не выбран</div>
+                    </div>
+                    <div class="request-progress" id="requestFileProgress" hidden>
+                        <div class="request-progress-bar" id="requestFileProgressBar"></div>
+                    </div>
+                </div>
                 <div class="request-actions">
+                    <div class="request-errors" id="requestErrors" role="alert" aria-live="assertive" hidden></div>
                     <button type="submit" class="request-submit" id="requestSubmit">Заказать консультацию</button>
                     <p class="request-status" id="requestStatus"></p>
                 </div>
@@ -2355,7 +2230,7 @@
             <div class="footer-container"> 
                 <div class="footer-col"> 
                     <h3>О компании</h3> 
-                    <p>Профессиональные электромонтажные работы в Москве и Московской области. Качество, надежность, гарантия.</p> 
+                    <p>Профессиональные электромонтажные работы в Норильске и Красноярском крае. Качество, надежность, гарантия.</p>
                 </div> 
                 <div class="footer-col"> 
                     <h3>Услуги</h3> 
@@ -2392,6 +2267,7 @@
         const defaultHeroBackground = 'assets/hero-background-blue.svg';
         const heroSection = document.querySelector('.hero');
         const servicesSection = document.getElementById('services');
+        const aboutSection = document.getElementById('about');
         const PARTNERS_VISIBLE_COUNT = 4;
         const DEFAULT_PARTNERS_INTERVAL_MS = 5000;
         const MIN_PARTNERS_INTERVAL_MS = 1000;
@@ -2402,13 +2278,13 @@
         let partnersRenderedItems = [];
         let partnersMaxIndex = 0;
         let currentPartnerIndex = 0;
-        const reviewsStatusElement = document.getElementById('reviewsStatus'); 
-        let reviewsData = []; 
-        let reviewsSource = 'content'; 
+        let reviewsData = [];
         let currentReviewIndex = 0; 
         let autoSlideTimer = null; 
-        const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024; 
-        const navToggle = document.querySelector('.nav-toggle');
+        const MAX_ATTACHMENT_SIZE_BYTES = 20 * 1024 * 1024;
+        const CONTACT_REQUIRED_ERROR = 'Укажите e-mail или телефон';
+        const COMMENT_OR_FILE_REQUIRED_ERROR = 'Добавьте комментарий или приложите файл';
+        const FILE_TOO_LARGE_ERROR = 'Файл слишком большой';
         const headerNav = document.getElementById('siteNav');
         const header = document.querySelector('header');
         const headerContainer = document.querySelector('.header-container');
@@ -2425,16 +2301,12 @@
         const requestPhoneInput = document.getElementById('requestPhone'); 
         const requestCommentInput = document.getElementById('requestComment'); 
         const requestFileInput = document.getElementById('requestFile'); 
-        const requestFileStatus = document.getElementById('requestFileStatus'); 
-        const requestFileError = document.getElementById('requestFileError');
+        const requestFileStatus = document.getElementById('requestFileStatus');
         const requestFileProgress = document.getElementById('requestFileProgress');
         const requestFileProgressBar = document.getElementById('requestFileProgressBar');
         const requestSubmitButton = document.getElementById('requestSubmit');
         const requestStatus = document.getElementById('requestStatus');
-        const requestNameError = document.getElementById('requestNameError');
-        const requestEmailError = document.getElementById('requestEmailError');
-        const requestPhoneError = document.getElementById('requestPhoneError');
-        const requestCommentError = document.getElementById('requestCommentError');
+        const requestErrorsContainer = document.getElementById('requestErrors');
         const requestContactEmail = document.getElementById('requestContactEmail');
         const requestContactPhone = document.getElementById('requestContactPhone');
         const requestModalLogo = document.getElementById('requestModalLogo');
@@ -2448,11 +2320,11 @@
             ? requestToastMessage.textContent
             : 'Ваша заявка отправлена, скоро с вами свяжутся наши специалисты.';
         let requestToastTimer = null;
+        let requestErrorMessages = new Map();
         let lastFocusedRequestTrigger = null;
         const NAV_COLLAPSE_BREAKPOINT = 1020;
         const HEADER_TOUCH_TOLERANCE = 0.5;
         const rootElement = document.documentElement;
-        let isNavInCollapsedMode = null;
         const footerColumns = Array.from(document.querySelectorAll('.footer-col'));
         const FOOTER_ACCORDION_BREAKPOINT = 768;
         let footerAccordionActive = false;
@@ -2523,7 +2395,7 @@
             }
             navItem.classList.toggle('is-hidden', !shouldShow);
             window.requestAnimationFrame(() => {
-                applyNavMode(false);
+                applyNavMode();
                 applyFooterAccordion(false);
             });
         }
@@ -2663,22 +2535,12 @@
             }
         }
 
-        function setNavCollapsed(collapsed) {
-            if (!headerNav || !navToggle) {
-                return;
-            }
-            headerNav.classList.toggle('is-collapsed', collapsed);
-            headerNav.setAttribute('aria-hidden', collapsed ? 'true' : 'false');
-            navToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-            window.requestAnimationFrame(updateHeaderOffset);
-        }
-
         function closeHeaderNav() {
-            if (!headerNav) {
+            if (!headerNav || !header) {
                 return;
             }
-            if (headerNav.classList.contains('is-collapsible')) {
-                setNavCollapsed(true);
+            if (header.classList.contains('is-compact-mode')) {
+                headerNav.setAttribute('aria-hidden', 'true');
             }
         }
 
@@ -2731,108 +2593,42 @@
             return false;
         }
 
-        function applyNavMode(forceCollapse = false) {
-            if (!headerNav || !navToggle) {
+        function applyNavMode() {
+            if (!header) {
                 return;
             }
-            const wasCompact = header && header.classList.contains('is-compact-mode');
-            const wasCollapsible = headerNav.classList.contains('is-collapsible');
-            const wasCollapsed = wasCollapsible && headerNav.classList.contains('is-collapsed');
-            if (wasCompact && header) {
+            const wasCompact = header.classList.contains('is-compact-mode');
+            if (wasCompact) {
                 header.classList.remove('is-compact-mode');
-            }
-            let temporarilyExpanded = false;
-            if (wasCollapsed) {
-                headerNav.classList.remove('is-collapsed');
-                headerNav.style.visibility = 'hidden';
-                headerNav.style.pointerEvents = 'none';
-                temporarilyExpanded = true;
+                if (headerNav) {
+                    headerNav.setAttribute('aria-hidden', 'false');
+                }
             }
 
-            const overlapDetected = window.innerWidth >= NAV_COLLAPSE_BREAKPOINT ? detectNavOverlap() : false;
+            const overlapDetected = headerNav && window.innerWidth >= NAV_COLLAPSE_BREAKPOINT
+                ? detectNavOverlap()
+                : false;
+            const shouldCompact = window.innerWidth < NAV_COLLAPSE_BREAKPOINT || overlapDetected;
 
-            if (temporarilyExpanded) {
-                headerNav.style.visibility = '';
-                headerNav.style.pointerEvents = '';
-                setNavCollapsed(true);
-            }
-            if (wasCompact && header) {
+            if (shouldCompact) {
                 header.classList.add('is-compact-mode');
             }
 
-            const shouldCollapse = window.innerWidth < NAV_COLLAPSE_BREAKPOINT || overlapDetected;
-            if (header) {
-                header.classList.toggle('is-compact-mode', shouldCollapse);
+            if (headerNav) {
+                headerNav.setAttribute('aria-hidden', shouldCompact ? 'true' : 'false');
             }
-            if (shouldCollapse) {
-                headerNav.classList.add('is-collapsible');
-                navToggle.setAttribute('aria-hidden', 'false');
-                navToggle.tabIndex = 0;
-                if (forceCollapse || isNavInCollapsedMode !== true) {
-                    setNavCollapsed(true);
-                } else {
-                    const isCollapsed = headerNav.classList.contains('is-collapsed');
-                    headerNav.setAttribute('aria-hidden', isCollapsed ? 'true' : 'false');
-                    navToggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-                }
-            } else {
-                headerNav.classList.remove('is-collapsible');
-                headerNav.classList.remove('is-collapsed');
+
+            if (!shouldCompact && wasCompact && headerNav) {
                 headerNav.style.visibility = '';
                 headerNav.style.pointerEvents = '';
-                headerNav.setAttribute('aria-hidden', 'false');
-                navToggle.setAttribute('aria-hidden', 'true');
-                navToggle.setAttribute('aria-expanded', 'false');
-                navToggle.tabIndex = -1;
             }
-            isNavInCollapsedMode = shouldCollapse;
+
             updateHeaderOffset();
         }
 
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                if (!headerNav || !headerNav.classList.contains('is-collapsible')) {
-                    return;
-                }
-                const shouldCollapse = headerNav.classList.contains('is-collapsed');
-                setNavCollapsed(!shouldCollapse);
-                window.requestAnimationFrame(updateHeaderOffset);
-            });
-        }
-
-        if (headerNav) {
-            headerNav.addEventListener('click', event => {
-                if (!headerNav.classList.contains('is-collapsible')) {
-                    return;
-                }
-                if (event.target instanceof HTMLElement && event.target.tagName.toLowerCase() === 'a') {
-                    setNavCollapsed(true);
-                }
-            });
-        }
-
-        document.addEventListener('click', event => {
-            if (!headerNav || !navToggle || !headerNav.classList.contains('is-collapsible')) {
-                return;
-            }
-            if (headerNav.contains(event.target) || navToggle.contains(event.target)) {
-                return;
-            }
-            setNavCollapsed(true);
-        });
-
-        document.addEventListener('keydown', event => {
-            if (event.key !== 'Escape' || !headerNav || !headerNav.classList.contains('is-collapsible')) {
-                return;
-            }
-            if (!headerNav.classList.contains('is-collapsed')) {
-                setNavCollapsed(true);
-            }
-        });
-
         const handleResize = () => {
             window.requestAnimationFrame(() => {
-                applyNavMode(false);
+                applyNavMode();
                 applyFooterAccordion(false);
             });
         };
@@ -2840,7 +2636,7 @@
         window.addEventListener('resize', handleResize);
         window.addEventListener('load', updateHeaderOffset);
         applyFooterAccordion(true);
-        applyNavMode(true);
+        applyNavMode();
 
         function resolveAssetUrl(value, fallback) { 
             const candidate = (value || '').trim(); 
@@ -2888,6 +2684,20 @@
             }
         }
 
+        function applyAboutBackground(imageValue) {
+            if (!aboutSection) {
+                return;
+            }
+            const backgroundUrl = resolveAssetUrl(imageValue);
+            if (backgroundUrl) {
+                aboutSection.style.setProperty('--about-background-image', `url("${backgroundUrl}")`);
+                aboutSection.classList.add('about--has-background');
+            } else {
+                aboutSection.style.removeProperty('--about-background-image');
+                aboutSection.classList.remove('about--has-background');
+            }
+        }
+
         function sanitizePartnersInterval(value) { 
             const parsed = Number(value); 
             if (!Number.isFinite(parsed) || parsed < MIN_PARTNERS_INTERVAL_MS) { 
@@ -2910,18 +2720,54 @@
             return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`; 
         } 
 
-        function clearRequestErrors() { 
-            [
-                requestNameError,
-                requestEmailError,
-                requestPhoneError,
-                requestCommentError,
-                requestFileError
-            ].forEach(node => {
-                if (node) {
-                    node.textContent = '';
-                }
+        function resetRequestErrorMessages() {
+            requestErrorMessages = new Map();
+        }
+
+        function registerRequestError(message, key) {
+            const text = typeof message === 'string' ? message.trim() : '';
+            if (!text) {
+                return;
+            }
+            const errorKey = key || text;
+            requestErrorMessages.set(errorKey, text);
+        }
+
+        function removeRequestError(key) {
+            if (!key) {
+                return;
+            }
+            requestErrorMessages.delete(key);
+        }
+
+        function renderRequestErrors() {
+            if (!requestErrorsContainer) {
+                return;
+            }
+
+            if (!requestErrorMessages.size) {
+                requestErrorsContainer.innerHTML = '';
+                requestErrorsContainer.hidden = true;
+                return;
+            }
+
+            const list = document.createElement('ul');
+            list.className = 'request-errors__list';
+
+            requestErrorMessages.forEach(error => {
+                const item = document.createElement('li');
+                item.textContent = error;
+                list.appendChild(item);
             });
+
+            requestErrorsContainer.innerHTML = '';
+            requestErrorsContainer.appendChild(list);
+            requestErrorsContainer.hidden = false;
+        }
+
+        function clearRequestErrors() {
+            resetRequestErrorMessages();
+            renderRequestErrors();
 
             [requestNameInput, requestEmailInput, requestPhoneInput, requestCommentInput, requestFileInput].forEach(input => {
                 if (!input) {
@@ -2932,20 +2778,33 @@
                     container.classList.remove('has-error');
                 }
             });
-        } 
+        }
 
-        function setRequestFieldError(input, errorNode, message) { 
-            if (errorNode) {
-                errorNode.textContent = message || '';
+        function setRequestFieldError(input, message, options = {}) {
+            const { silent = false, key } = options;
+            const hasError = Boolean(message);
+
+            if (!silent) {
+                if (hasError) {
+                    registerRequestError(message, key);
+                } else if (key) {
+                    removeRequestError(key);
+                }
             }
+
             if (!input) {
                 return;
             }
+
             const container = input.closest('.request-field');
             if (container) {
-                container.classList.toggle('has-error', Boolean(message));
+                container.classList.toggle('has-error', hasError);
             }
-        } 
+
+            if (!silent) {
+                renderRequestErrors();
+            }
+        }
 
         function updateRequestStatus(message, type = 'info') { 
             if (!requestStatus) {
@@ -2973,7 +2832,7 @@
                 if (requestFileProgress) {
                     requestFileProgress.hidden = true;
                 }
-                setRequestFieldError(requestFileInput, requestFileError, '');
+                setRequestFieldError(requestFileInput, '', { key: 'attachment' });
                 return;
             }
 
@@ -3125,34 +2984,33 @@
             let hasError = false;
 
             if (!nameValue) {
-                setRequestFieldError(requestNameInput, requestNameError, 'Заполните это поле');
+                setRequestFieldError(requestNameInput, 'Заполните это поле', { key: 'name' });
                 hasError = true;
             }
 
             const hasContact = Boolean(emailValue) || Boolean(phoneValue);
             if (!hasContact) {
-                const contactMessage = 'Укажите e-mail или телефон';
-                setRequestFieldError(requestEmailInput, requestEmailError, contactMessage);
-                setRequestFieldError(requestPhoneInput, requestPhoneError, contactMessage);
+                setRequestFieldError(requestEmailInput, CONTACT_REQUIRED_ERROR, { key: 'contact' });
+                setRequestFieldError(requestPhoneInput, CONTACT_REQUIRED_ERROR, { key: 'contact', silent: true });
                 hasError = true;
             } else if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
-                setRequestFieldError(requestEmailInput, requestEmailError, 'Введите корректный e-mail');
+                setRequestFieldError(requestEmailInput, 'Введите корректный e-mail', { key: 'email' });
                 hasError = true;
             }
 
             if (file && file.size > MAX_ATTACHMENT_SIZE_BYTES) {
-                setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                 hasError = true;
             }
 
             if (!commentValue && !file) {
-                const commentMessage = 'Добавьте комментарий или приложите файл';
-                setRequestFieldError(requestCommentInput, requestCommentError, commentMessage);
-                setRequestFieldError(requestFileInput, requestFileError, commentMessage);
+                setRequestFieldError(requestCommentInput, COMMENT_OR_FILE_REQUIRED_ERROR, { key: 'commentOrFile' });
+                setRequestFieldError(requestFileInput, COMMENT_OR_FILE_REQUIRED_ERROR, { key: 'commentOrFile', silent: true });
                 hasError = true;
             }
 
             if (hasError) {
+                renderRequestErrors();
                 return;
             }
 
@@ -3175,27 +3033,42 @@
 
                 if (!response.ok) {
                     if (response.status === 413 || payload.code === 'FILE_TOO_LARGE') {
-                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                        setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                     }
 
                     if (payload.errors) {
                         if (payload.errors.name) {
-                            setRequestFieldError(requestNameInput, requestNameError, payload.errors.name);
+                            setRequestFieldError(requestNameInput, payload.errors.name, { key: 'name' });
                         }
                         if (payload.errors.email) {
-                            setRequestFieldError(requestEmailInput, requestEmailError, payload.errors.email);
+                            const emailMessage = payload.errors.email;
+                            const isContactError = emailMessage === CONTACT_REQUIRED_ERROR;
+                            setRequestFieldError(requestEmailInput, emailMessage, { key: isContactError ? 'contact' : 'email' });
                         }
                         if (payload.errors.phone) {
-                            setRequestFieldError(requestPhoneInput, requestPhoneError, payload.errors.phone);
+                            const phoneMessage = payload.errors.phone;
+                            const isContactError = phoneMessage === CONTACT_REQUIRED_ERROR;
+                            setRequestFieldError(requestPhoneInput, phoneMessage, {
+                                key: isContactError ? 'contact' : 'phone',
+                                silent: isContactError && requestErrorMessages.has('contact')
+                            });
                         }
                         if (payload.errors.comment) {
-                            setRequestFieldError(requestCommentInput, requestCommentError, payload.errors.comment);
+                            const commentMessage = payload.errors.comment;
+                            const commentKey = commentMessage === COMMENT_OR_FILE_REQUIRED_ERROR ? 'commentOrFile' : 'comment';
+                            setRequestFieldError(requestCommentInput, commentMessage, { key: commentKey });
                         }
                         if (payload.errors.attachment) {
-                            setRequestFieldError(requestFileInput, requestFileError, payload.errors.attachment);
+                            const attachmentMessage = payload.errors.attachment;
+                            const attachmentKey = attachmentMessage === COMMENT_OR_FILE_REQUIRED_ERROR ? 'commentOrFile' : 'attachment';
+                            setRequestFieldError(requestFileInput, attachmentMessage, {
+                                key: attachmentKey,
+                                silent: attachmentKey === 'commentOrFile' && requestErrorMessages.has('commentOrFile')
+                            });
                         }
                     }
 
+                    renderRequestErrors();
                     updateRequestStatus(payload.error || 'Не удалось отправить заявку.', 'error');
                     return;
                 }
@@ -3433,6 +3306,10 @@
             fab: 'fa-brands'
         };
 
+        const ICON_CLASS_ALIASES = {
+            'fa-shield-halved': ['fa-shield-alt', 'fa-shield']
+        };
+
         function normalizeIconClass(value, fallback) {
             const candidate = typeof value === 'string' ? value.trim() : '';
             const base = candidate || (typeof fallback === 'string' ? fallback.trim() : '');
@@ -3443,11 +3320,22 @@
                 .split(/\s+/)
                 .filter(Boolean)
                 .map(token => ICON_STYLE_ALIASES[token] || token);
-            const hasStyle = tokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
+            const expandedTokens = tokens.flatMap(token => {
+                const alias = ICON_CLASS_ALIASES[token];
+                if (!alias) {
+                    return [token];
+                }
+                if (Array.isArray(alias)) {
+                    return [token, ...alias];
+                }
+                return [token, alias];
+            });
+            const dedupedTokens = Array.from(new Set(expandedTokens));
+            const hasStyle = dedupedTokens.some(token => /^fa(-(solid|regular|light|thin|duotone|brands|sharp(-solid|-regular|-light|-thin|-duotone)?)?)$/.test(token));
             if (!hasStyle) {
-                tokens.unshift('fa-solid');
+                dedupedTokens.unshift('fa-solid');
             }
-            return Array.from(new Set(tokens)).join(' ');
+            return dedupedTokens.join(' ');
         }
 
         const SERVICE_ICON_FALLBACK = 'fa-solid fa-screwdriver-wrench';
@@ -3470,9 +3358,12 @@
             const servicesSettings = data.servicesSettings && typeof data.servicesSettings === 'object'
                 ? data.servicesSettings
                 : {};
-            const steps = Array.isArray(data.steps) ? data.steps : []; 
-            const about = data.about || {}; 
-            const partners = Array.isArray(data.partners) ? data.partners : []; 
+            const steps = Array.isArray(data.steps) ? data.steps : [];
+            const about = data.about || {};
+            const aboutSettings = data.aboutSettings && typeof data.aboutSettings === 'object'
+                ? data.aboutSettings
+                : {};
+            const partners = Array.isArray(data.partners) ? data.partners : [];
             partnersAutoInterval = sanitizePartnersInterval(data.partnersSettings?.autoScrollInterval); 
             const portfolio = Array.isArray(data.portfolio) ? data.portfolio : []; 
             const reviews = Array.isArray(data.reviews) ? data.reviews : []; 
@@ -3497,6 +3388,7 @@
             document.getElementById('heroCta').textContent = hero.cta || '';
             applyHeroBackground(hero.image);
             applyServicesBackground(servicesSettings.background);
+            applyAboutBackground(aboutSettings.background);
 
             const featuresGrid = document.getElementById('featuresGrid');
             if (featuresGrid) {
@@ -3529,29 +3421,22 @@
                 servicesGrid.innerHTML = '';
                 services.forEach(service => {
                     const card = document.createElement('div');
-                    card.className = 'service-card';
-                    const iconWrapper = document.createElement('div');
-                    iconWrapper.className = 'service-card__icon';
-                    iconWrapper.setAttribute('aria-hidden', 'true');
+                    card.className = 'feature-card';
+
                     const iconElement = document.createElement('i');
                     iconElement.className = normalizeIconClass(service.icon, SERVICE_ICON_FALLBACK);
-                    iconWrapper.appendChild(iconElement);
-
-                    const contentWrapper = document.createElement('div');
-                    contentWrapper.className = 'service-card__content';
+                    card.appendChild(iconElement);
 
                     const titleElement = document.createElement('h3');
                     titleElement.textContent = service.title || '';
-                    contentWrapper.appendChild(titleElement);
+                    card.appendChild(titleElement);
 
                     if (service.description) {
                         const descriptionElement = document.createElement('p');
                         descriptionElement.textContent = service.description;
-                        contentWrapper.appendChild(descriptionElement);
+                        card.appendChild(descriptionElement);
                     }
 
-                    card.appendChild(iconWrapper);
-                    card.appendChild(contentWrapper);
                     servicesGrid.appendChild(card);
                 });
                 updateSectionEmptyState('services', servicesGrid.children.length > 0);
@@ -3659,8 +3544,7 @@
                 updateSectionEmptyState('portfolio', false);
             }
 
-            reviewsSource = 'content'; 
-            reviewsData = reviews; 
+            reviewsData = reviews;
             renderReviews(); 
 
             document.getElementById('ctaTitle').textContent = cta.title || ''; 
@@ -3805,13 +3689,9 @@
             }
         }
 
-        async function loadExternalReviews() { 
-            if (reviewsStatusElement) { 
-                reviewsStatusElement.textContent = 'Пробуем загрузить отзывы с 2ГИС...'; 
-            }
-
+        async function loadExternalReviews() {
             try {
-                const response = await fetch(reviewsEndpoint, { credentials: 'include' }); 
+                const response = await fetch(reviewsEndpoint, { credentials: 'include' });
                 let payload = {};
                 try {
                     payload = await response.json(); 
@@ -3825,8 +3705,7 @@
 
                 const externalReviews = Array.isArray(payload.reviews) ? payload.reviews : []; 
                 if (externalReviews.length) { 
-                    reviewsData = externalReviews; 
-                    reviewsSource = payload.source === 'external' ? 'external' : 'fallback-external'; 
+                    reviewsData = externalReviews;
                     currentReviewIndex = 0; 
                     renderReviews(); 
                     return;
@@ -3836,12 +3715,10 @@
                     console.warn(payload.error); 
                 }
 
-                reviewsSource = 'fallback-external'; 
-                renderReviews(); 
+                renderReviews();
             } catch (error) {
-                console.warn('Не удалось загрузить отзывы с 2ГИС:', error); 
-                reviewsSource = 'fallback-external'; 
-                renderReviews(); 
+                console.warn('Не удалось загрузить отзывы с 2ГИС:', error);
+                renderReviews();
             }
         } 
 
@@ -3929,7 +3806,6 @@
 
         function renderReviews() {
             const reviewsContainer = document.getElementById('reviewsContainer');
-            const statusElement = reviewsStatusElement;
             if (!reviewsContainer) {
                 updateSectionEmptyState('reviews', false);
                 return;
@@ -3944,9 +3820,6 @@
                     </div>
                 `;
                 reviewsContainer.appendChild(placeholder);
-                if (statusElement) {
-                    statusElement.textContent = 'Отзывы не найдены. Добавьте их в панели управления.';
-                }
                 stopAutoSlide();
                 reviewsContainer.style.transform = 'translateX(0)';
                 updateSectionEmptyState('reviews', false);
@@ -3981,16 +3854,7 @@
             updateSliderPosition();
             startAutoSlide();
             updateSectionEmptyState('reviews', reviewsData.length > 0);
-            if (statusElement) {
-                let statusText = 'Отзывы отображаются из файла контента.';
-                if (reviewsSource === 'external') {
-                    statusText = 'Отзывы загружены с 2ГИС.';
-                } else if (reviewsSource === 'fallback-external') {
-                    statusText = 'Не удалось загрузить отзывы с 2ГИС, показаны данные с сайта.';
-                }
-                statusElement.textContent = statusText; 
-            } 
-        } 
+        }
 
         function advanceReview(step) { 
             if (!reviewsData.length) { 
@@ -4056,13 +3920,14 @@
                 updateRequestFileUI(file);
                 if (file) {
                     if (file.size > MAX_ATTACHMENT_SIZE_BYTES) {
-                        setRequestFieldError(requestFileInput, requestFileError, 'Файл слишком большой');
+                        setRequestFieldError(requestFileInput, FILE_TOO_LARGE_ERROR, { key: 'attachment' });
                     } else {
-                        setRequestFieldError(requestFileInput, requestFileError, '');
-                        setRequestFieldError(requestCommentInput, requestCommentError, '');
+                        setRequestFieldError(requestFileInput, '', { key: 'attachment' });
+                        setRequestFieldError(requestFileInput, '', { key: 'commentOrFile', silent: true });
+                        setRequestFieldError(requestCommentInput, '', { key: 'commentOrFile' });
                     }
                 } else {
-                    setRequestFieldError(requestFileInput, requestFileError, '');
+                    setRequestFieldError(requestFileInput, '', { key: 'attachment' });
                 }
             });
         }
@@ -4070,8 +3935,9 @@
         if (requestEmailInput) {
             requestEmailInput.addEventListener('input', () => {
                 if (requestEmailInput.value.trim()) {
-                    setRequestFieldError(requestEmailInput, requestEmailError, '');
-                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
+                    setRequestFieldError(requestEmailInput, '', { key: 'email' });
+                    setRequestFieldError(requestEmailInput, '', { key: 'contact' });
+                    setRequestFieldError(requestPhoneInput, '', { key: 'contact', silent: true });
                 }
             });
         }
@@ -4079,8 +3945,9 @@
         if (requestPhoneInput) {
             requestPhoneInput.addEventListener('input', () => {
                 if (requestPhoneInput.value.trim()) {
-                    setRequestFieldError(requestPhoneInput, requestPhoneError, '');
-                    setRequestFieldError(requestEmailInput, requestEmailError, '');
+                    setRequestFieldError(requestPhoneInput, '', { key: 'phone' });
+                    setRequestFieldError(requestPhoneInput, '', { key: 'contact' });
+                    setRequestFieldError(requestEmailInput, '', { key: 'contact', silent: true });
                 }
             });
         }
@@ -4088,8 +3955,9 @@
         if (requestCommentInput) {
             requestCommentInput.addEventListener('input', () => {
                 if (requestCommentInput.value.trim()) {
-                    setRequestFieldError(requestCommentInput, requestCommentError, '');
-                    setRequestFieldError(requestFileInput, requestFileError, '');
+                    setRequestFieldError(requestCommentInput, '', { key: 'comment' });
+                    setRequestFieldError(requestCommentInput, '', { key: 'commentOrFile' });
+                    setRequestFieldError(requestFileInput, '', { key: 'commentOrFile', silent: true });
                 }
             });
         }

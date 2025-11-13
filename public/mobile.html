@@ -48,6 +48,37 @@
             padding-bottom: clamp(120px, 22vw, 160px);
         }
 
+        .desktop-switch {
+            position: fixed;
+            top: 50%;
+            left: max(4px, env(safe-area-inset-left, 0px) + 4px);
+            width: clamp(28px, 7.2vw, 32px);
+            height: clamp(28px, 7.2vw, 32px);
+            border-radius: 999px;
+            background: #ffd400;
+            color: #111111;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 24px rgba(17, 17, 17, 0.25);
+            border: none;
+            z-index: 12;
+            transition: transform var(--transition), box-shadow var(--transition);
+            --desktop-switch-translate: -50%;
+            transform: translate3d(0, var(--desktop-switch-translate), 0);
+        }
+
+        .desktop-switch:focus-visible,
+        .desktop-switch:hover {
+            --desktop-switch-translate: calc(-50% - 1px);
+            box-shadow: 0 16px 32px rgba(17, 17, 17, 0.3);
+        }
+
+        .desktop-switch svg {
+            width: 62%;
+            height: 62%;
+        }
+
         header.site-header {
             display: flex;
             justify-content: center;
@@ -269,12 +300,88 @@
             font-size: clamp(13px, 4vw, 15px);
         }
 
-        .card__extra {
+        .contact-card {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-card__line {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 10px;
+            color: inherit;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .contact-card__line:focus-visible,
+        .contact-card__line:hover {
+            background: rgba(255, 212, 0, 0.12);
+            box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .contact-card__line:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 18px rgba(17, 17, 17, 0.06);
+        }
+
+        .contact-card__line.contact-card__line--primary {
+            background: transparent;
+        }
+
+        .contact-card__line.contact-card__line--highlight {
+            animation: contact-card-highlight 2s ease forwards;
+        }
+
+        @keyframes contact-card-highlight {
+            0% {
+                background: rgba(255, 212, 0, 0.16);
+                box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+            }
+
+            70% {
+                background: rgba(255, 212, 0, 0.08);
+                box-shadow: 0 8px 18px rgba(17, 17, 17, 0.06);
+            }
+
+            100% {
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+
+        .contact-card__line.contact-card__line--static {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .contact-card__line.contact-card__line--static:hover,
+        .contact-card__line.contact-card__line--static:focus-visible,
+        .contact-card__line.contact-card__line--static:active {
+            background: transparent;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .contact-card__line.contact-card__line--disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .contact-card__content {
             display: grid;
             gap: 4px;
-            margin-top: 6px;
-            font-size: clamp(12px, 3.6vw, 14px);
-            color: var(--muted);
+        }
+
+        .contact-card__extra {
+            display: grid;
+            gap: 10px;
+            margin-top: 4px;
         }
 
         .services .card {
@@ -288,8 +395,7 @@
         }
 
         .contact-info .card {
-            grid-template-columns: auto 1fr;
-            column-gap: 12px;
+            grid-template-columns: 1fr;
         }
 
         .contact-info .card__icon {
@@ -398,7 +504,7 @@
             text-decoration: none;
             border: 1px solid rgba(255, 212, 0, 0.38);
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
             z-index: 90;
         }
 
@@ -409,12 +515,59 @@
             fill: currentColor;
         }
 
+        .call-fab.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+        }
+
         .call-fab:hover,
         .call-fab:focus-visible {
             transform: translateY(-2px);
             box-shadow: 0 18px 32px rgba(0, 0, 0, 0.32);
             border-color: rgba(255, 212, 0, 0.6);
             outline: none;
+        }
+
+        .cta-fab {
+            position: fixed;
+            left: 50%;
+            bottom: calc(env(safe-area-inset-bottom, 0px) + var(--call-fab-offset));
+            transform: translate3d(-50%, 16px, 0);
+            padding: clamp(14px, 4.8vw, 18px) clamp(24px, 7.6vw, 36px);
+            border-radius: 999px;
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: clamp(15px, 4.6vw, 17px);
+            line-height: 1.2;
+            border: none;
+            box-shadow: 0 20px 34px rgba(255, 212, 0, 0.34);
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 92;
+            width: min(486px, calc((100vw - clamp(116px, 32vw, 192px)) * 0.9));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .cta-fab:focus-visible {
+            outline: 2px solid rgba(17, 17, 17, 0.4);
+            outline-offset: 4px;
+        }
+
+        .cta-fab.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate3d(-50%, 0, 0);
+            box-shadow: 0 24px 40px rgba(255, 212, 0, 0.42);
         }
 
         .request-overlay {
@@ -688,6 +841,13 @@
     </style>
 </head>
 <body>
+    <a class="desktop-switch" href="landingStart.html" aria-label="Перейти на полную версию сайта">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <rect x="3.5" y="5" width="17" height="11" rx="1.8" fill="currentColor"></rect>
+            <rect x="7" y="18" width="10" height="1.8" rx="0.9" fill="currentColor"></rect>
+            <circle cx="12" cy="16.5" r="1" fill="#111111"></circle>
+        </svg>
+    </a>
     <div class="page">
         <header class="site-header">
             <a class="brand" href="#top" id="brandLink">
@@ -738,25 +898,35 @@
                 <h2 id="contactTitle">Связаться с нами</h2>
                 <div class="contact-info" id="contactInfo">
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-phone" id="contactPhoneIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
-                            <div class="card__text">Звоните в рабочее время</div>
-                            <div class="card__extra" id="contactPhoneExtra" hidden></div>
+                        <div class="contact-card">
+                            <a class="contact-card__line contact-card__line--primary" id="contactPhonePrimaryLink" href="tel:+74951234567">
+                                <span class="card__icon" id="contactPhoneIcon" aria-hidden="true"></span>
+                                <span class="contact-card__content">
+                                    <span class="card__title" id="contactPhone">+7 (495) 123-45-67</span>
+                                    <span class="card__text" id="contactPhoneLabel">Звоните в рабочее время</span>
+                                </span>
+                            </a>
+                            <div class="contact-card__extra" id="contactPhoneExtra" hidden></div>
                         </div>
                     </article>
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-envelope" id="contactEmailIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactEmail">etl@elektrokonstruktiv.ru</div>
-                            <div class="card__text">Ответим в течение дня</div>
-                        </div>
+                        <a class="contact-card__line" id="contactEmailLink" href="mailto:etl@elektrokonstruktiv.ru">
+                            <span class="card__icon" id="contactEmailIcon" aria-hidden="true"></span>
+                            <span class="contact-card__content">
+                                <span class="card__title" id="contactEmail">etl@elektrokonstruktiv.ru</span>
+                                <span class="card__text" id="contactEmailNote">Ответим в течение дня</span>
+                            </span>
+                        </a>
                     </article>
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-location-dot" id="contactAddressIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactAddress">Москва, ул. Электромонтажная, 15</div>
-                            <div class="card__text" id="contactSchedule">Пн-Пт: 9:00 - 19:00</div>
+                        <div class="contact-card">
+                            <div class="contact-card__line contact-card__line--static">
+                                <span class="card__icon" id="contactAddressIcon" aria-hidden="true"></span>
+                                <span class="contact-card__content">
+                                    <span class="card__title" id="contactAddress">Москва, ул. Электромонтажная, 15</span>
+                                    <span class="card__text" id="contactSchedule">Пн-Пт: 9:00 - 19:00</span>
+                                </span>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -786,6 +956,10 @@
             <path d="M6.62 2.99a1 1 0 0 1 1.12-.54l3.2.8a1 1 0 0 1 .73.97v3.12a1 1 0 0 1-.41.8l-1.63 1.22a11.05 11.05 0 0 0 4.92 4.92l1.22-1.63a1 1 0 0 1 .8-.41h3.12a1 1 0 0 1 .97.73l.8 3.2a1 1 0 0 1-.54 1.12l-2.74 1.37c-.3.15-.64.2-.97.13-2.86-.62-5.44-2.05-7.55-4.16-2.11-2.11-3.54-4.69-4.16-7.55a1.5 1.5 0 0 1 .13-.97L6.62 2.99z"/>
         </svg>
     </a>
+
+    <button type="button" class="cta-fab" id="scrollCompletionCta" data-open-request="true">
+        Оставить заявку
+    </button>
 
     <div class="request-overlay" id="requestOverlay" aria-hidden="true">
         <div class="request-modal" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
@@ -847,18 +1021,19 @@
         const servicesList = document.getElementById('mobileServicesList');
         const contactTitleEl = document.getElementById('contactTitle');
         const contactPhoneEl = document.getElementById('contactPhone');
+        const contactPhoneLabelEl = document.getElementById('contactPhoneLabel');
+        const contactPhonePrimaryLink = document.getElementById('contactPhonePrimaryLink');
         const contactEmailEl = document.getElementById('contactEmail');
+        const contactEmailLink = document.getElementById('contactEmailLink');
         const contactAddressEl = document.getElementById('contactAddress');
         const contactScheduleEl = document.getElementById('contactSchedule');
         const contactCallButton = document.getElementById('contactCallButton');
         const contactRequestButton = document.getElementById('contactRequestButton');
         const floatingCallButton = document.getElementById('floatingCallButton');
-        const contactPhoneIconNode = document.getElementById('contactPhoneIcon');
-        const contactEmailIconNode = document.getElementById('contactEmailIcon');
-        const contactAddressIconNode = document.getElementById('contactAddressIcon');
-        const contactPhoneIconContainer = contactPhoneIconNode ? contactPhoneIconNode.closest('.card__icon') : null;
-        const contactEmailIconContainer = contactEmailIconNode ? contactEmailIconNode.closest('.card__icon') : null;
-        const contactAddressIconContainer = contactAddressIconNode ? contactAddressIconNode.closest('.card__icon') : null;
+        const scrollCompletionCta = document.getElementById('scrollCompletionCta');
+        const contactPhoneIconContainer = document.getElementById('contactPhoneIcon');
+        const contactEmailIconContainer = document.getElementById('contactEmailIcon');
+        const contactAddressIconContainer = document.getElementById('contactAddressIcon');
         const scrollProgressFill = document.getElementById('scrollProgressFill');
         const scrollProgressIcon = document.getElementById('scrollProgressIcon');
         const requestOverlay = document.getElementById('requestOverlay');
@@ -882,6 +1057,7 @@
         let requestToastTimer = null;
         let scrollUpdateScheduled = false;
         const SCROLL_COMPLETE_THRESHOLD = 0.995;
+        const CONTACT_LINE_HIGHLIGHT_DURATION = 2000;
 
         function resolveAssetUrl(value, fallback) {
             const candidate = (value || '').trim();
@@ -934,6 +1110,12 @@
             }
             if (scrollProgressIcon) {
                 scrollProgressIcon.classList.toggle('is-complete', isComplete);
+            }
+            if (scrollCompletionCta) {
+                scrollCompletionCta.classList.toggle('is-visible', isComplete);
+            }
+            if (floatingCallButton) {
+                floatingCallButton.classList.toggle('is-hidden', isComplete);
             }
         }
 
@@ -1086,6 +1268,22 @@
             wrapper.setAttribute('aria-hidden', 'true');
             setIconContent(wrapper, source, fallbackIcon);
             return wrapper;
+        }
+
+        function flashContactLine(element) {
+            if (!element) {
+                return;
+            }
+            const existingTimeoutId = element.dataset.highlightTimeoutId;
+            if (existingTimeoutId) {
+                clearTimeout(Number(existingTimeoutId));
+            }
+            element.classList.add('contact-card__line--highlight');
+            const timeoutId = window.setTimeout(() => {
+                element.classList.remove('contact-card__line--highlight');
+                delete element.dataset.highlightTimeoutId;
+            }, CONTACT_LINE_HIGHLIGHT_DURATION);
+            element.dataset.highlightTimeoutId = String(timeoutId);
         }
 
         function createHighlightCard(item) {
@@ -1333,6 +1531,10 @@
             if (heroPhoneButton) {
                 heroPhoneButton.textContent = hero.secondaryAction || 'Позвонить';
             }
+            if (scrollCompletionCta) {
+                const ctaText = hero.primaryAction || content.cta?.button || scrollCompletionCta.textContent || 'Оставить заявку';
+                scrollCompletionCta.textContent = ctaText;
+            }
 
             applyHeroBackground(hero.image || content.hero?.image);
 
@@ -1358,6 +1560,7 @@
             const phone = contact.phone || content.contacts?.phone || defaultPhone;
             const phoneRequests = contact.phoneRequests || content.contacts?.phoneRequests;
             const phoneEtl = contact.phoneEtl || content.contacts?.phoneEtl;
+            const phoneLabel = contact.phoneLabel || content.contacts?.phoneLabel || 'Звоните в рабочее время';
             const email = contact.email || content.contacts?.email;
             const address = contact.address || content.contacts?.address;
             const schedule = contact.schedule || content.contacts?.schedule;
@@ -1365,30 +1568,88 @@
             if (contactPhoneEl) {
                 contactPhoneEl.textContent = phone || contactPhoneEl.textContent;
             }
+            if (contactPhoneLabelEl) {
+                contactPhoneLabelEl.textContent = phoneLabel;
+            }
             const contactPhoneExtraEl = document.getElementById('contactPhoneExtra');
+            const contactIcons = contact.icons && typeof contact.icons === 'object' ? contact.icons : {};
             if (contactPhoneExtraEl) {
+                const iconChainBase = [contactIcons.phone, desktopContactIcons.phone];
                 const extraItems = [];
                 if (phoneRequests) {
-                    extraItems.push(`${phoneRequests} Прием заявок`);
+                    extraItems.push({
+                        number: phoneRequests,
+                        label: 'Прием заявок',
+                        iconSources: [contactIcons.phoneRequests, desktopContactIcons.phoneRequests, ...iconChainBase]
+                    });
                 }
                 if (phoneEtl) {
-                    extraItems.push(`${phoneEtl} ЭТЛ`);
+                    extraItems.push({
+                        number: phoneEtl,
+                        label: 'ЭТЛ',
+                        iconSources: [contactIcons.phoneEtl, desktopContactIcons.phoneEtl, ...iconChainBase]
+                    });
                 }
                 contactPhoneExtraEl.innerHTML = '';
-                extraItems.forEach(text => {
-                    const span = document.createElement('span');
-                    span.textContent = text;
-                    contactPhoneExtraEl.appendChild(span);
+                extraItems.forEach(item => {
+                    if (!item || !item.number) {
+                        return;
+                    }
+                    const telHref = normalizePhoneToTel(item.number);
+                    const link = document.createElement('a');
+                    link.className = 'contact-card__line';
+                    if (telHref) {
+                        link.href = `tel:${telHref}`;
+                    } else {
+                        link.href = '#';
+                        link.classList.add('contact-card__line--disabled');
+                        link.addEventListener('click', event => event.preventDefault());
+                    }
+
+                    const iconEl = document.createElement('span');
+                    iconEl.className = 'card__icon';
+                    iconEl.setAttribute('aria-hidden', 'true');
+                    setIconContent(iconEl, item.iconSources, ICON_FALLBACK_PHONE);
+                    link.appendChild(iconEl);
+
+                    const contentEl = document.createElement('span');
+                    contentEl.className = 'contact-card__content';
+
+                    const numberEl = document.createElement('span');
+                    numberEl.className = 'card__title';
+                    numberEl.textContent = item.number;
+                    contentEl.appendChild(numberEl);
+
+                    if (item.label) {
+                        const labelEl = document.createElement('span');
+                        labelEl.className = 'card__text';
+                        labelEl.textContent = item.label;
+                        contentEl.appendChild(labelEl);
+                    }
+
+                    link.appendChild(contentEl);
+                    contactPhoneExtraEl.appendChild(link);
+                    if (telHref) {
+                        flashContactLine(link);
+                    }
                 });
                 contactPhoneExtraEl.hidden = extraItems.length === 0;
             }
-            const contactIcons = contact.icons && typeof contact.icons === 'object' ? contact.icons : {};
             setIconContent(contactPhoneIconContainer, [contactIcons.phone, desktopContactIcons.phone], ICON_FALLBACK_PHONE);
             setIconContent(contactEmailIconContainer, [contactIcons.email, desktopContactIcons.email], ICON_FALLBACK_EMAIL);
             setIconContent(contactAddressIconContainer, [contactIcons.address, desktopContactIcons.address], ICON_FALLBACK_ADDRESS);
 
             if (contactEmailEl) {
                 contactEmailEl.textContent = email || contactEmailEl.textContent;
+            }
+            if (contactEmailLink) {
+                if (email) {
+                    contactEmailLink.href = `mailto:${email}`;
+                    contactEmailLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactEmailLink.href = '#';
+                    contactEmailLink.classList.add('contact-card__line--disabled');
+                }
             }
             if (contactAddressEl) {
                 contactAddressEl.textContent = address || contactAddressEl.textContent;
@@ -1404,6 +1665,16 @@
                     element.href = `tel:${callHref}`;
                 }
             });
+            if (contactPhonePrimaryLink) {
+                if (callHref) {
+                    contactPhonePrimaryLink.href = `tel:${callHref}`;
+                    contactPhonePrimaryLink.classList.remove('contact-card__line--disabled');
+                    flashContactLine(contactPhonePrimaryLink);
+                } else {
+                    contactPhonePrimaryLink.href = '#';
+                    contactPhonePrimaryLink.classList.add('contact-card__line--disabled');
+                }
+            }
 
             const ctaText = contact.cta || mobile.hero?.primaryAction || content.cta?.button;
             [heroPrimaryAction, contactRequestButton].forEach(element => {
@@ -1460,8 +1731,26 @@
             if (contactPhoneEl) {
                 contactPhoneEl.textContent = phone;
             }
+            if (contactPhonePrimaryLink) {
+                if (tel) {
+                    contactPhonePrimaryLink.href = `tel:${tel}`;
+                    contactPhonePrimaryLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactPhonePrimaryLink.href = '#';
+                    contactPhonePrimaryLink.classList.add('contact-card__line--disabled');
+                }
+            }
             if (contactEmailEl) {
                 contactEmailEl.textContent = email;
+            }
+            if (contactEmailLink) {
+                if (email) {
+                    contactEmailLink.href = `mailto:${email}`;
+                    contactEmailLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactEmailLink.href = '#';
+                    contactEmailLink.classList.add('contact-card__line--disabled');
+                }
             }
             if (requestFooterEmail) {
                 requestFooterEmail.textContent = email;

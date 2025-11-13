@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1f3f" />
+      <stop offset="45%" stop-color="#123d7a" />
+      <stop offset="100%" stop-color="#144e9c" />
+    </linearGradient>
+    <radialGradient id="accent" cx="15%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#ffd400" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffd400" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="accentSecondary" cx="85%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="#ff8c42" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ff8c42" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0.35)" />
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)" />
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bgGradient)" />
+  <circle cx="220" cy="220" r="420" fill="url(#accent)" />
+  <circle cx="1240" cy="720" r="380" fill="url(#accentSecondary)" />
+  <path d="M0 720 Q320 620 640 700 T1280 640 T1440 700 V900 H0 Z" fill="url(#waveGradient)" />
+  <path d="M0 820 Q300 760 600 820 T1200 800 T1440 840 V900 H0 Z" fill="rgba(255, 255, 255, 0.1)" />
+</svg>

@@ -107,6 +107,9 @@
       }
     ]
   },
+  "aboutSettings": {
+    "background": "assets/about-background-test.svg"
+  },
   "partners": [
     {
       "name": "Норникель",
@@ -299,6 +302,14 @@
       "icons": {
         "phone": {
           "icon": "fa-solid fa-phone",
+          "image": ""
+        },
+        "phoneRequests": {
+          "icon": "",
+          "image": ""
+        },
+        "phoneEtl": {
+          "icon": "",
           "image": ""
         },
         "email": {

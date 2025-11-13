@@ -389,6 +389,9 @@
                 <div>
                     <label for="aboutImage">URL изображения</label>
                     <input type="url" id="aboutImage">
+                    <label for="aboutBackground">URL фонового изображения</label>
+                    <input type="url" id="aboutBackground">
+                    <p class="hint">Это изображение появится в фоне блока «О компании» на десктопной версии.</p>
                 </div>
             </div>
             <div class="array-header">
@@ -560,6 +563,26 @@
                 </div>
                 <div class="two-columns">
                     <div class="form-field">
+                        <label for="mobileContactPhoneRequestsIcon">Иконка приёма заявок (CSS-класс)</label>
+                        <input type="text" id="mobileContactPhoneRequestsIcon" placeholder="fa-solid fa-headset">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactPhoneRequestsImage">URL изображения приёма заявок</label>
+                        <input type="url" id="mobileContactPhoneRequestsImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
+                        <label for="mobileContactPhoneEtlIcon">Иконка ЭТЛ (CSS-класс)</label>
+                        <input type="text" id="mobileContactPhoneEtlIcon" placeholder="fa-solid fa-bolt">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactPhoneEtlImage">URL изображения ЭТЛ</label>
+                        <input type="url" id="mobileContactPhoneEtlImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
                         <label for="mobileContactEmailIcon">Иконка e-mail (CSS-класс)</label>
                         <input type="text" id="mobileContactEmailIcon" placeholder="fa-solid fa-envelope">
                     </div>
@@ -607,6 +630,7 @@
         const heroImageInput = document.getElementById('heroImage');
         const servicesBackgroundInput = document.getElementById('servicesBackground');
         const aboutImageInput = document.getElementById('aboutImage');
+        const aboutBackgroundInput = document.getElementById('aboutBackground');
         const mobileHeroTitleInput = document.getElementById('mobileHeroTitle');
         const mobileHeroSubtitleInput = document.getElementById('mobileHeroSubtitle');
         const mobileHeroPrimaryInput = document.getElementById('mobileHeroPrimary');
@@ -623,6 +647,10 @@
         const mobileContactCtaInput = document.getElementById('mobileContactCta');
         const mobileContactPhoneIconInput = document.getElementById('mobileContactPhoneIcon');
         const mobileContactPhoneImageInput = document.getElementById('mobileContactPhoneImage');
+        const mobileContactPhoneRequestsIconInput = document.getElementById('mobileContactPhoneRequestsIcon');
+        const mobileContactPhoneRequestsImageInput = document.getElementById('mobileContactPhoneRequestsImage');
+        const mobileContactPhoneEtlIconInput = document.getElementById('mobileContactPhoneEtlIcon');
+        const mobileContactPhoneEtlImageInput = document.getElementById('mobileContactPhoneEtlImage');
         const mobileContactEmailIconInput = document.getElementById('mobileContactEmailIcon');
         const mobileContactEmailImageInput = document.getElementById('mobileContactEmailImage');
         const mobileContactAddressIconInput = document.getElementById('mobileContactAddressIcon');
@@ -729,6 +757,8 @@
         function collectContactIconsPayload() {
             const icons = {
                 phone: buildIconPayload(mobileContactPhoneIconInput, mobileContactPhoneImageInput),
+                phoneRequests: buildIconPayload(mobileContactPhoneRequestsIconInput, mobileContactPhoneRequestsImageInput),
+                phoneEtl: buildIconPayload(mobileContactPhoneEtlIconInput, mobileContactPhoneEtlImageInput),
                 email: buildIconPayload(mobileContactEmailIconInput, mobileContactEmailImageInput),
                 address: buildIconPayload(mobileContactAddressIconInput, mobileContactAddressImageInput),
             };
@@ -851,10 +881,13 @@
         [
             heroImageInput,
             servicesBackgroundInput,
+            aboutBackgroundInput,
             aboutImageInput,
             headerLogoInput,
             heroLogoInput,
             mobileContactPhoneImageInput,
+            mobileContactPhoneRequestsImageInput,
+            mobileContactPhoneEtlImageInput,
             mobileContactEmailImageInput,
             mobileContactAddressImageInput,
         ].forEach(attachImagePreview);
@@ -1104,6 +1137,9 @@
             if (aboutImageInput) {
                 aboutImageInput.value = data.about?.image || '';
             }
+            if (aboutBackgroundInput) {
+                aboutBackgroundInput.value = data.aboutSettings?.background || '';
+            }
 
             populateArray(statsList, data.about?.stats || [], [
                 { name: 'value', label: 'Значение' },
@@ -1210,6 +1246,18 @@
             if (mobileContactPhoneImageInput) {
                 mobileContactPhoneImageInput.value = extractIconImageFromEntry(mobileContactIcons.phone);
             }
+            if (mobileContactPhoneRequestsIconInput) {
+                mobileContactPhoneRequestsIconInput.value = extractIconClassFromEntry(mobileContactIcons.phoneRequests);
+            }
+            if (mobileContactPhoneRequestsImageInput) {
+                mobileContactPhoneRequestsImageInput.value = extractIconImageFromEntry(mobileContactIcons.phoneRequests);
+            }
+            if (mobileContactPhoneEtlIconInput) {
+                mobileContactPhoneEtlIconInput.value = extractIconClassFromEntry(mobileContactIcons.phoneEtl);
+            }
+            if (mobileContactPhoneEtlImageInput) {
+                mobileContactPhoneEtlImageInput.value = extractIconImageFromEntry(mobileContactIcons.phoneEtl);
+            }
             if (mobileContactEmailIconInput) {
                 mobileContactEmailIconInput.value = extractIconClassFromEntry(mobileContactIcons.email);
             }
@@ -1255,6 +1303,9 @@
                     description: document.getElementById('aboutDescription').value.trim(),
                     image: aboutImageInput ? aboutImageInput.value.trim() : '',
                     stats: getItemsFromContainer(statsList)
+                },
+                aboutSettings: {
+                    background: aboutBackgroundInput ? aboutBackgroundInput.value.trim() : ''
                 },
                 partners: getItemsFromContainer(partnersList),
                 partnersSettings: {
