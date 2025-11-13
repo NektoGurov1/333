@@ -307,13 +307,60 @@
 
         .contact-card__line {
             display: grid;
-            gap: 6px;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 10px;
+            color: inherit;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .contact-card__line:focus-visible,
+        .contact-card__line:hover {
+            background: rgba(255, 212, 0, 0.12);
+            box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .contact-card__line:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 18px rgba(17, 17, 17, 0.06);
+        }
+
+        .contact-card__line.contact-card__line--primary {
+            background: rgba(255, 212, 0, 0.08);
+        }
+
+        .contact-card__line.contact-card__line--static {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .contact-card__line.contact-card__line--static:hover,
+        .contact-card__line.contact-card__line--static:focus-visible,
+        .contact-card__line.contact-card__line--static:active {
+            background: transparent;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .contact-card__line.contact-card__line--disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .contact-card__content {
+            display: grid;
+            gap: 4px;
         }
 
         .contact-card__extra {
             display: grid;
-            gap: 12px;
-            margin-top: 6px;
+            gap: 10px;
+            margin-top: 4px;
         }
 
         .services .card {
@@ -327,8 +374,7 @@
         }
 
         .contact-info .card {
-            grid-template-columns: auto 1fr;
-            column-gap: 12px;
+            grid-template-columns: 1fr;
         }
 
         .contact-info .card__icon {
@@ -831,27 +877,35 @@
                 <h2 id="contactTitle">Связаться с нами</h2>
                 <div class="contact-info" id="contactInfo">
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-phone" id="contactPhoneIcon"></i></div>
                         <div class="contact-card">
-                            <div class="contact-card__line contact-card__line--primary" id="contactPhonePrimary">
-                                <div class="card__title" id="contactPhone">+7 (495) 123-45-67</div>
-                                <div class="card__text" id="contactPhoneLabel">Звоните в рабочее время</div>
-                            </div>
+                            <a class="contact-card__line contact-card__line--primary" id="contactPhonePrimaryLink" href="tel:+74951234567">
+                                <span class="card__icon" id="contactPhoneIcon" aria-hidden="true"></span>
+                                <span class="contact-card__content">
+                                    <span class="card__title" id="contactPhone">+7 (495) 123-45-67</span>
+                                    <span class="card__text" id="contactPhoneLabel">Звоните в рабочее время</span>
+                                </span>
+                            </a>
                             <div class="contact-card__extra" id="contactPhoneExtra" hidden></div>
                         </div>
                     </article>
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-envelope" id="contactEmailIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactEmail">etl@elektrokonstruktiv.ru</div>
-                            <div class="card__text">Ответим в течение дня</div>
-                        </div>
+                        <a class="contact-card__line" id="contactEmailLink" href="mailto:etl@elektrokonstruktiv.ru">
+                            <span class="card__icon" id="contactEmailIcon" aria-hidden="true"></span>
+                            <span class="contact-card__content">
+                                <span class="card__title" id="contactEmail">etl@elektrokonstruktiv.ru</span>
+                                <span class="card__text" id="contactEmailNote">Ответим в течение дня</span>
+                            </span>
+                        </a>
                     </article>
                     <article class="card">
-                        <div class="card__icon" aria-hidden="true"><i class="fa-solid fa-location-dot" id="contactAddressIcon"></i></div>
-                        <div>
-                            <div class="card__title" id="contactAddress">Москва, ул. Электромонтажная, 15</div>
-                            <div class="card__text" id="contactSchedule">Пн-Пт: 9:00 - 19:00</div>
+                        <div class="contact-card">
+                            <div class="contact-card__line contact-card__line--static">
+                                <span class="card__icon" id="contactAddressIcon" aria-hidden="true"></span>
+                                <span class="contact-card__content">
+                                    <span class="card__title" id="contactAddress">Москва, ул. Электромонтажная, 15</span>
+                                    <span class="card__text" id="contactSchedule">Пн-Пт: 9:00 - 19:00</span>
+                                </span>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -947,19 +1001,18 @@
         const contactTitleEl = document.getElementById('contactTitle');
         const contactPhoneEl = document.getElementById('contactPhone');
         const contactPhoneLabelEl = document.getElementById('contactPhoneLabel');
+        const contactPhonePrimaryLink = document.getElementById('contactPhonePrimaryLink');
         const contactEmailEl = document.getElementById('contactEmail');
+        const contactEmailLink = document.getElementById('contactEmailLink');
         const contactAddressEl = document.getElementById('contactAddress');
         const contactScheduleEl = document.getElementById('contactSchedule');
         const contactCallButton = document.getElementById('contactCallButton');
         const contactRequestButton = document.getElementById('contactRequestButton');
         const floatingCallButton = document.getElementById('floatingCallButton');
         const scrollCompletionCta = document.getElementById('scrollCompletionCta');
-        const contactPhoneIconNode = document.getElementById('contactPhoneIcon');
-        const contactEmailIconNode = document.getElementById('contactEmailIcon');
-        const contactAddressIconNode = document.getElementById('contactAddressIcon');
-        const contactPhoneIconContainer = contactPhoneIconNode ? contactPhoneIconNode.closest('.card__icon') : null;
-        const contactEmailIconContainer = contactEmailIconNode ? contactEmailIconNode.closest('.card__icon') : null;
-        const contactAddressIconContainer = contactAddressIconNode ? contactAddressIconNode.closest('.card__icon') : null;
+        const contactPhoneIconContainer = document.getElementById('contactPhoneIcon');
+        const contactEmailIconContainer = document.getElementById('contactEmailIcon');
+        const contactAddressIconContainer = document.getElementById('contactAddressIcon');
         const scrollProgressFill = document.getElementById('scrollProgressFill');
         const scrollProgressIcon = document.getElementById('scrollProgressIcon');
         const requestOverlay = document.getElementById('requestOverlay');
@@ -1481,45 +1534,81 @@
                 contactPhoneLabelEl.textContent = phoneLabel;
             }
             const contactPhoneExtraEl = document.getElementById('contactPhoneExtra');
+            const contactIcons = contact.icons && typeof contact.icons === 'object' ? contact.icons : {};
             if (contactPhoneExtraEl) {
+                const iconChainBase = [contactIcons.phone, desktopContactIcons.phone];
                 const extraItems = [];
                 if (phoneRequests) {
-                    extraItems.push({ number: phoneRequests, label: 'Прием заявок' });
+                    extraItems.push({
+                        number: phoneRequests,
+                        label: 'Прием заявок',
+                        iconSources: [contactIcons.phoneRequests, desktopContactIcons.phoneRequests, ...iconChainBase]
+                    });
                 }
                 if (phoneEtl) {
-                    extraItems.push({ number: phoneEtl, label: 'ЭТЛ' });
+                    extraItems.push({
+                        number: phoneEtl,
+                        label: 'ЭТЛ',
+                        iconSources: [contactIcons.phoneEtl, desktopContactIcons.phoneEtl, ...iconChainBase]
+                    });
                 }
                 contactPhoneExtraEl.innerHTML = '';
                 extraItems.forEach(item => {
                     if (!item || !item.number) {
                         return;
                     }
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'contact-card__line';
-
-                    const numberEl = document.createElement('div');
-                    numberEl.className = 'card__title';
-                    numberEl.textContent = item.number;
-                    wrapper.appendChild(numberEl);
-
-                    if (item.label) {
-                        const labelEl = document.createElement('div');
-                        labelEl.className = 'card__text';
-                        labelEl.textContent = item.label;
-                        wrapper.appendChild(labelEl);
+                    const telHref = normalizePhoneToTel(item.number);
+                    const link = document.createElement('a');
+                    link.className = 'contact-card__line';
+                    if (telHref) {
+                        link.href = `tel:${telHref}`;
+                    } else {
+                        link.href = '#';
+                        link.classList.add('contact-card__line--disabled');
+                        link.addEventListener('click', event => event.preventDefault());
                     }
 
-                    contactPhoneExtraEl.appendChild(wrapper);
+                    const iconEl = document.createElement('span');
+                    iconEl.className = 'card__icon';
+                    iconEl.setAttribute('aria-hidden', 'true');
+                    setIconContent(iconEl, item.iconSources, ICON_FALLBACK_PHONE);
+                    link.appendChild(iconEl);
+
+                    const contentEl = document.createElement('span');
+                    contentEl.className = 'contact-card__content';
+
+                    const numberEl = document.createElement('span');
+                    numberEl.className = 'card__title';
+                    numberEl.textContent = item.number;
+                    contentEl.appendChild(numberEl);
+
+                    if (item.label) {
+                        const labelEl = document.createElement('span');
+                        labelEl.className = 'card__text';
+                        labelEl.textContent = item.label;
+                        contentEl.appendChild(labelEl);
+                    }
+
+                    link.appendChild(contentEl);
+                    contactPhoneExtraEl.appendChild(link);
                 });
                 contactPhoneExtraEl.hidden = extraItems.length === 0;
             }
-            const contactIcons = contact.icons && typeof contact.icons === 'object' ? contact.icons : {};
             setIconContent(contactPhoneIconContainer, [contactIcons.phone, desktopContactIcons.phone], ICON_FALLBACK_PHONE);
             setIconContent(contactEmailIconContainer, [contactIcons.email, desktopContactIcons.email], ICON_FALLBACK_EMAIL);
             setIconContent(contactAddressIconContainer, [contactIcons.address, desktopContactIcons.address], ICON_FALLBACK_ADDRESS);
 
             if (contactEmailEl) {
                 contactEmailEl.textContent = email || contactEmailEl.textContent;
+            }
+            if (contactEmailLink) {
+                if (email) {
+                    contactEmailLink.href = `mailto:${email}`;
+                    contactEmailLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactEmailLink.href = '#';
+                    contactEmailLink.classList.add('contact-card__line--disabled');
+                }
             }
             if (contactAddressEl) {
                 contactAddressEl.textContent = address || contactAddressEl.textContent;
@@ -1535,6 +1624,15 @@
                     element.href = `tel:${callHref}`;
                 }
             });
+            if (contactPhonePrimaryLink) {
+                if (callHref) {
+                    contactPhonePrimaryLink.href = `tel:${callHref}`;
+                    contactPhonePrimaryLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactPhonePrimaryLink.href = '#';
+                    contactPhonePrimaryLink.classList.add('contact-card__line--disabled');
+                }
+            }
 
             const ctaText = contact.cta || mobile.hero?.primaryAction || content.cta?.button;
             [heroPrimaryAction, contactRequestButton].forEach(element => {
@@ -1591,8 +1689,26 @@
             if (contactPhoneEl) {
                 contactPhoneEl.textContent = phone;
             }
+            if (contactPhonePrimaryLink) {
+                if (tel) {
+                    contactPhonePrimaryLink.href = `tel:${tel}`;
+                    contactPhonePrimaryLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactPhonePrimaryLink.href = '#';
+                    contactPhonePrimaryLink.classList.add('contact-card__line--disabled');
+                }
+            }
             if (contactEmailEl) {
                 contactEmailEl.textContent = email;
+            }
+            if (contactEmailLink) {
+                if (email) {
+                    contactEmailLink.href = `mailto:${email}`;
+                    contactEmailLink.classList.remove('contact-card__line--disabled');
+                } else {
+                    contactEmailLink.href = '#';
+                    contactEmailLink.classList.add('contact-card__line--disabled');
+                }
             }
             if (requestFooterEmail) {
                 requestFooterEmail.textContent = email;

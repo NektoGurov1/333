@@ -563,6 +563,26 @@
                 </div>
                 <div class="two-columns">
                     <div class="form-field">
+                        <label for="mobileContactPhoneRequestsIcon">Иконка приёма заявок (CSS-класс)</label>
+                        <input type="text" id="mobileContactPhoneRequestsIcon" placeholder="fa-solid fa-headset">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactPhoneRequestsImage">URL изображения приёма заявок</label>
+                        <input type="url" id="mobileContactPhoneRequestsImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
+                        <label for="mobileContactPhoneEtlIcon">Иконка ЭТЛ (CSS-класс)</label>
+                        <input type="text" id="mobileContactPhoneEtlIcon" placeholder="fa-solid fa-bolt">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileContactPhoneEtlImage">URL изображения ЭТЛ</label>
+                        <input type="url" id="mobileContactPhoneEtlImage">
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="form-field">
                         <label for="mobileContactEmailIcon">Иконка e-mail (CSS-класс)</label>
                         <input type="text" id="mobileContactEmailIcon" placeholder="fa-solid fa-envelope">
                     </div>
@@ -627,6 +647,10 @@
         const mobileContactCtaInput = document.getElementById('mobileContactCta');
         const mobileContactPhoneIconInput = document.getElementById('mobileContactPhoneIcon');
         const mobileContactPhoneImageInput = document.getElementById('mobileContactPhoneImage');
+        const mobileContactPhoneRequestsIconInput = document.getElementById('mobileContactPhoneRequestsIcon');
+        const mobileContactPhoneRequestsImageInput = document.getElementById('mobileContactPhoneRequestsImage');
+        const mobileContactPhoneEtlIconInput = document.getElementById('mobileContactPhoneEtlIcon');
+        const mobileContactPhoneEtlImageInput = document.getElementById('mobileContactPhoneEtlImage');
         const mobileContactEmailIconInput = document.getElementById('mobileContactEmailIcon');
         const mobileContactEmailImageInput = document.getElementById('mobileContactEmailImage');
         const mobileContactAddressIconInput = document.getElementById('mobileContactAddressIcon');
@@ -733,6 +757,8 @@
         function collectContactIconsPayload() {
             const icons = {
                 phone: buildIconPayload(mobileContactPhoneIconInput, mobileContactPhoneImageInput),
+                phoneRequests: buildIconPayload(mobileContactPhoneRequestsIconInput, mobileContactPhoneRequestsImageInput),
+                phoneEtl: buildIconPayload(mobileContactPhoneEtlIconInput, mobileContactPhoneEtlImageInput),
                 email: buildIconPayload(mobileContactEmailIconInput, mobileContactEmailImageInput),
                 address: buildIconPayload(mobileContactAddressIconInput, mobileContactAddressImageInput),
             };
@@ -860,6 +886,8 @@
             headerLogoInput,
             heroLogoInput,
             mobileContactPhoneImageInput,
+            mobileContactPhoneRequestsImageInput,
+            mobileContactPhoneEtlImageInput,
             mobileContactEmailImageInput,
             mobileContactAddressImageInput,
         ].forEach(attachImagePreview);
@@ -1217,6 +1245,18 @@
             }
             if (mobileContactPhoneImageInput) {
                 mobileContactPhoneImageInput.value = extractIconImageFromEntry(mobileContactIcons.phone);
+            }
+            if (mobileContactPhoneRequestsIconInput) {
+                mobileContactPhoneRequestsIconInput.value = extractIconClassFromEntry(mobileContactIcons.phoneRequests);
+            }
+            if (mobileContactPhoneRequestsImageInput) {
+                mobileContactPhoneRequestsImageInput.value = extractIconImageFromEntry(mobileContactIcons.phoneRequests);
+            }
+            if (mobileContactPhoneEtlIconInput) {
+                mobileContactPhoneEtlIconInput.value = extractIconClassFromEntry(mobileContactIcons.phoneEtl);
+            }
+            if (mobileContactPhoneEtlImageInput) {
+                mobileContactPhoneEtlImageInput.value = extractIconImageFromEntry(mobileContactIcons.phoneEtl);
             }
             if (mobileContactEmailIconInput) {
                 mobileContactEmailIconInput.value = extractIconClassFromEntry(mobileContactIcons.email);

@@ -304,6 +304,14 @@
           "icon": "fa-solid fa-phone",
           "image": ""
         },
+        "phoneRequests": {
+          "icon": "",
+          "image": ""
+        },
+        "phoneEtl": {
+          "icon": "",
+          "image": ""
+        },
         "email": {
           "icon": "fa-solid fa-envelope",
           "image": ""
